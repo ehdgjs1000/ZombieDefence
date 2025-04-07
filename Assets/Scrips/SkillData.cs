@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+[CreateAssetMenu(fileName ="Skill", menuName ="Scriptable Object/SkillData")]
+public class SkillData : ScriptableObject
+{
+    public enum SkillType
+    {
+        UpgradeWeapon,
+    }
+
+    [Header("#Weapon Skill Info")]
+    public SkillType skillType;
+    public int ID;
+    public int skillLevel;
+    public string skillName;
+    public Sprite skillSprite;
+
+    [TextArea]
+    public string skillDesc;
+
+
+}

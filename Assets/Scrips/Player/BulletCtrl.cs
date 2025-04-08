@@ -5,8 +5,9 @@ using UnityEngine;
 public class BulletCtrl : MonoBehaviour
 {
     Rigidbody rigid;
-    private float damage;
+    public float damage;
     [SerializeField] private float bulletSpeed;
+    private int penetrateCount = 0;
     
 
     private void Awake()
@@ -16,13 +17,16 @@ public class BulletCtrl : MonoBehaviour
     }
     private void Start()
     {
-        rigid.velocity = transform.forward * bulletSpeed;
+        //rigid.velocity = transform.forward * bulletSpeed;
 
+        rigid.AddForce(transform.forward*bulletSpeed);
         Destroy(gameObject, 4.0f);
     }
-    public void SetDamage(float dmg)
+
+    public void SetBulletInfo(float dmg, int _penetrateCount)
     {
         damage = dmg;
+        penetrateCount = _penetrateCount;
     }
     private void OnTriggerEnter(Collider co)
     {
@@ -31,6 +35,19 @@ public class BulletCtrl : MonoBehaviour
             co.GetComponent<EnemyCtrl>().GetAttack(damage);
             Destroy(this.gameObject);
         }
+    }
+    private void OnCollisionEnter(Collision co)
+    {
+        if (co.gameObject.CompareTag("Enemy"))
+        {
+            co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
+            if (penetrateCount <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+            penetrateCount--;
+        }
+
     }
 
 }

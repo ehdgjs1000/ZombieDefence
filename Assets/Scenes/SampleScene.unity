@@ -1826,10 +1826,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3600d2a0e657cd54a8b70b15c74d9669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStopGame: 0
   enemies:
   - {fileID: 8047579261906496781, guid: 3aa6a6d1c6b120f4f8df06eec784f738, type: 3}
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 1.2
+  minSpawnInterval: 0.1
+  maxSpawnInterval: 0.3
   expImage: {fileID: 1558849099}
   hpImage: {fileID: 65324522}
   levelTxt: {fileID: 1215530244}
@@ -2706,12 +2707,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e455ead778ae449b977908fd22e561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 35764015d4e8c974a95c6a907490f0ef, type: 2}
+  weaponData: {fileID: 11400000, guid: b7798d3628767d84f80c51f36c8f47a3, type: 2}
   remainBulletImg: {fileID: 131990735}
+  bulletGO: {fileID: 4774843709525027754, guid: 9661708f4c680c94e8fb4dbc2774392d, type: 3}
   bulletSpawnPos: {fileID: 276161973}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemyColls: []
 --- !u!4 &1073959455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4370289213991616, guid: 86fbce35c5d130147bc5b953dbf3059c, type: 3}
@@ -5671,7 +5674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3614474545922038446, guid: 3aa6a6d1c6b120f4f8df06eec784f738, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3614474545922038446, guid: 3aa6a6d1c6b120f4f8df06eec784f738, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5708,6 +5711,14 @@ PrefabInstance:
     - target: {fileID: 3614474545922038446, guid: 3aa6a6d1c6b120f4f8df06eec784f738, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485868290683102607, guid: 3aa6a6d1c6b120f4f8df06eec784f738, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485868290683102607, guid: 3aa6a6d1c6b120f4f8df06eec784f738, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8047579261906496781, guid: 3aa6a6d1c6b120f4f8df06eec784f738, type: 3}
       propertyPath: m_Name

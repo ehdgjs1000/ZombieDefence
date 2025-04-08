@@ -13,7 +13,6 @@ public class Army : MonoBehaviour
     private float damage; 
     private float fireRate;
     private float tempFireRate;
-    private float reloadTime;
     private float attackRange;
     private float maxbulletCount;
     private bool isReloading = false;
@@ -21,10 +20,10 @@ public class Army : MonoBehaviour
     private bool canPenetrate;
     private float reloadingTime;
 
-
+    [SerializeField] private GameObject bulletGO;
     [SerializeField] private Transform bulletSpawnPos;
     [SerializeField] private LayerMask enemyLayer;
-    private Collider[] enemyColls;
+    public Collider[] enemyColls;
 
     LineRenderer lineRenderer;
     private void Awake()
@@ -49,29 +48,25 @@ public class Army : MonoBehaviour
         damage = weaponData.damage;
         fireRate = weaponData.fireRate;
         tempFireRate = fireRate;
-        reloadTime = weaponData.reloadTime;
         attackRange = weaponData.range;
         maxbulletCount = weaponData.maxBulletCount;
         remainBulletCount = maxbulletCount;
         canPenetrate = weaponData.canPenetrate;
         reloadingTime = weaponData.reloadingTime;
     }
-    private void Attack(EnemyCtrl enemy)
+    private void AttackTest(EnemyCtrl enemy)
     {
         //Data
         fireRate = tempFireRate;
         remainBulletCount--;
-        
-        //공격
-        enemy.GetAttack(damage);
 
-        if(remainBulletCount <= 0 && !isReloading)
+        GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
+        bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage,0);
+
+        if (remainBulletCount <= 0 && !isReloading)
         {
             StartCoroutine(Reload());
         }
-        
-
-        
     }
     private IEnumerator Reload()
     {
@@ -86,12 +81,31 @@ public class Army : MonoBehaviour
         enemyColls = Physics.OverlapSphere(this.transform.position, attackRange, enemyLayer);
         if(enemyColls.Length > 0)
         {
-            GameObject enemyGO = enemyColls[0].gameObject;
+
+            GameObject enemyGO = FindClosestTarget(enemyColls).gameObject;
             transform.LookAt(enemyGO.transform.position);
             EnemyCtrl enemy = enemyGO.GetComponent<EnemyCtrl>();
-            if (fireRate <= 0.0f && !isReloading) Attack(enemy);
+            //if (fireRate <= 0.0f && !isReloading) Attack(enemy);
+            if (fireRate <= 0.0f && !isReloading) AttackTest(enemy);
 
         }
+    }
+    private Collider FindClosestTarget(Collider[] targets)
+    {
+        float closestDist = Mathf.Infinity;
+        Collider target = null;
+
+        foreach (var entity in targets)
+        {
+            //vector3.distance 보다 sqrMagnitude의 계산이 더 빠름
+            float distance = (entity.transform.position - this.transform.position).sqrMagnitude;
+            if (distance<closestDist)
+            {
+                closestDist = distance;
+                target = entity;
+            }
+        }
+        return target;
     }
 
     private void OnDrawGizmos()

@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         level++;
         gainedExp -= needExp;
-        needExp *= 1.3f;
+        needExp *= 1.4f;
         levelGOSet.SetActive(true);
         StopGame();
     }

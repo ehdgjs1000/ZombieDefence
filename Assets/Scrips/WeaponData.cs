@@ -8,6 +8,7 @@ public class WeaponData : ScriptableObject
     public enum WeaponType
     {
         Pistol,
+        SMG,
         Rifle,
         SR,
         DMR,
@@ -18,7 +19,6 @@ public class WeaponData : ScriptableObject
     public WeaponType type;
     public string itemName;
     public float fireRate;
-    public float reloadTime;
     public float maxBulletCount;
     public float damage;
     public int bulletShootCount;

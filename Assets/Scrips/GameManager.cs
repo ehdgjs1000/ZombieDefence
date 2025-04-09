@@ -15,28 +15,38 @@ public class GameManager : MonoBehaviour
     public float maxSpawnInterval;
 
     //Level System
+    [SerializeField] private Skill[] skills;
     [SerializeField] private Image expImage;
     [SerializeField] private Image hpImage;
     [SerializeField] private Text levelTxt;
-    [SerializeField] private GameObject levelGOSet;
+    [SerializeField] private LevelUp uiLevelUp;
     private int level = 1;
     private float hp = 100.0f;
     private float needExp = 100.0f;
     private float gainedExp = 0.0f;
-    private int gameLevel;
+    public int gameLevel = 1;
+    private float gameLevelTime = 60.0f;
 
     private void Awake()
     {
         if(instance == null) instance = this;
+        SkillLevelReset();
     }
 
     private void Update()
     {
+        gameLevelTime -= Time.deltaTime;
         spawnInterval -= Time.deltaTime;
         if(spawnInterval <= 0.0f) SpawnEnemy();
 
         UpdateInfo();
+        if(gameLevelTime<=0.0f) GameLevelUp();
 
+    }
+    private void GameLevelUp()
+    {
+        gameLevel++;
+        gameLevelTime = 60.0f;
     }
     private void UpdateInfo()
     {
@@ -54,14 +64,22 @@ public class GameManager : MonoBehaviour
         level++;
         gainedExp -= needExp;
         needExp *= 1.4f;
-        levelGOSet.SetActive(true);
+        for (int a = 0; a < skills.Length; a++)
+        {
+            skills[a].SkillUpdate();
+        }
+        uiLevelUp.gameObject.SetActive(true);
+        uiLevelUp.ShowLevelUp();
         StopGame();
     }
-    public void SkillBtnOnClick(int num)
+    public void SkillLevelReset()
     {
-        levelGOSet.SetActive(false);
-        ResumeGame();
+        for (int a = 0; a < skills.Length; a++)
+        {
+            skills[a].level = 0;
+        }
     }
+
     public void StopGame()
     {
         isStopGame = true;

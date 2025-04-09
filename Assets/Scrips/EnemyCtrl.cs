@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyCtrl : MonoBehaviour
 {
-    private GameManager gameManager;
-
     private bool canMove = true;
     [SerializeField] private float moveSpeed;
     private bool isDie = false;
@@ -18,7 +16,14 @@ public class EnemyCtrl : MonoBehaviour
     private Animator animator;
     private void Awake()
     {
+        
+        //몬스터 체력 설정
         animator = GetComponent<Animator>();
+    }
+    private void Start()
+    {
+        float ranHpRate = Random.Range(0.7f, 1.3f);
+        hp = hp * GameManager.instance.gameLevel * ranHpRate;
     }
     private void Update()
     {

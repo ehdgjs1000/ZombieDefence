@@ -16,7 +16,7 @@ public class SkillData : ScriptableObject
     public int ID;
     public int skillLevel;
     public string skillName;
-    public Sprite skillSprite;
+    public Sprite skillIcon;
 
     [TextArea]
     public string skillDesc;

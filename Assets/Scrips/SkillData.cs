@@ -14,6 +14,7 @@ public class SkillData : ScriptableObject
     [Header("#Weapon Skill Info")]
     public SkillType skillType;
     public int ID;
+    public int weaponType;
     public int skillLevel;
     public string skillName;
     public Sprite skillIcon;

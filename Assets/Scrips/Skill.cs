@@ -55,6 +55,12 @@ public class Skill : MonoBehaviour
         {
             SkillChoose();
         }
+        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeapon &&
+            !GameManager.instance.haveWeaponType[skills[ranNum].weaponType])
+        {
+            SkillChoose();
+        }
+
     }
     private void OnEnable()
     {

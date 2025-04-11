@@ -19,17 +19,23 @@ public class Army : MonoBehaviour
     private float remainBulletCount;
     private bool canPenetrate;
     private float reloadingTime;
+    private int weaponType;
 
     [SerializeField] private GameObject bulletGO;
     [SerializeField] private Transform bulletSpawnPos;
     [SerializeField] private LayerMask enemyLayer;
     public Collider[] enemyColls;
+    [SerializeField] private int posNum;
 
     LineRenderer lineRenderer;
     private void Awake()
     {
         WeaponInfoInit();
         lineRenderer = GetComponent<LineRenderer>();
+    }
+    private void Start()
+    {
+        GameManager.instance.SetHaveWeaponType(weaponType);
     }
     private void Update()
     {
@@ -38,9 +44,6 @@ public class Army : MonoBehaviour
         remainBulletImg.fillAmount = (remainBulletCount/maxbulletCount);
 
         CheckEnemy();
-    }
-    private void Start()
-    {
         
     }
     private void WeaponInfoInit()
@@ -53,6 +56,27 @@ public class Army : MonoBehaviour
         remainBulletCount = maxbulletCount;
         canPenetrate = weaponData.canPenetrate;
         reloadingTime = weaponData.reloadingTime;
+        switch (weaponData.type)
+        {
+            case (WeaponData.WeaponType.Pistol):
+                weaponType = 0;
+                break;
+            case (WeaponData.WeaponType.SMG):
+                weaponType = 1;
+                break;
+            case (WeaponData.WeaponType.Rifle):
+                weaponType = 2;
+                break;
+            case (WeaponData.WeaponType.SR):
+                weaponType = 3;
+                break;
+            case (WeaponData.WeaponType.DMR):
+                weaponType = 4;
+                break;
+            case (WeaponData.WeaponType.Special):
+                weaponType = 5;
+                break;
+        }
     }
     private void AttackTest(EnemyCtrl enemy)
     {

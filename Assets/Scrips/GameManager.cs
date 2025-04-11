@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     //Level System
     [SerializeField] private Skill[] skills;
+    [SerializeField] private SkillData[] skillsDatas;
     [SerializeField] private Image expImage;
     [SerializeField] private Image hpImage;
     [SerializeField] private Text levelTxt;
@@ -27,12 +28,22 @@ public class GameManager : MonoBehaviour
     public int gameLevel = 1;
     private float gameLevelTime = 60.0f;
 
+    //Army
+    [SerializeField] private Transform[] armyPos;
+    public bool[] haveWeaponType; //#0 Pistol #1 SMG #2 Rifle #3 SR #4 DMR #5 Special
+
     private void Awake()
     {
         if(instance == null) instance = this;
+        for (int a = 0; a< System.Enum.GetValues(typeof(WeaponData.WeaponType)).Length; a++)
+        {
+            haveWeaponType[a] = false;
+        }
+    }
+    private void Start()
+    {
         SkillLevelReset();
     }
-
     private void Update()
     {
         gameLevelTime -= Time.deltaTime;
@@ -41,7 +52,14 @@ public class GameManager : MonoBehaviour
 
         UpdateInfo();
         if(gameLevelTime<=0.0f) GameLevelUp();
-
+    }
+    public void SetHaveWeaponType(int weaponType)
+    {
+        haveWeaponType[weaponType] = true;
+    }
+    private void EndGame()
+    {
+        SkillLevelReset();
     }
     private void GameLevelUp()
     {
@@ -76,7 +94,7 @@ public class GameManager : MonoBehaviour
     {
         for (int a = 0; a < skills.Length; a++)
         {
-            skills[a].level = 0;
+            skillsDatas[a].skillLevel = 0;
         }
     }
 

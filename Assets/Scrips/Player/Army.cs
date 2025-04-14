@@ -8,6 +8,7 @@ public class Army : MonoBehaviour
     //Attack Info
     [SerializeField] WeaponData weaponData;
     [SerializeField] Image remainBulletImg;
+    [SerializeField] private bool isSrArmy = false;
     [Header("#Weapon Info")]
     private bool canAttack = false; //공격 가능 여부
     private float damage; 
@@ -17,7 +18,6 @@ public class Army : MonoBehaviour
     private float maxbulletCount;
     private bool isReloading = false;
     private float remainBulletCount;
-    private bool canPenetrate;
     private float reloadingTime;
     private int weaponType;
 
@@ -54,7 +54,6 @@ public class Army : MonoBehaviour
         attackRange = weaponData.range;
         maxbulletCount = weaponData.maxBulletCount;
         remainBulletCount = maxbulletCount;
-        canPenetrate = weaponData.canPenetrate;
         reloadingTime = weaponData.reloadingTime;
         switch (weaponData.type)
         {
@@ -85,7 +84,15 @@ public class Army : MonoBehaviour
         remainBulletCount--;
 
         GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
-        bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage,0);
+        if (!isSrArmy)
+        {
+            bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage, 1);
+        }
+        else
+        {
+            bullet.GetComponent<SrBulletCtrl>().SetBulletInfo(damage, 1);
+        }
+        
 
         if (remainBulletCount <= 0 && !isReloading)
         {

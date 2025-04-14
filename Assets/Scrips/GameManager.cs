@@ -30,11 +30,20 @@ public class GameManager : MonoBehaviour
 
     //Army
     [SerializeField] private Transform[] armyPos;
+    [SerializeField] private Army[] armies;
     public bool[] haveWeaponType; //#0 Pistol #1 SMG #2 Rifle #3 SR #4 DMR #5 Special
 
     private void Awake()
     {
-        if(instance == null) instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
         for (int a = 0; a< System.Enum.GetValues(typeof(WeaponData.WeaponType)).Length; a++)
         {
             haveWeaponType[a] = false;
@@ -43,6 +52,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SkillLevelReset();
+        ArmySet();
     }
     private void Update()
     {
@@ -52,6 +62,19 @@ public class GameManager : MonoBehaviour
 
         UpdateInfo();
         if(gameLevelTime<=0.0f) GameLevelUp();
+    }
+    private void ArmySet()
+    {
+        int a = 0;
+        while (a < armies.Length)
+        {
+            if (ChangeScene.instance.GetArmy(a) != null)
+            {
+                armies[a] = ChangeScene.instance.GetArmy(a);
+                a++;
+            }
+            else if (ChangeScene.instance.GetArmy(a) == null) break;
+        }
     }
     public void SetHaveWeaponType(int weaponType)
     {

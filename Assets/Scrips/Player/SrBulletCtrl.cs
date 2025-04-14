@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletCtrl : MonoBehaviour
+public class SrBulletCtrl : MonoBehaviour
 {
     Rigidbody rigid;
     public float damage;
@@ -39,15 +39,13 @@ public class BulletCtrl : MonoBehaviour
     }
     private void OnCollisionEnter(Collision co)
     {
-        if (co.gameObject.CompareTag("Enemy"))
+        if(co.gameObject != null)
         {
-            co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
-            penetrateCount--;
-            if (penetrateCount <= 0)
+            if (co.gameObject.CompareTag("Enemy"))
             {
-                Destroy(this.gameObject);
+                co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
+
             }
-            
         }
 
     }

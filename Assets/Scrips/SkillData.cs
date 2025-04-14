@@ -8,7 +8,10 @@ public class SkillData : ScriptableObject
 {
     public enum SkillType
     {
-        UpgradeWeapon,
+        UpgradeWeaponNormal,
+        UpgradeWeaponSpecial,
+        UpgradeWeaponEpic
+
     }
 
     [Header("#Weapon Skill Info")]

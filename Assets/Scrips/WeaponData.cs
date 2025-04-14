@@ -22,7 +22,6 @@ public class WeaponData : ScriptableObject
     public float maxBulletCount;
     public float damage;
     public int bulletShootCount;
-    public bool canPenetrate;
     public float range;
     public float reloadingTime;
 

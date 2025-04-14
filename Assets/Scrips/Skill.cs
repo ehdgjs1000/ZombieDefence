@@ -51,12 +51,16 @@ public class Skill : MonoBehaviour
     private void NormalSkillException(int ranNum)
     {
         // Skill Exception
-        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeapon && skills[ranNum].skillLevel >=5)
+        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponNormal && skills[ranNum].skillLevel >=5)
         {
             SkillChoose();
         }
-        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeapon &&
-            !GameManager.instance.haveWeaponType[skills[ranNum].weaponType])
+        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponNormal && 
+            !GameManager.instance.haveWeaponType[skills[ranNum].weaponType]) //해당 무기가 장착되어 있을경우
+        {
+            SkillChoose();
+        }
+        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponSpecial && skills[ranNum].skillLevel >= 3)
         {
             SkillChoose();
         }
@@ -67,7 +71,7 @@ public class Skill : MonoBehaviour
         textLevel.text = "Lv." + (skills[ranSkill].skillLevel + 1);
         switch (skills[ranSkill].skillType)
         {
-            case SkillData.SkillType.UpgradeWeapon:
+            case SkillData.SkillType.UpgradeWeaponNormal:
                 textDesc.text = string.Format(skills[ranSkill].skillDesc);
                 break;
 
@@ -77,11 +81,13 @@ public class Skill : MonoBehaviour
     {
         switch (skills[ranSkill].skillType)
         {
-            case SkillData.SkillType.UpgradeWeapon:
+            case (SkillData.SkillType.UpgradeWeaponNormal):
                 skills[ranSkill].skillLevel++;
                 break;
 
         }
+
+
         LevelUp.instance.HideLevelUp();
         GameManager.instance.isStopGame = false;
     }

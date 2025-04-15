@@ -83,6 +83,9 @@ public class Skill : MonoBehaviour
         {
             case (SkillData.SkillType.UpgradeWeaponNormal):
                 skills[ranSkill].skillLevel++;
+                SkillManager.instance.UpgradeWeapon(skills[ranSkill].weaponType, 
+                    skills[ranSkill].upgradeType, skills[ranSkill].upgradeAmount);
+                GameManager.instance.canUpgradeCheck = true;
                 break;
 
         }

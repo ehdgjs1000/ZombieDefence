@@ -6,6 +6,7 @@ public class ChangeScene : MonoBehaviour
 {
     public static ChangeScene instance;
 
+    public int chooseArmyCount = 0;
     [SerializeField] private Army[] armies;
 
     private void Awake()
@@ -20,8 +21,9 @@ public class ChangeScene : MonoBehaviour
         }
     }
 
-    public void SetArmies(Army[] _armies)
+    public void SetArmies(Army[] _armies, int _chooseArmyCount)
     {
+        chooseArmyCount = _chooseArmyCount;
         int a = 0;
         while (a < armies.Length)
         {

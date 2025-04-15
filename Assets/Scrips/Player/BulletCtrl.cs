@@ -9,6 +9,8 @@ public class BulletCtrl : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     private int penetrateCount = 0;
     private bool canPenetrate = false;
+
+    [SerializeField] private Transform damagePopUpTr;
     
 
     private void Awake()
@@ -29,26 +31,31 @@ public class BulletCtrl : MonoBehaviour
         damage = dmg;
         penetrateCount = _penetrateCount;
     }
-    private void OnTriggerEnter(Collider co)
-    {
-        if (co.CompareTag("Enemy"))
-        {
-            co.GetComponent<EnemyCtrl>().GetAttack(damage);
-            Destroy(this.gameObject);
-        }
-    }
+
     private void OnCollisionEnter(Collision co)
     {
-        if (co.gameObject.CompareTag("Enemy"))
+        try
         {
-            co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
-            penetrateCount--;
-            if (penetrateCount <= 0)
+            if (co.gameObject.CompareTag("Enemy"))
             {
-                Destroy(this.gameObject);
+                co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
+                //Damage PopUp
+                DamagePopUp.Create(this.transform.position, damage);
+
+                penetrateCount--;
+                if (penetrateCount <= 0)
+                {
+                    Destroy(this.gameObject);
+                }
+
             }
-            
         }
+        catch (System.ObjectDisposedException e)
+        {
+            System.Console.WriteLine("Caught: {0}", e.Message);
+        }
+
+        
 
     }
 

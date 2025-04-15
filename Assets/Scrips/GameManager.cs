@@ -31,7 +31,9 @@ public class GameManager : MonoBehaviour
     //Army
     [SerializeField] private Transform[] armyPos;
     [SerializeField] private Army[] armies;
+    [SerializeField] private Army[] armiesGO;
     public bool[] haveWeaponType; //#0 Pistol #1 SMG #2 Rifle #3 SR #4 DMR #5 Special
+    public bool canUpgradeCheck = false;
 
     private void Awake()
     {
@@ -62,6 +64,19 @@ public class GameManager : MonoBehaviour
 
         UpdateInfo();
         if(gameLevelTime<=0.0f) GameLevelUp();
+
+        //Upgrade check
+        if (canUpgradeCheck)
+        {
+            int a = 0;
+            while (a < armies.Length)
+            {
+               armiesGO[a].Upgrade();
+                a++;
+                if (a == ChangeScene.instance.chooseArmyCount) break;
+            }
+            canUpgradeCheck = false;
+        }
     }
     private void ArmySet()
     {
@@ -75,6 +90,14 @@ public class GameManager : MonoBehaviour
             }
             else if (ChangeScene.instance.GetArmy(a) == null) break;
         }
+        int armyNum = 0;
+        while (armyNum < armies.Length)
+        {
+            armiesGO[armyNum] = Instantiate(armies[armyNum], armyPos[armyNum].position, Quaternion.identity);
+            armyNum++;
+            if (armyNum == ChangeScene.instance.chooseArmyCount) break;
+        }
+
     }
     public void SetHaveWeaponType(int weaponType)
     {

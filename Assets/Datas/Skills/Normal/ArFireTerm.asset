@@ -15,6 +15,8 @@ MonoBehaviour:
   skillType: 0
   ID: 32
   weaponType: 2
+  upgradeType: 1
+  upgradeAmount: 8
   skillLevel: 0
   skillName: "\uB77C\uC774\uD50C \uC5F0\uC0AC \uC18D\uB3C4 \uAC15\uD654"
   skillIcon: {fileID: 21300000, guid: a67d80a1e6dd824409cb30f62dc28448, type: 3}

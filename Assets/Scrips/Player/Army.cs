@@ -10,8 +10,11 @@ public class Army : MonoBehaviour
     [SerializeField] Image remainBulletImg;
     [SerializeField] private bool isSrArmy = false;
     [Header("#Weapon Info")]
+    //#Upgrade Type
+    //#0 Damge #1 fireRate #2 reloadingTime
+
     private bool canAttack = false; //공격 가능 여부
-    private float damage; 
+    public float damage; 
     private float fireRate;
     private float tempFireRate;
     private float attackRange;
@@ -44,7 +47,8 @@ public class Army : MonoBehaviour
         remainBulletImg.fillAmount = (remainBulletCount/maxbulletCount);
 
         CheckEnemy();
-        
+
+        Debug.Log(this.name + " : " + weaponType);
     }
     private void WeaponInfoInit()
     {
@@ -76,6 +80,13 @@ public class Army : MonoBehaviour
                 weaponType = 5;
                 break;
         }
+    }
+    public void Upgrade()
+    {
+        Debug.Log("Upgrade Checked");
+        damage *= SkillManager.instance.GetWeaponData(weaponType)[0]/100;
+        tempFireRate *= SkillManager.instance.GetWeaponData(weaponType)[1]/100;
+        reloadingTime *= SkillManager.instance.GetWeaponData(weaponType)[2]/100;
     }
     private void AttackTest(EnemyCtrl enemy)
     {
@@ -116,7 +127,7 @@ public class Army : MonoBehaviour
             GameObject enemyGO = FindClosestTarget(enemyColls).gameObject;
             transform.LookAt(enemyGO.transform.position);
             EnemyCtrl enemy = enemyGO.GetComponent<EnemyCtrl>();
-            //if (fireRate <= 0.0f && !isReloading) Attack(enemy);
+            //공격
             if (fireRate <= 0.0f && !isReloading) AttackTest(enemy);
 
         }

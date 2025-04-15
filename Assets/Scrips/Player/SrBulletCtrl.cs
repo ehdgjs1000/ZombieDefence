@@ -9,7 +9,9 @@ public class SrBulletCtrl : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     private int penetrateCount = 0;
     private bool canPenetrate = false;
-    
+
+    [SerializeField] private Transform damagePopUpTr;
+
 
     private void Awake()
     {
@@ -39,13 +41,18 @@ public class SrBulletCtrl : MonoBehaviour
     }
     private void OnCollisionEnter(Collision co)
     {
-        if(co.gameObject != null)
+        try
         {
             if (co.gameObject.CompareTag("Enemy"))
             {
                 co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
-
+                //Damage PopUp
+                DamagePopUp.Create(this.transform.position, damage);
             }
+        }
+        catch (System.ObjectDisposedException e)
+        {
+            System.Console.WriteLine("Caught: {0}", e.Message);
         }
 
     }

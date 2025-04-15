@@ -18,6 +18,8 @@ public class SkillData : ScriptableObject
     public SkillType skillType;
     public int ID;
     public int weaponType;
+    public int upgradeType; //#0 dmgup #1 firerateup #2 reloadup
+    public float upgradeAmount;
     public int skillLevel;
     public string skillName;
     public Sprite skillIcon;

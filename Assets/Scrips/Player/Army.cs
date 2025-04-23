@@ -8,6 +8,7 @@ public class Army : MonoBehaviour
     //Attack Info
     [SerializeField] WeaponData weaponData;
     [SerializeField] Image remainBulletImg;
+    [SerializeField] Image weaponImg;
     [SerializeField] private bool isSrArmy = false;
     [Header("#Weapon Info")]
     //#Upgrade Type
@@ -19,10 +20,11 @@ public class Army : MonoBehaviour
     private float tempFireRate;
     private float attackRange;
     private float maxbulletCount;
-    private bool isReloading = false;
+    public bool isReloading = false;
     private float remainBulletCount;
     private float reloadingTime;
     private int weaponType;
+    public int weaponGrade;
 
     [SerializeField] private GameObject bulletGO;
     [SerializeField] private Transform bulletSpawnPos;
@@ -47,8 +49,6 @@ public class Army : MonoBehaviour
         remainBulletImg.fillAmount = (remainBulletCount/maxbulletCount);
 
         CheckEnemy();
-
-        Debug.Log(this.name + " : " + weaponType);
     }
     private void WeaponInfoInit()
     {
@@ -59,6 +59,7 @@ public class Army : MonoBehaviour
         maxbulletCount = weaponData.maxBulletCount;
         remainBulletCount = maxbulletCount;
         reloadingTime = weaponData.reloadingTime;
+        weaponImg.sprite = weaponData.weaponImage;
         switch (weaponData.type)
         {
             case (WeaponData.WeaponType.Pistol):
@@ -78,6 +79,24 @@ public class Army : MonoBehaviour
                 break;
             case (WeaponData.WeaponType.Special):
                 weaponType = 5;
+                break;
+        }
+        switch (weaponData.grade)
+        {
+            case (WeaponData.WeaponGrade.Normal):
+                weaponGrade = 0;
+                break;
+            case (WeaponData.WeaponGrade.Special):
+                weaponGrade = 1;
+                break;
+            case (WeaponData.WeaponGrade.Epic):
+                weaponGrade = 2;
+                break;
+            case (WeaponData.WeaponGrade.Hero):
+                weaponGrade = 3;
+                break;
+            case (WeaponData.WeaponGrade.Legendary):
+                weaponGrade = 4;
                 break;
         }
     }
@@ -123,12 +142,19 @@ public class Army : MonoBehaviour
         enemyColls = Physics.OverlapSphere(this.transform.position, attackRange, enemyLayer);
         if(enemyColls.Length > 0)
         {
-
-            GameObject enemyGO = FindClosestTarget(enemyColls).gameObject;
-            transform.LookAt(enemyGO.transform.position);
-            EnemyCtrl enemy = enemyGO.GetComponent<EnemyCtrl>();
-            //공격
-            if (fireRate <= 0.0f && !isReloading) AttackTest(enemy);
+            try
+            {
+                GameObject enemyGO = FindClosestTarget(enemyColls).gameObject;
+                transform.LookAt(enemyGO.transform.position);
+                EnemyCtrl enemy = enemyGO.GetComponent<EnemyCtrl>();
+                //공격
+                if (fireRate <= 0.0f && !isReloading) AttackTest(enemy);
+            }
+            
+            catch (System.ObjectDisposedException e)
+            {
+                System.Console.WriteLine("Caught: {0}", e.Message);
+            }
 
         }
     }

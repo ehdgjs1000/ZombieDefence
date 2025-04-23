@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: ArLv3
   m_EditorClassIdentifier: 
   type: 2
+  grade: 3
   itemName: AK-47
   fireRate: 0.2
   maxBulletCount: 30
   damage: 40
   bulletShootCount: 1
-  canPenetrate: 0
   range: 20
   reloadingTime: 2
+  weaponImage: {fileID: 21300000, guid: 8b7c665bb3146e4468d74ae5fef73f0a, type: 3}

@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
     }
     public void SkillLevelReset()
     {
-        for (int a = 0; a < skills.Length; a++)
+        for (int a = 0; a < skillsDatas.Length; a++)
         {
             skillsDatas[a].skillLevel = 0;
         }

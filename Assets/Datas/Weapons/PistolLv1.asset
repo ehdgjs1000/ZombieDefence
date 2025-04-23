@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: PistolLv1
   m_EditorClassIdentifier: 
   type: 0
+  grade: 0
   itemName: "\uB9AC\uBCFC\uBC84"
   fireRate: 0.5
   maxBulletCount: 6
   damage: 25
   bulletShootCount: 1
-  canPenetrate: 0
   range: 13
   reloadingTime: 2
+  weaponImage: {fileID: 21300000, guid: b8e5dfd7f98a4f64ebc9d2e965b22fdc, type: 3}

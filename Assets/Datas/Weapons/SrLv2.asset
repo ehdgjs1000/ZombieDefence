@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SrLv2
   m_EditorClassIdentifier: 
   type: 3
+  grade: 3
   itemName: "\uB9C1\uC2A4"
   fireRate: 0.8
   maxBulletCount: 10
   damage: 110
   bulletShootCount: 1
-  canPenetrate: 1
   range: 27
   reloadingTime: 2
+  weaponImage: {fileID: 21300000, guid: bde2b38109e7fc3498dee8cce9b907f6, type: 3}

@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SmgLv1
   m_EditorClassIdentifier: 
   type: 1
+  grade: 1
   itemName: MP5
   fireRate: 0.08
   maxBulletCount: 25
   damage: 15
   bulletShootCount: 1
-  canPenetrate: 0
   range: 16
   reloadingTime: 2
+  weaponImage: {fileID: 21300000, guid: 0a5c79c813da6664cbfae7e49fefc4f9, type: 3}

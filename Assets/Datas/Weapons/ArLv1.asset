@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: ArLv1
   m_EditorClassIdentifier: 
   type: 2
+  grade: 0
   itemName: G36C
   fireRate: 0.18
   maxBulletCount: 30
   damage: 28
   bulletShootCount: 1
-  canPenetrate: 0
   range: 20
   reloadingTime: 2
+  weaponImage: {fileID: 21300000, guid: 4622a124f412f9541bcac772fb3dd962, type: 3}

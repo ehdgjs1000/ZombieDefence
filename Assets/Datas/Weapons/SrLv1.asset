@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SrLv1
   m_EditorClassIdentifier: 
   type: 3
+  grade: 1
   itemName: M-24
   fireRate: 1.2
   maxBulletCount: 7
   damage: 85
   bulletShootCount: 1
-  canPenetrate: 1
   range: 27
   reloadingTime: 1.5
+  weaponImage: {fileID: 21300000, guid: 3bda70c9e5dffb94eb9215fd5da47d4c, type: 3}

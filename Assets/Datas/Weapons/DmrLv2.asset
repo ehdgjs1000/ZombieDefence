@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: DmrLv2
   m_EditorClassIdentifier: 
   type: 4
+  grade: 4
   itemName: MK-14
   fireRate: 0.33
   maxBulletCount: 20
   damage: 52
   bulletShootCount: 1
-  canPenetrate: 0
   range: 25
   reloadingTime: 1.7
+  weaponImage: {fileID: 21300000, guid: d8d45a167bbba064abadc1048b9d4513, type: 3}

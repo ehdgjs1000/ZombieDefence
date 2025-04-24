@@ -5,8 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
-{
-    [SerializeField] private GameObject[] themas;
+{  
+    public static LobbyManager instance;
+
+    public GameObject[] themas;
 
     //Setting Datas
     [SerializeField] private Army[] armyGos;
@@ -15,12 +17,31 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private Sprite[] armySprites;
     private int chooseArmyCount = 0;
 
-    //Main Datas
+    //AccountInfo
+    [SerializeField] private Text goldTxt;
+    [SerializeField] private Text CrystalTxt;
 
+    //Main Datas
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
         SwapBtnOnlick(1);
+    }
+    private void Update()
+    {
+        goldTxt.text = AccountInfo.instance.CashInfo(0).ToString();
+        CrystalTxt.text = AccountInfo.instance.CashInfo(1).ToString();
     }
     public void StartBtnOnClick()
     {
@@ -96,5 +117,13 @@ public class LobbyManager : MonoBehaviour
             else if(a != num) themas[a].SetActive(false);
         }
     }
+    /*public void SwapBtnOnlick(int num)
+    {
+        for (int a = 0; a < themas.Length; a++)
+        {
+            if (a == num) themas[a].transform.localScale = new Vector3(1, 1, 1);
+            else if (a != num) themas[a].transform.localScale = new Vector3(0, 0, 0);
+        }
+    }*/
 
 }

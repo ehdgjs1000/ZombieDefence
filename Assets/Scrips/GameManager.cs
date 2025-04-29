@@ -1,24 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool isStopGame = false;
-
-    [Header("#Spawner")]
-    [SerializeField] private GameObject[] enemies;
-    private float spawnInterval = 0.5f;
-    public float minSpawnInterval;
-    public float maxSpawnInterval;
+    private int min;
+    private float sec;
+    [SerializeField] private Text timeTxt;
+    [SerializeField] private Text gameOverTimeTxt;
+    private int speedUpType = 0;
+    [SerializeField] private Text speedUpTxt;
+    private float tempTimeScale = 1.0f;
+    private int gold = 0;
+    [SerializeField] private GameObject gameOverSet;
+    [SerializeField] private Text goldText;
 
     //Level System
     [SerializeField] private Skill[] skills;
     [SerializeField] private SkillData[] skillsDatas;
     [SerializeField] private Image expImage;
     [SerializeField] private Image hpImage;
+    [SerializeField] private Text hpTxt;
     [SerializeField] private Text levelTxt;
     [SerializeField] private LevelUp uiLevelUp;
     private int level = 1;
@@ -26,7 +32,9 @@ public class GameManager : MonoBehaviour
     private float needExp = 100.0f;
     private float gainedExp = 0.0f;
     public int gameLevel = 1;
-    private float gameLevelTime = 60.0f;
+    public float gameHpLevel = 1;
+    private float gameLevelTime = 120.0f;
+    private float gameHpLevelTime = 60.0f;
 
     //Army
     [SerializeField] private Transform[] armyPos;
@@ -50,6 +58,9 @@ public class GameManager : MonoBehaviour
         {
             haveWeaponType[a] = false;
         }
+        gold = 0;
+        min = 0;
+        sec = 0;
     }
     private void Start()
     {
@@ -59,11 +70,13 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         gameLevelTime -= Time.deltaTime;
-        spawnInterval -= Time.deltaTime;
-        if(spawnInterval <= 0.0f) SpawnEnemy();
+        gameHpLevelTime -= Time.deltaTime;
 
         UpdateInfo();
-        if(gameLevelTime<=0.0f) GameLevelUp();
+        Timer();
+        if (gameLevelTime <= 0.0f) GameLevelUp();
+        if (gameHpLevelTime <= 0.0f) GameHpLevelUp();
+        if (hp <= 0.0f) EndGame();
 
         //Upgrade check
         if (canUpgradeCheck)
@@ -71,12 +84,61 @@ public class GameManager : MonoBehaviour
             int a = 0;
             while (a < armies.Length)
             {
-               armiesGO[a].Upgrade();
+                armiesGO[a].Upgrade();
                 a++;
                 if (a == ChangeScene.instance.chooseArmyCount) break;
             }
             canUpgradeCheck = false;
         }
+    }
+    public void GetGold(int goldAmount)
+    {
+        gold += goldAmount;
+    }
+    public void SpeedUpBtnOnClick()
+    {
+        speedUpType++;
+        if(speedUpType >= 3)speedUpType = 0;
+        switch (speedUpType)
+        {
+            case 0:
+                speedUpTxt.text = "x1";
+                Time.timeScale = 1.0f;
+                tempTimeScale = 1.0f;
+                break;
+            case 1:
+                speedUpTxt.text = "x1.5";
+                Time.timeScale = 1.5f;
+                tempTimeScale = 1.5f;
+                break;
+            case 2:
+                speedUpTxt.text = "x2";
+                Time.timeScale = 2.0f;
+                tempTimeScale = 2.0f;
+                break;
+        }
+        
+    }
+    private void Timer()
+    {
+        sec += Time.deltaTime;
+        if (sec >= 60f)
+        {
+            min += 1;
+            sec = 0;
+        }
+        timeTxt.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
+    }
+    private void GameHpLevelUp()
+    {
+        gameHpLevelTime = 60.0f;
+        gameHpLevel *= 1.2f;
+    }
+    public IEnumerator ArmyGetAttack(float damage)
+    {
+        //Apply Zombie Attack Speed
+        yield return new WaitForSeconds(0.1f);    
+        hp -= damage;
     }
     private void ArmySet()
     {
@@ -106,11 +168,19 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         SkillLevelReset();
+        gameOverSet.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+    public void ToLobbyBtnOnClick()
+    {
+        tempTimeScale = 1.0f;
+        gameOverSet.SetActive(false);
+        SceneManager.LoadScene(0);
     }
     private void GameLevelUp()
     {
         gameLevel++;
-        gameLevelTime = 60.0f;
+        gameLevelTime = 120.0f;
     }
     private void UpdateInfo()
     {
@@ -118,6 +188,8 @@ public class GameManager : MonoBehaviour
         expImage.fillAmount = (gainedExp / needExp);
         hpImage.fillAmount = (hp/100.0f);
         levelTxt.text = "Lv." + level.ToString();
+        hpTxt.text = hp.ToString();
+        goldText.text = gold.ToString();
     }
     public void GainExp(float tempExp)
     {
@@ -152,17 +224,7 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         isStopGame = false;
-        Time.timeScale = 1.0f;
+        Time.timeScale = tempTimeScale;
     }
-    private void SpawnEnemy()
-    {
-        spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-        //추후 레벨 시스템 도입하여 변경
-        float ranX = Random.Range(-3.8f, 3.8f);
-        float ranZ = Random.Range(17.0f, 19.0f);
-        Instantiate(enemies[0],new Vector3(ranX,0.5f,ranZ), Quaternion.Euler(0,180,0));
-
-    }
-
 
 }

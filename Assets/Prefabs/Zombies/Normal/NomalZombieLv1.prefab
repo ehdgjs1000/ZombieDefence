@@ -7401,7 +7401,7 @@ GameObject:
   - component: {fileID: 996133741444592560}
   - component: {fileID: 4485868290683102607}
   m_Layer: 6
-  m_Name: ZombieTest
+  m_Name: NomalZombieLv1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7527,9 +7527,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91394fd9fdbd11145b54522fda2e715f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
-  hp: 50
+  isLongRange: 0
+  hp: 25
   exp: 25
+  moveSpeed: 0.2
+  attackRange: 0.5
+  damage: 10
 --- !u!54 &4485868290683102607
 Rigidbody:
   m_ObjectHideFlags: 0

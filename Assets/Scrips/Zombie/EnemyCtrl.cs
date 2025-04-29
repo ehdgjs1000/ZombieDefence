@@ -5,18 +5,23 @@ using UnityEngine;
 public class EnemyCtrl : MonoBehaviour
 {
     private bool canMove = true;
-    [SerializeField] private float moveSpeed;
     private bool isDie = false;
+    private bool isAttacking = false;
+    private float attackCount = 0.0f;
 
     //Enemy Info
+    [SerializeField] private bool isLongRange;
     [SerializeField] private float hp;
     [SerializeField] private float exp;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float damage;
+    [SerializeField] private int gold;
 
     //Animation
     private Animator animator;
     private void Awake()
     {
-        
         //몬스터 체력 설정
         animator = GetComponent<Animator>();
     }
@@ -27,10 +32,35 @@ public class EnemyCtrl : MonoBehaviour
     }
     private void Update()
     {
-        if (canMove && !GameManager.instance.isStopGame) Move();
+        attackCount -= Time.deltaTime;
 
+        if (canMove && !GameManager.instance.isStopGame) Move();
         if (hp <= 0.0f && !isDie) StartCoroutine(EnemyDie());
 
+        if(attackCount <= 0.0f) AttackCheck();
+
+    }
+    public void InitHp(float hpTimes)
+    {
+        hp *= hpTimes;
+    }
+    private void AttackCheck()
+    {
+        Physics.Raycast(this.transform.position, transform.forward, out RaycastHit hitInfo,attackRange);
+        if(hitInfo.collider != null && !isAttacking)
+        {
+            StartCoroutine(Attack(damage));
+        }
+        
+    }
+    IEnumerator Attack(float damage)
+    {
+        isAttacking = true;
+        animator.SetTrigger("ShortAttack");
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine(GameManager.instance.ArmyGetAttack(damage));
+        isAttacking = false;
+        GameManager.instance.GetGold(gold);
     }
     public void GetAttack(float damage)
     {

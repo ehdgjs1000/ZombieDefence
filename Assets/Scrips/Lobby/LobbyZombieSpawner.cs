@@ -25,6 +25,7 @@ public class LobbyZombieSpawner : MonoBehaviour
         int ranZombie = Random.Range(0, zombies.Length);
         int ranPos = Random.Range(0, spawnPoses.Length);
         GameObject zombie = Instantiate(zombies[ranZombie], spawnPoses[ranPos].position, Quaternion.Euler(0,-90,0));
+        float ranTime = Random.Range(5.0f,7.0f);
         Destroy(zombie, 5.0f);
     }
 

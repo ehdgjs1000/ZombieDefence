@@ -11,11 +11,11 @@ public class AccountInfo : MonoBehaviour
 
     //Gun Info
     [Header("Gun Info")]
-    public int[] pistolCount;
-    public int[] smgCount;
-    public int[] rifleCount;
-    public int[] srCount;
-    public int[] dmrCount;
+    public float[] pistolCount;
+    public float[] smgCount;
+    public float[] rifleCount;
+    public float[] srCount;
+    public float[] dmrCount;
     public int[] pistolLevel;
     public int[] rifleLevel;
     public int[] smgLevel;

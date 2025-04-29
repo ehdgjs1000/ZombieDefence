@@ -35,6 +35,8 @@ public class WeaponData : ScriptableObject
     public float range;
     public float reloadingTime;
     public Sprite weaponImage;
+    public int weaponLevel;
+    public float weaponCount;
    
 
     //public AudioClip reloadSfx;

@@ -17,6 +17,12 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private Sprite[] armySprites;
     private int chooseArmyCount = 0;
 
+    //WeaponDatas
+    [SerializeField] private WeaponData[] weaponDatas;
+    private WeaponData[] tempWeaponDatas = new WeaponData[13];
+    public int weaponNum=0;
+    public int weaponLevel;
+
     //AccountInfo
     [SerializeField] private Text goldTxt;
     [SerializeField] private Text CrystalTxt;
@@ -32,6 +38,17 @@ public class LobbyManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        for(int a = 0; a < weaponDatas.Length; a++)
+        {
+            tempWeaponDatas[a] = weaponDatas[a];
+        }
+    }
+    private void OnApplicationQuit()
+    {
+        for (int a = 0; a < weaponDatas.Length; a++)
+        {
+            weaponDatas[a] = tempWeaponDatas[a];
+        }
     }
 
     private void Start()
@@ -43,19 +60,24 @@ public class LobbyManager : MonoBehaviour
         goldTxt.text = AccountInfo.instance.CashInfo(0).ToString();
         CrystalTxt.text = AccountInfo.instance.CashInfo(1).ToString();
     }
+    public WeaponData ReturnWeaponDatas(int num)
+    {
+        return weaponDatas[num];
+    }
     public void StartBtnOnClick()
     {
         SceneManager.LoadScene(1);
         ChangeScene.instance.SetArmies(chooseArmyGos, chooseArmyCount);
     }
-    public void ArmyBtnOnClick(int num)
+    public void ArmyBtnOnClick()
     {
-        ChooseArmy(num);
+        if(weaponLevel >0)ChooseArmy(weaponNum);
     }
     public void ChooseArmyBtnOnClick(int num)
     {
         chooseArmyGos[num] = null;
         chooseArmyGosSprites[num].sprite = null;
+
         chooseArmyCount--;
     }
     private void ChooseArmy(int _a)

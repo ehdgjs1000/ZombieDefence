@@ -13,6 +13,11 @@ public class StoreManager : MonoBehaviour
 
     [SerializeField] private Sprite[] gunSprites;
 
+    //Store GOs
+    [SerializeField] private GameObject buyGoldGo;
+    private int buyAmountType;
+    [SerializeField] private GameObject buyCrystalGo;
+
     private void Awake()
     {
         card1CF = card1.GetComponent<CardFlip>();
@@ -23,6 +28,38 @@ public class StoreManager : MonoBehaviour
         for(int a = 0; a < card10.Length; a++) card10CF[a].ResetFlip();
         card1CF.ResetFlip();
     }
+    
+    //골드 구매 초기창
+    public void TryBuyGoldOnClick(int num)
+    {
+        buyGoldGo.SetActive(true);
+        buyAmountType = num;
+    }
+    //골드 확실히 구매
+    public void BuyGoldOnClick()
+    {
+        if(buyAmountType == 0 && AccountInfo.instance.CashInfo(1) >= 100)
+        {
+            AccountInfo.instance.LoseCash(1,100);
+            AccountInfo.instance.GetCash(0, 1500);
+        }
+        else if (buyAmountType == 1 && AccountInfo.instance.CashInfo(1) >= 600)
+        {
+            AccountInfo.instance.LoseCash(1, 600);
+            AccountInfo.instance.GetCash(0, 10000);
+        }
+        else if (buyAmountType == 2 && AccountInfo.instance.CashInfo(1) >= 3000)
+        {
+            AccountInfo.instance.LoseCash(1, 3000);
+            AccountInfo.instance.GetCash(0, 50000);
+        }
+        buyGoldGo.SetActive(false);
+    }
+    public void BuyGoldExitBtn()
+    {
+        buyGoldGo.SetActive(false);
+    }
+
     public void DrawnBtnOnClick(int num) //뽑기 버튼 클릭 이벤트
     {
         if (num == 0) //한장 뽑기
@@ -47,21 +84,30 @@ public class StoreManager : MonoBehaviour
     }
     public void DrawExitBtnOnClick()
     {
+        StartCoroutine(FilpAll());
+    }
+    IEnumerator FilpAll()
+    {
+        for (int a = 0; a < card10.Length; a++)
+        {
+            card10CF[a].FlipBtnOnClick();
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(0.1f);
         CardFlipReset();
         for (int a = 0; a < DrawGos.Length; a++)
         {
             DrawGos[a].SetActive(false);
         }
-        
-
     }
+
     public void DrawGun(int count)
     {
-        //#normal 80% #Special 10% #Epic 6% #Hero 3% #Legendary 1%
-        int ranVal = Random.Range(0,101);
+        //#normal 91% #Special 8% #Epic 1% #Hero 3% #Legendary 1%
+        float ranVal = Random.Range(0.0f,100.0f);
         int gunSpriteNum = 0;
         int gunGrade = 0;
-        if(ranVal <= 80) //normal
+        if(ranVal <= 91) //normal
         {
             gunGrade = 0;
             int ranN = Random.Range(0,2);
@@ -76,7 +122,7 @@ public class StoreManager : MonoBehaviour
                     gunSpriteNum = 5;
                     break;
             }
-        }else if (ranVal > 80 && ranVal <=90) //Special
+        }else if (ranVal > 91.0f && ranVal <=98.5f) //Special
         {
             gunGrade = 1;
             int ranS = Random.Range(0,2);
@@ -91,7 +137,7 @@ public class StoreManager : MonoBehaviour
                     gunSpriteNum = 9;
                     break;
             }
-        }else if (ranVal >90 && ranVal<= 96) //Epic
+        }else if (ranVal >98.5f && ranVal<= 99.5f) //Epic
         {
             gunGrade = 2;
             int ranE = Random.Range(0, 3);
@@ -112,7 +158,7 @@ public class StoreManager : MonoBehaviour
             }
 
         }
-        else if (ranVal > 96 && ranVal <=99) //Hero
+        else if (ranVal > 99.5f && ranVal <=99.8f) //Hero
         {
             gunGrade = 3;
             int ranH = Random.Range(0,4);
@@ -155,14 +201,14 @@ public class StoreManager : MonoBehaviour
         if (count == -1)
         {
             Image[] card1Imgs = card1.GetComponentsInChildren<Image>();
-            card1Imgs[3].sprite = gunSprites[gunSpriteNum];
+            card1Imgs[1].sprite = gunSprites[gunSpriteNum];
             CardBackColor(gunGrade,card1Imgs[2]);
             CardBackColor(gunGrade, card1Imgs[0]);
         }
         else
         {
             Image[] card10Imgs = card10[count].GetComponentsInChildren<Image>();
-            card10Imgs[3].sprite = gunSprites[gunSpriteNum];
+            card10Imgs[1].sprite = gunSprites[gunSpriteNum];
             CardBackColor(gunGrade, card10Imgs[2]);
             CardBackColor(gunGrade, card10Imgs[0]);
         } 

@@ -103,20 +103,20 @@ public class Army : MonoBehaviour
     public void Upgrade()
     {
         Debug.Log("Upgrade Checked");
-        damage *= SkillManager.instance.GetWeaponData(weaponType)[0]/100;
+        /*damage *= SkillManager.instance.GetWeaponData(weaponType)[0]/100;
         tempFireRate *= SkillManager.instance.GetWeaponData(weaponType)[1]/100;
-        reloadingTime *= SkillManager.instance.GetWeaponData(weaponType)[2]/100;
+        reloadingTime *= SkillManager.instance.GetWeaponData(weaponType)[2]/100;*/
     }
     private void AttackTest(EnemyCtrl enemy)
     {
         //Data
-        fireRate = tempFireRate;
+        fireRate = tempFireRate* SkillManager.instance.GetWeaponData(weaponType)[1] / 100;
         remainBulletCount--;
 
         GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
         if (!isSrArmy)
         {
-            bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage, 1);
+            bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage * SkillManager.instance.GetWeaponData(weaponType)[0] / 100, 1);
         }
         else
         {
@@ -132,7 +132,7 @@ public class Army : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
-        yield return new WaitForSeconds(reloadingTime);
+        yield return new WaitForSeconds(reloadingTime * SkillManager.instance.GetWeaponData(weaponType)[2] / 100);
         isReloading = false;
         remainBulletCount = maxbulletCount;
     }

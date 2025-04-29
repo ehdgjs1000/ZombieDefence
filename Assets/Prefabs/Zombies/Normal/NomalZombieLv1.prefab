@@ -7531,8 +7531,12 @@ MonoBehaviour:
   hp: 25
   exp: 25
   moveSpeed: 0.2
-  attackRange: 0.5
+  attackRange: 1
   damage: 10
+  gold: 1
+  armyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!54 &4485868290683102607
 Rigidbody:
   m_ObjectHideFlags: 0

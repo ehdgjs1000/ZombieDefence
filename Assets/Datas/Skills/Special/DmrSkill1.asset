@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillType: 1
   ID: 0
-  weaponType: 0
+  weaponType: 4
+  upgradeType: 1
+  upgradeAmount: 25
   skillLevel: 0
   skillName: "\uBC1C\uC0AC\uC18D\uB3C4 \uAC10\uC18C"
   skillIcon: {fileID: 0}

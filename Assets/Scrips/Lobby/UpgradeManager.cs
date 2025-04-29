@@ -13,6 +13,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Text[] rifleLevel;
     [SerializeField] private Text[] srLevel;
     [SerializeField] private Text[] dmrLevel;
+    [SerializeField] private Text[] specialLevel;
 
     [Header("Weapon Count")]
     [SerializeField] private Text[] pistolCount;
@@ -20,6 +21,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Text[] rifleCount;
     [SerializeField] private Text[] srCount;
     [SerializeField] private Text[] dmrCount;
+    [SerializeField] private Text[] specialCount;
 
     [Header("Weapon Progress bar")]
     [SerializeField] private Image[] pistolProgresses;
@@ -27,6 +29,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Image[] rifleProgresses;
     [SerializeField] private Image[] srProgresses;
     [SerializeField] private Image[] dmrProgresses;
+    [SerializeField] private Image[] specialProgresses;
 
     [Header("Weapon Bg")]
     [SerializeField] private GameObject[] pistolBg;
@@ -34,6 +37,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private GameObject[] rifleBg;
     [SerializeField] private GameObject[] srBg;
     [SerializeField] private GameObject[] dmrBg;
+    [SerializeField] private GameObject[] specialBg;
 
     [SerializeField] private GameObject upgradePanel;
 
@@ -61,7 +65,6 @@ public class UpgradeManager : MonoBehaviour
             if (AccountInfo.instance.pistolLevel[pc] > 0) pistolBg[pc].SetActive(false);
             if(AccountInfo.instance.pistolCount[pc] >= upgradeConuts[AccountInfo.instance.pistolLevel[pc]])
             {
-                Debug.Log(AccountInfo.instance.pistolCount[0] + " : " + upgradeConuts[AccountInfo.instance.pistolLevel[0]]);
                 //업그레이드 가능
                 pistolBg[pc].SetActive(false);
                 pistolBg[pc].GetComponentInParent<UpgradeWeapons>().canClick = true;
@@ -131,7 +134,21 @@ public class UpgradeManager : MonoBehaviour
                 dmrBg[dc].GetComponentInParent<UpgradeWeapons>().canClick = true;
                 dmrBg[dc].GetComponentInParent<UpgradeWeapons>().canUpgrade = true;
             }
-
+        }
+        for (int sc = 0; sc < specialProgresses.Length; sc++)
+        {
+            specialProgresses[sc].fillAmount =
+                (AccountInfo.instance.specialCount[sc] / upgradeConuts[AccountInfo.instance.specialLevel[sc]]);
+            specialCount[sc].text = AccountInfo.instance.specialCount[sc].ToString();
+            specialLevel[sc].text = "Lv." + AccountInfo.instance.specialLevel[sc].ToString();
+            if (AccountInfo.instance.specialLevel[sc] > 0) specialBg[sc].SetActive(false);
+            if (AccountInfo.instance.specialCount[sc] >= upgradeConuts[AccountInfo.instance.specialLevel[sc]])
+            {
+                //업그레이드 가능
+                specialBg[sc].SetActive(false);
+                specialBg[sc].GetComponentInParent<UpgradeWeapons>().canClick = true;
+                specialBg[sc].GetComponentInParent<UpgradeWeapons>().canUpgrade = true;
+            }
         }
     }
 

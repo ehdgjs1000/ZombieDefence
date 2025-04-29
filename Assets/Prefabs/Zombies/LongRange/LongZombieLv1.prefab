@@ -848,6 +848,10 @@ MonoBehaviour:
   moveSpeed: 0.3
   attackRange: 1.5
   damage: 5
+  gold: 1
+  armyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!54 &6770040003184576351
 Rigidbody:
   m_ObjectHideFlags: 0

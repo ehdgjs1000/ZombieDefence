@@ -17,6 +17,7 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private float damage;
     [SerializeField] private int gold;
+    [SerializeField] private LayerMask armyLayer;
 
     //Animation
     private Animator animator;
@@ -46,7 +47,8 @@ public class EnemyCtrl : MonoBehaviour
     }
     private void AttackCheck()
     {
-        Physics.Raycast(this.transform.position, transform.forward, out RaycastHit hitInfo,attackRange);
+        Physics.Raycast(this.transform.position, transform.forward,
+            out RaycastHit hitInfo,attackRange, armyLayer);
         if(hitInfo.collider != null && !isAttacking)
         {
             StartCoroutine(Attack(damage));
@@ -60,7 +62,6 @@ public class EnemyCtrl : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         StartCoroutine(GameManager.instance.ArmyGetAttack(damage));
         isAttacking = false;
-        GameManager.instance.GetGold(gold);
     }
     public void GetAttack(float damage)
     {
@@ -69,6 +70,7 @@ public class EnemyCtrl : MonoBehaviour
     private IEnumerator EnemyDie()
     {
         GameManager.instance.GainExp(exp);
+        GameManager.instance.GetGold(gold);
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
         isDie = true;

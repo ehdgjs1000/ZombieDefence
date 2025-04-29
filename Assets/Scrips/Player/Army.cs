@@ -16,20 +16,21 @@ public class Army : MonoBehaviour
 
     private bool canAttack = false; //공격 가능 여부
     public float damage; 
-    private float fireRate;
+    public float fireRate;
+    public float reloadingTime;
     private float tempFireRate;
     private float attackRange;
-    private float maxbulletCount;
+    private float maxbulletCount; 
     public bool isReloading = false;
     private float remainBulletCount;
-    private float reloadingTime;
+    
     private int weaponType;
     public int weaponGrade;
 
     [SerializeField] private GameObject bulletGO;
     [SerializeField] private Transform bulletSpawnPos;
     [SerializeField] private LayerMask enemyLayer;
-    public Collider[] enemyColls;
+    private Collider[] enemyColls;
     [SerializeField] private int posNum;
 
     LineRenderer lineRenderer;
@@ -116,7 +117,8 @@ public class Army : MonoBehaviour
         GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
         if (!isSrArmy)
         {
-            bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage * SkillManager.instance.GetWeaponData(weaponType)[0] / 100, 1);
+            bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage * SkillManager.instance.GetWeaponData(weaponType)[0] / 100
+                , (int)SkillManager.instance.GetWeaponData(0)[3]);
         }
         else
         {

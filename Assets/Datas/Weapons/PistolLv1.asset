@@ -17,9 +17,9 @@ MonoBehaviour:
   itemName: "\uB9AC\uBCFC\uBC84"
   fireRate: 0.5
   maxBulletCount: 6
-  damage: 25
+  damage: 22
   bulletShootCount: 1
-  range: 13
+  range: 10
   reloadingTime: 2
   weaponImage: {fileID: 21300000, guid: b8e5dfd7f98a4f64ebc9d2e965b22fdc, type: 3}
   weaponLevel: 0

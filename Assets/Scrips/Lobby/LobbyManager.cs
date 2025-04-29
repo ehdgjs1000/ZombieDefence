@@ -9,7 +9,6 @@ public class LobbyManager : MonoBehaviour
     public static LobbyManager instance;
 
     public GameObject[] themas;
-
     //Setting Datas
     [SerializeField] private Army[] armyGos;
     [SerializeField] public Army[] chooseArmyGos;
@@ -19,13 +18,20 @@ public class LobbyManager : MonoBehaviour
 
     //WeaponDatas
     [SerializeField] private WeaponData[] weaponDatas;
-    private WeaponData[] tempWeaponDatas = new WeaponData[13];
+    private WeaponData[] tempWeaponDatas = new WeaponData[14];
     public int weaponNum=0;
     public int weaponLevel;
 
     //AccountInfo
     [SerializeField] private Text goldTxt;
     [SerializeField] private Text CrystalTxt;
+    [SerializeField] private Text steminaTxt;
+
+    [SerializeField] private GameObject propsGO;
+    [SerializeField] private GameObject chapterClearGo;
+    private bool chapterClearGoActive = false;
+    [SerializeField] private GameObject QuestGo;
+    [SerializeField] private GameObject settingPanel;
 
     //Main Datas
     private void Awake()
@@ -59,6 +65,32 @@ public class LobbyManager : MonoBehaviour
     {
         goldTxt.text = AccountInfo.instance.CashInfo(0).ToString();
         CrystalTxt.text = AccountInfo.instance.CashInfo(1).ToString();
+        steminaTxt.text = AccountInfo.instance.stemina.ToString();
+    }
+    public void Save()
+    {
+        PlayerPrefs.SetInt("Gold", AccountInfo.instance.CashInfo(0));
+        PlayerPrefs.SetInt("Crystal", AccountInfo.instance.CashInfo(1));
+    }
+    public void Load()
+    {
+        
+    }
+    public void SettingBtnOnClick()
+    {
+        settingPanel.SetActive(true);
+    }
+    public void CloseSettingOnClick()
+    {
+        settingPanel.SetActive(false);
+    }
+    public void HideProps()
+    {
+        propsGO.SetActive(false);
+    }
+    public void ShowProps()
+    {
+        propsGO.SetActive(true);
     }
     public WeaponData ReturnWeaponDatas(int num)
     {
@@ -66,8 +98,39 @@ public class LobbyManager : MonoBehaviour
     }
     public void StartBtnOnClick()
     {
-        SceneManager.LoadScene(1);
-        ChangeScene.instance.SetArmies(chooseArmyGos, chooseArmyCount);
+        if(AccountInfo.instance.stemina >= 5)
+        {
+            SceneManager.LoadScene(1);
+            AccountInfo.instance.stemina -= 5;
+            ChangeScene.instance.SetArmies(chooseArmyGos, chooseArmyCount);
+        }
+        else
+        {
+            //게임 실행 불가
+        }
+        
+    }
+    public void QuestCloseBtnOnClick()
+    {
+        QuestGo.SetActive(false);
+        propsGO.SetActive(true);
+    }
+    public void QuestOpenBtnOnClick()
+    {
+        QuestGo.SetActive(true);
+        propsGO.SetActive(false);
+    }
+    public void ChapterClearBtnOnClick()
+    {
+        chapterClearGoActive = true;
+        propsGO.SetActive(!chapterClearGoActive);
+        chapterClearGo.SetActive(chapterClearGoActive);
+    }
+    public void ChapterCloseBtnOnClick()
+    {
+        chapterClearGoActive = false;
+        propsGO.SetActive(!chapterClearGoActive);
+        chapterClearGo.SetActive(chapterClearGoActive);
     }
     public void ArmyBtnOnClick()
     {
@@ -120,6 +183,11 @@ public class LobbyManager : MonoBehaviour
                     case 4:
                         chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.yellow;
                         ColorUtility.TryParseHtmlString("#C0B700", out color);
+                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
+                        break;
+                    case 5:
+                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.red;
+                        ColorUtility.TryParseHtmlString("#D10000", out color);
                         chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
                         break;
                 }

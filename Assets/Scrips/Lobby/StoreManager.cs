@@ -28,6 +28,10 @@ public class StoreManager : MonoBehaviour
         for(int a = 0; a < card10.Length; a++) card10CF[a].ResetFlip();
         card1CF.ResetFlip();
     }
+    public void ExitGoldOnClick()
+    {
+        buyGoldGo.SetActive(false);
+    }
     
     //골드 구매 초기창
     public void TryBuyGoldOnClick(int num)
@@ -103,8 +107,8 @@ public class StoreManager : MonoBehaviour
 
     public void DrawGun(int count)
     {
-        //#normal 91% #Special 8% #Epic 1% #Hero 3% #Legendary 1%
-        float ranVal = Random.Range(0.0f,100.0f);
+        //#normal 91% #Special 8% #Epic 1% #Hero 3% #Legendary 0.15% #God 0.05%
+        float ranVal = Random.Range(99.96f,100.0f);
         int gunSpriteNum = 0;
         int gunGrade = 0;
         if(ranVal <= 91) //normal
@@ -182,7 +186,7 @@ public class StoreManager : MonoBehaviour
                     break;
             }
         }
-        else //Legendary
+        else if(ranVal > 99.8f && ranVal <= 99.95f) //Legendary
         {
             gunGrade = 4;
             int ranL = Random.Range(0,2);
@@ -198,6 +202,13 @@ public class StoreManager : MonoBehaviour
                     break;
             }
         }
+        else //God
+        {
+            gunGrade = 5;
+            AccountInfo.instance.specialCount[0]++;
+            gunSpriteNum = 13;
+        }
+
         if (count == -1)
         {
             Image[] card1Imgs = card1.GetComponentsInChildren<Image>();
@@ -234,6 +245,9 @@ public class StoreManager : MonoBehaviour
                 break;
             case 4:
                 card.color = Color.yellow;
+                break;
+            case 5:
+                card.color = Color.red;
                 break;
         }
     }

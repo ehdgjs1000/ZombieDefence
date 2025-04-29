@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
         {
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
     private void GameHpLevelUp()
     {
         gameHpLevelTime = 60.0f;
-        gameHpLevel *= 1.2f;
+        gameHpLevel *= 1.3f;
     }
     public IEnumerator ArmyGetAttack(float damage)
     {
@@ -174,6 +174,7 @@ public class GameManager : MonoBehaviour
     public void ToLobbyBtnOnClick()
     {
         tempTimeScale = 1.0f;
+        AccountInfo.instance.GetCash(0,gold);
         gameOverSet.SetActive(false);
         SceneManager.LoadScene(0);
     }

@@ -32,6 +32,7 @@ public class LobbyManager : MonoBehaviour
     private bool chapterClearGoActive = false;
     [SerializeField] private GameObject QuestGo;
     [SerializeField] private GameObject settingPanel;
+    [SerializeField] private Image[] borderImgs;
 
     //Main Datas
     private void Awake()
@@ -66,6 +67,8 @@ public class LobbyManager : MonoBehaviour
         goldTxt.text = AccountInfo.instance.CashInfo(0).ToString();
         CrystalTxt.text = AccountInfo.instance.CashInfo(1).ToString();
         steminaTxt.text = AccountInfo.instance.stemina.ToString();
+
+        SynchAccountToLobby();
     }
     public void Save()
     {
@@ -132,6 +135,49 @@ public class LobbyManager : MonoBehaviour
         propsGO.SetActive(!chapterClearGoActive);
         chapterClearGo.SetActive(chapterClearGoActive);
     }
+    
+    private void SynchAccountToLobby()
+    {
+        int pistolC = 0;
+        int smgC = 0;
+        int rifleC = 0;
+        int srC = 0;
+        int dmrC = 0;
+        int specialC = 0;
+        for (int a = 0; a < weaponDatas.Length; a++)
+        {
+            if(weaponDatas[a].type == WeaponData.WeaponType.Pistol)
+            {
+                AccountInfo.instance.pistolLevel[pistolC] = weaponDatas[a].weaponLevel;
+                pistolC++;
+            }
+            else if (weaponDatas[a].type == WeaponData.WeaponType.SMG)
+            {
+                AccountInfo.instance.smgLevel[smgC] = weaponDatas[a].weaponLevel;
+                smgC++;
+            }
+            else if (weaponDatas[a].type == WeaponData.WeaponType.Rifle)
+            {
+                AccountInfo.instance.rifleLevel[rifleC] = weaponDatas[a].weaponLevel;
+                rifleC++;
+            }
+            else if (weaponDatas[a].type == WeaponData.WeaponType.SR)
+            {
+                AccountInfo.instance.srLevel[srC] = weaponDatas[a].weaponLevel;
+                srC++;
+            }
+            else if (weaponDatas[a].type == WeaponData.WeaponType.DMR)
+            {
+                AccountInfo.instance.dmrLevel[dmrC] = weaponDatas[a].weaponLevel;
+                dmrC++;
+            }
+            else
+            {
+                AccountInfo.instance.specialLevel[specialC] = weaponDatas[a].weaponLevel;
+                specialC++;
+            }
+        }
+    }
     public void ArmyBtnOnClick()
     {
         if(weaponLevel >0)ChooseArmy(weaponNum);
@@ -140,6 +186,9 @@ public class LobbyManager : MonoBehaviour
     {
         chooseArmyGos[num] = null;
         chooseArmyGosSprites[num].sprite = null;
+
+        borderImgs[num].color = Color.black;
+        borderImgs[num].GetComponentsInChildren<Image>()[1].color = Color.white;
 
         chooseArmyCount--;
     }

@@ -688,7 +688,7 @@ Transform:
   m_GameObject: {fileID: 3945399974979420253}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.467, y: 0.112, z: 0.021}
+  m_LocalPosition: {x: 0.678, y: 0.112, z: 0.021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2926,14 +2926,17 @@ MonoBehaviour:
   weaponImg: {fileID: 5258519552874170805}
   isSrArmy: 1
   damage: 0
+  fireRate: 0
+  reloadingTime: 0
+  maxbulletCount: 0
   isReloading: 0
+  weaponType: 0
   weaponGrade: 1
   bulletGO: {fileID: 4774843709525027754, guid: 0d38ebd9c3b325642ab40850b6bb9416, type: 3}
   bulletSpawnPos: {fileID: 5957153489856225452}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  enemyColls: []
   posNum: 0
 --- !u!1 &8387133153491469602
 GameObject:

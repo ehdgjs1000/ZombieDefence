@@ -108,7 +108,7 @@ public class StoreManager : MonoBehaviour
     public void DrawGun(int count)
     {
         //#normal 91% #Special 8% #Epic 1% #Hero 3% #Legendary 0.15% #God 0.05%
-        float ranVal = Random.Range(99.96f,100.0f);
+        float ranVal = Random.Range(0.0f,100.0f);
         int gunSpriteNum = 0;
         int gunGrade = 0;
         if(ranVal <= 91) //normal

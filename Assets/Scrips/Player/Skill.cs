@@ -34,40 +34,36 @@ public class Skill : MonoBehaviour
         if (ranSkillChange <= 88.0f)
         {
             ranSkill = Random.Range(0, 15);
-            NormalSkillException(ranSkill);
+            SkillException(ranSkill);
         }
         else if (ranSkillChange > 88.0f && ranSkillChange <= 96.0f) //Special Skill
         {
-            ranSkill = Random.Range(15,23);
-            NormalSkillException(ranSkill);
+            ranSkill = Random.Range(15,24);
+            SkillException(ranSkill);
         }
         else if (ranSkillChange > 96.0f && ranSkillChange <= 99.0f) //Epic SKill
         {
-            ranSkill = Random.Range(23, 26);
-            NormalSkillException(ranSkill);
+            ranSkill = Random.Range(24, 29);
+            SkillException(ranSkill);
         }
 
     }
     //추가되는 Skill들 Gamemanager에서 Skilldata 추가 해주기
-    private void NormalSkillException(int ranNum)
+    private void SkillException(int ranNum)
     {
         // Skill Exception
-        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponNormal && skills[ranNum].skillLevel >=5)
+        if (!GameManager.instance.haveWeaponType[skills[ranNum].weaponType]) SkillChoose();
+        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponNormal)
         {
-            SkillChoose();
+            if(skills[ranNum].skillLevel >= 5) SkillChoose();
         }
-        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponNormal && 
-            !GameManager.instance.haveWeaponType[skills[ranNum].weaponType]) //해당 무기가 장착되어 있을경우
+        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponSpecial)
         {
-            SkillChoose();
+            if(skills[ranNum].skillLevel >= 3) SkillChoose();
         }
-        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponSpecial && skills[ranNum].skillLevel >= 3)
+        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponEpic)
         {
-            SkillChoose();
-        }
-        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponEpic && skills[ranNum].skillLevel >= 3)
-        {
-            SkillChoose();
+            if(skills[ranNum].skillLevel >= 3) SkillChoose();
         }
 
     }

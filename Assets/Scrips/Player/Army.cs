@@ -20,11 +20,11 @@ public class Army : MonoBehaviour
     public float reloadingTime;
     private float tempFireRate;
     private float attackRange;
-    private float maxbulletCount; 
+    public float maxbulletCount; 
     public bool isReloading = false;
     private float remainBulletCount;
     
-    private int weaponType;
+    public int weaponType;
     public int weaponGrade;
 
     [SerializeField] private GameObject bulletGO;
@@ -36,11 +36,12 @@ public class Army : MonoBehaviour
     LineRenderer lineRenderer;
     private void Awake()
     {
-        WeaponInfoInit();
+        
         lineRenderer = GetComponent<LineRenderer>();
     }
     private void Start()
     {
+        WeaponInfoInit();
         GameManager.instance.SetHaveWeaponType(weaponType);
     }
     private void Update()
@@ -50,6 +51,10 @@ public class Army : MonoBehaviour
         remainBulletImg.fillAmount = (remainBulletCount/maxbulletCount);
 
         CheckEnemy();
+    }
+    public void IncreaseMaxBullet(int amount)
+    {
+        maxbulletCount += amount;
     }
     private void WeaponInfoInit()
     {
@@ -99,11 +104,13 @@ public class Army : MonoBehaviour
             case (WeaponData.WeaponGrade.Legendary):
                 weaponGrade = 4;
                 break;
+            case (WeaponData.WeaponGrade.God):
+                weaponGrade = 5;
+                break;
         }
     }
     public void Upgrade()
     {
-        Debug.Log("Upgrade Checked");
         /*damage *= SkillManager.instance.GetWeaponData(weaponType)[0]/100;
         tempFireRate *= SkillManager.instance.GetWeaponData(weaponType)[1]/100;
         reloadingTime *= SkillManager.instance.GetWeaponData(weaponType)[2]/100;*/
@@ -113,16 +120,25 @@ public class Army : MonoBehaviour
         //Data
         fireRate = tempFireRate* SkillManager.instance.GetWeaponData(weaponType)[1] / 100;
         remainBulletCount--;
-
-        GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
+        //GameObject bullet1 = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
         if (!isSrArmy)
         {
+            //GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
+            GameObject bullet = ObjectPool.instance.MakeObj("bullet");
+            bullet.transform.position = bulletSpawnPos.position;
+            bullet.transform.rotation = Quaternion.Euler(0, 0, 0);
+            bullet.transform.rotation = this.transform.rotation;
             bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage * SkillManager.instance.GetWeaponData(weaponType)[0] / 100
-                , (int)SkillManager.instance.GetWeaponData(0)[3]);
+                , (int)SkillManager.instance.GetWeaponData(weaponType)[3]);
         }
         else
         {
-            bullet.GetComponent<SrBulletCtrl>().SetBulletInfo(damage, 1);
+            GameObject srBullet = ObjectPool.instance.MakeObj("srBullet");
+            srBullet.transform.position = bulletSpawnPos.position;
+            srBullet.transform.rotation = Quaternion.Euler(0, 0, 0);
+            srBullet.transform.rotation = this.transform.rotation;
+            //GameObject srBullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
+            srBullet.GetComponent<SrBulletCtrl>().SetBulletInfo(damage, 10);
         }
         
 
@@ -130,6 +146,11 @@ public class Army : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
+    }
+    public int ReturnWeaponType()
+    {
+        Debug.Log(this.name+" : " + weaponType);
+        return weaponType;
     }
     private IEnumerator Reload()
     {
@@ -147,7 +168,7 @@ public class Army : MonoBehaviour
             try
             {
                 GameObject enemyGO = FindClosestTarget(enemyColls).gameObject;
-                transform.LookAt(enemyGO.transform.position);
+                this.transform.LookAt(enemyGO.transform.position);
                 EnemyCtrl enemy = enemyGO.GetComponent<EnemyCtrl>();
                 //АјАн
                 if (fireRate <= 0.0f && !isReloading) AttackTest(enemy);

@@ -23,21 +23,13 @@ public class SrBulletCtrl : MonoBehaviour
         //rigid.velocity = transform.forward * bulletSpeed;
 
         rigid.AddForce(transform.forward*bulletSpeed);
-        Destroy(gameObject, 4.0f);
+        StartCoroutine(ObjectPool.instance.DeActive(4.0f, this.gameObject));
     }
 
     public void SetBulletInfo(float dmg, int _penetrateCount)
     {
         damage = dmg;
         penetrateCount = _penetrateCount;
-    }
-    private void OnTriggerEnter(Collider co)
-    {
-        if (co.CompareTag("Enemy"))
-        {
-            co.GetComponent<EnemyCtrl>().GetAttack(damage);
-            Destroy(this.gameObject);
-        }
     }
     private void OnCollisionEnter(Collision co)
     {

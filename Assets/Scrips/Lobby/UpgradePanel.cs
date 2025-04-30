@@ -12,7 +12,7 @@ public class UpgradePanel : MonoBehaviour
     [SerializeField] private GameObject upgradeInfoTxt;
 
     //weaponInfo
-    private WeaponData weapon;
+    public WeaponData weapon;
     [SerializeField] private Image weaponImage;
     [SerializeField] private Text levelTxt;
     [SerializeField] private Text damageTxt;
@@ -91,7 +91,13 @@ public class UpgradePanel : MonoBehaviour
             {
                 AccountInfo.instance.dmrCount[weaponNum - 11] -= Mathf.Pow(2, weapon.weaponLevel+1);
                 weapon.weaponLevel++;
-                AccountInfo.instance.dmrCount[weaponNum - 11]++;
+                AccountInfo.instance.dmrLevel[weaponNum - 11]++;
+            }
+            else if (weaponNum >= 13 )
+            {
+                AccountInfo.instance.specialCount[weaponNum - 13] -= Mathf.Pow(2, weapon.weaponLevel + 1);
+                weapon.weaponLevel++;
+                AccountInfo.instance.specialLevel[weaponNum - 13]++;
             }
             canUpgrade = false;
             this.gameObject.SetActive(false);

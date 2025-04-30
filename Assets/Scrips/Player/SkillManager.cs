@@ -10,7 +10,7 @@ public class SkillManager : MonoBehaviour
     public float[] damageRatio = { 100,100,100,100,100,100};
     public float[] tempFireRatio = { 100, 100, 100, 100, 100, 100};
     public float[] tempReloadration = { 100, 100, 100, 100, 100 ,100};
-    public float[] canPanetrate = { 1,1,1 };
+    public float[] canPanetrate = { 1,1,1 ,1,1,1};
 
     private void Awake()
     {
@@ -24,6 +24,22 @@ public class SkillManager : MonoBehaviour
         else if (upgradeType == 1) tempFireRatio[upgradeWeaponType] *= (100 - ratio) / 100;
         else if (upgradeType == 2) tempReloadration[upgradeWeaponType] *= (100 - ratio) / 100;
         else if (upgradeType == 3) canPanetrate[upgradeWeaponType]++;
+        else if (upgradeType == 4)
+        {   //최대 탄창 증가
+            for (int a = 0; a<3; a++)
+            {
+                if(GameManager.instance.ReturnArmy(a) != null)
+                {
+                    Army army = GameManager.instance.ReturnArmy(a);
+                    if(army.ReturnWeaponType() == 3 || army.ReturnWeaponType() == 4)
+                    {
+                        army.IncreaseMaxBullet(5);
+                    }
+                    
+                }
+                
+            }
+        }
     }
     public float[] GetWeaponData(int weaponType)
     {

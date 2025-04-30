@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class LobbyZombieSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] zombies;
+    public LobbyPool lobbyPool;
 
+    [SerializeField] private GameObject[] zombies;
     [SerializeField] private Transform[] spawnPoses;
-    private float ranSpwanTime = 0.5f;
+    private float ranSpwanTime = 0.0f;
 
     private void Update()
     {
@@ -15,6 +16,9 @@ public class LobbyZombieSpawner : MonoBehaviour
         {
             ranSpwanTime -= Time.deltaTime;
             if (ranSpwanTime < 0) SpawnZombie();
+        }else if (!LobbyManager.instance.themas[1].activeSelf)
+        {
+            lobbyPool.DestroyObj();
         }
         
     }
@@ -22,11 +26,15 @@ public class LobbyZombieSpawner : MonoBehaviour
     private void SpawnZombie()
     {
         ranSpwanTime = Random.Range(0.1f,0.2f);
-        int ranZombie = Random.Range(0, zombies.Length);
         int ranPos = Random.Range(0, spawnPoses.Length);
-        GameObject zombie = Instantiate(zombies[ranZombie], spawnPoses[ranPos].position, Quaternion.Euler(0,-90,0));
-        float ranTime = Random.Range(5.0f,9.0f);
-        Destroy(zombie, ranTime);
+
+        GameObject zombie = lobbyPool.MakeObj("zombie");
+        zombie.transform.position = spawnPoses[ranPos].transform.position;
+        zombie.transform.rotation = Quaternion.Euler(0,-90,0);
+        
+        LobbyZombieCtrl zCtrl = zombie.GetComponent<LobbyZombieCtrl>();
+        zCtrl.ranDieTime = Random.Range(1.2f, 1.5f);
+        zCtrl.isDying = false;
     }
 
 }

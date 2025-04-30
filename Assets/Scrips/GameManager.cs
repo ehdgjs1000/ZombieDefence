@@ -91,6 +91,10 @@ public class GameManager : MonoBehaviour
             canUpgradeCheck = false;
         }
     }
+    public Army ReturnArmy(int num)
+    {
+        return armiesGO[num];
+    }
     public void GetGold(int goldAmount)
     {
         gold += goldAmount;

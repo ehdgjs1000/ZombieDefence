@@ -21,7 +21,8 @@ public class WeaponData : ScriptableObject
         Special,
         Epic,
         Hero,
-        Legendary
+        Legendary,
+        God
     }
 
     [Header("#Weapon Info")]

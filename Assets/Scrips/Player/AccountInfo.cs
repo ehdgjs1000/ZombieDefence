@@ -6,8 +6,8 @@ public class AccountInfo : MonoBehaviour
 {
     public static AccountInfo instance;
 
-    private int Gold = 1000;
-    private int Crystal = 1000;
+    private int Gold = 100000;
+    private int Crystal = 100000;
     public int stemina = 30;
 
     //Gun Info

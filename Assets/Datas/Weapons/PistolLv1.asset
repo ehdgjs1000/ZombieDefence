@@ -15,12 +15,13 @@ MonoBehaviour:
   type: 0
   grade: 0
   itemName: "\uB9AC\uBCFC\uBC84"
-  fireRate: 0.32804996
+  fireRate: 0.40499997
   maxBulletCount: 6
-  damage: 32.2102
+  damage: 30
   bulletShootCount: 1
   range: 10
-  reloadingTime: 1.3121998
+  reloadingTime: 1.2149999
   weaponImage: {fileID: 21300000, guid: b8e5dfd7f98a4f64ebc9d2e965b22fdc, type: 3}
-  weaponLevel: 1
+  weaponLevel: 2
   weaponCount: 0
+  weaponNum: 0

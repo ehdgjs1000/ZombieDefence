@@ -21,7 +21,7 @@ public class BulletCtrl : MonoBehaviour
     private void Start()
     {
         rigid.AddForce(transform.forward*bulletSpeed);
-        StartCoroutine(ObjectPool.instance.DeActive(4.0f, this.gameObject));
+        StartCoroutine(ObjectPool.instance.DeActive(2.0f, this.gameObject));
     }
 
     public void SetBulletInfo(float dmg, int _penetrateCount)

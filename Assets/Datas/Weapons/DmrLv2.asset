@@ -15,7 +15,7 @@ MonoBehaviour:
   type: 4
   grade: 4
   itemName: MK-14
-  fireRate: 0.15783796
+  fireRate: 0.157838
   maxBulletCount: 20
   damage: 101.333305
   bulletShootCount: 1
@@ -24,3 +24,4 @@ MonoBehaviour:
   weaponImage: {fileID: 21300000, guid: d8d45a167bbba064abadc1048b9d4513, type: 3}
   weaponLevel: 0
   weaponCount: 0
+  weaponNum: 12

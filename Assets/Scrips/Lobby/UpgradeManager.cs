@@ -41,6 +41,17 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] private GameObject upgradePanel;
 
+    private void Start()
+    {
+        if (ChangeScene.instance.chooseArmyCount > 0)
+        {
+            for (int a = 0; a < ChangeScene.instance.chooseArmyCount; a++)
+            {
+                //chooseArmyGos[a] = ChangeScene.instance.GetArmy(a);
+                LobbyManager.instance.ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
+            }
+        }
+    }
     private void Update()
     {
         UpdateWeaponsProgress();

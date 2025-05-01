@@ -15,12 +15,13 @@ MonoBehaviour:
   type: 2
   grade: 4
   itemName: Famas
-  fireRate: 0.05165605
+  fireRate: 0.2
   maxBulletCount: 40
-  damage: 79.3128
+  damage: 80
   bulletShootCount: 1
   range: 20
-  reloadingTime: 0.64570063
+  reloadingTime: 1.5
   weaponImage: {fileID: 21300000, guid: 66fea71ef138ef241b0caa7b3e35b3dc, type: 3}
-  weaponLevel: 4
+  weaponLevel: 0
   weaponCount: 0
+  weaponNum: 8

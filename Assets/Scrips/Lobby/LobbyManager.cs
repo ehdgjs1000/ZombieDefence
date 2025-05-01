@@ -61,6 +61,7 @@ public class LobbyManager : MonoBehaviour
     private void Start()
     {
         SwapBtnOnlick(1);
+        //SetArmies();
     }
     private void Update()
     {
@@ -69,6 +70,18 @@ public class LobbyManager : MonoBehaviour
         steminaTxt.text = AccountInfo.instance.stemina.ToString();
 
         SynchAccountToLobby();
+    }
+    public void SetArmies()
+    {
+        if(ChangeScene.instance.chooseArmyCount > 0)
+        {
+            for (int a = 0; a < ChangeScene.instance.ArmyCount(); a++)
+            {
+                //chooseArmyGos[a] = ChangeScene.instance.GetArmy(a);
+                ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
+            }
+        }
+        
     }
     public void Save()
     {
@@ -192,7 +205,7 @@ public class LobbyManager : MonoBehaviour
 
         chooseArmyCount--;
     }
-    private void ChooseArmy(int _a)
+    public void ChooseArmy(int _a)
     {
         int a = 0; 
         while (a <= chooseArmyGos.Length && chooseArmyCount<3)

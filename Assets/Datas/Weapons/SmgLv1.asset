@@ -22,3 +22,6 @@ MonoBehaviour:
   range: 16
   reloadingTime: 2
   weaponImage: {fileID: 21300000, guid: 0a5c79c813da6664cbfae7e49fefc4f9, type: 3}
+  weaponLevel: 0
+  weaponCount: 0
+  weaponNum: 3

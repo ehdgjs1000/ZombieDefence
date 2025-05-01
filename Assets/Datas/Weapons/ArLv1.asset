@@ -15,12 +15,13 @@ MonoBehaviour:
   type: 2
   grade: 0
   itemName: G36C
-  fireRate: 0.18
+  fireRate: 0.162
   maxBulletCount: 20
-  damage: 17
+  damage: 18.7
   bulletShootCount: 1
   range: 15
-  reloadingTime: 1.8
+  reloadingTime: 1.6199999
   weaponImage: {fileID: 21300000, guid: 4622a124f412f9541bcac772fb3dd962, type: 3}
-  weaponLevel: 0
+  weaponLevel: 1
   weaponCount: 0
+  weaponNum: 5

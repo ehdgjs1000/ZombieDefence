@@ -61,6 +61,7 @@ public class ObjectPool : MonoBehaviour
      public IEnumerator DeActive(float time, GameObject go)
     {
         yield return new WaitForSeconds(time);
+        go.transform.position = Vector3.zero;
         go.gameObject.SetActive(false);
     }
     public GameObject DestroyObj()

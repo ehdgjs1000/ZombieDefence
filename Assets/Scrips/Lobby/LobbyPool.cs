@@ -48,10 +48,14 @@ public class LobbyPool : MonoBehaviour
     }
     public GameObject DestroyObj()
     {
-        for (int index = 0; index < targetPool.Length; index++)
+        if(targetPool != null)
         {
-            targetPool[index].SetActive(false);
+            for (int index = 0; index < targetPool.Length; index++)
+            {
+                targetPool[index].SetActive(false);
+            }
         }
+        
         return null;
     }
     public GameObject[] GetPool(string type)

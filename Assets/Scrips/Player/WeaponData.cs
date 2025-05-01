@@ -38,6 +38,7 @@ public class WeaponData : ScriptableObject
     public Sprite weaponImage;
     public int weaponLevel;
     public float weaponCount;
+    public int weaponNum;
    
 
     //public AudioClip reloadSfx;

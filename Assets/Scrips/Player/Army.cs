@@ -120,14 +120,12 @@ public class Army : MonoBehaviour
         //Data
         fireRate = tempFireRate* SkillManager.instance.GetWeaponData(weaponType)[1] / 100;
         remainBulletCount--;
-        //GameObject bullet1 = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
         if (!isSrArmy)
         {
-            //GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
-            GameObject bullet = ObjectPool.instance.MakeObj("bullet");
+            /*GameObject bullet = ObjectPool.instance.MakeObj("bullet");
             bullet.transform.position = bulletSpawnPos.position;
-            bullet.transform.rotation = Quaternion.Euler(0, 0, 0);
-            bullet.transform.rotation = this.transform.rotation;
+            bullet.transform.rotation = this.transform.rotation;*/
+            GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position,this.transform.rotation);
             bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage * SkillManager.instance.GetWeaponData(weaponType)[0] / 100
                 , (int)SkillManager.instance.GetWeaponData(weaponType)[3]);
         }
@@ -159,6 +157,10 @@ public class Army : MonoBehaviour
         isReloading = false;
         remainBulletCount = maxbulletCount;
     }
+    public int ReturnArmyWeaponData()
+    {
+        return weaponData.weaponNum;
+    }
     private void CheckEnemy()
     {
         enemyColls = null;
@@ -181,6 +183,7 @@ public class Army : MonoBehaviour
 
         }
     }
+
     private Collider FindClosestTarget(Collider[] targets)
     {
         float closestDist = Mathf.Infinity;

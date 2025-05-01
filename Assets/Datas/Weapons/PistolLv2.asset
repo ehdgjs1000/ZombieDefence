@@ -24,3 +24,4 @@ MonoBehaviour:
   weaponImage: {fileID: 21300000, guid: 2d816a1cc08969d4481cc8e8c48d2b1a, type: 3}
   weaponLevel: 0
   weaponCount: 0
+  weaponNum: 1

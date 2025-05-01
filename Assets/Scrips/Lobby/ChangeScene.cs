@@ -20,7 +20,6 @@ public class ChangeScene : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     public void SetArmies(Army[] _armies, int _chooseArmyCount)
     {
         chooseArmyCount = _chooseArmyCount;
@@ -38,6 +37,10 @@ public class ChangeScene : MonoBehaviour
     public Army GetArmy(int num)
     {
         return armies[num];
+    }
+    public int ArmyCount()
+    {
+        return armies.Length;
     }
 
 }

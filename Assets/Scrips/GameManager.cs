@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,12 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text gameOverTimeTxt;
     private int speedUpType = 0;
     [SerializeField] private Text speedUpTxt;
-    private float tempTimeScale = 1.0f;
+    public float tempTimeScale = 1.0f;
     private int gold = 0;
     [SerializeField] private GameObject gameOverSet;
-    [SerializeField] private Text goldText;
+    [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private GameObject settingGo;
+    [SerializeField] private Button settingBtn;
 
-    //Level System
+    [Header("Level System")]
     [SerializeField] private Skill[] skills;
     [SerializeField] private SkillData[] skillsDatas;
     [SerializeField] private Image expImage;
@@ -28,7 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text levelTxt;
     [SerializeField] private LevelUp uiLevelUp;
     private int level = 1;
-    private float hp = 100.0f;
+    public float hp = 100.0f;
     private float needExp = 100.0f;
     private float gainedExp = 0.0f;
     public int gameLevel = 1;
@@ -36,12 +39,22 @@ public class GameManager : MonoBehaviour
     private float gameLevelTime = 120.0f;
     private float gameHpLevelTime = 60.0f;
 
-    //Army
+    [Header("Army info")]
     [SerializeField] private Transform[] armyPos;
     [SerializeField] private Army[] armies;
     [SerializeField] private Army[] armiesGO;
     public bool[] haveWeaponType; //#0 Pistol #1 SMG #2 Rifle #3 SR #4 DMR #5 Special
     public bool canUpgradeCheck = false;
+
+    [Header("Killed Zombie Info")]
+    //#0 normal #1 fast #2 long #3 tank #4 boss
+    private int[] killedZombieInfo = new int[5] {0,0,0,0,0};
+    [SerializeField] private Text normalZTxt;
+    [SerializeField] private Text fastZTxt;
+    [SerializeField] private Text longZTxt;
+    [SerializeField] private Text tankZTxt;
+    [SerializeField] private Text bossZTxt;
+
 
     private void Awake()
     {
@@ -71,7 +84,6 @@ public class GameManager : MonoBehaviour
     {
         gameLevelTime -= Time.deltaTime;
         gameHpLevelTime -= Time.deltaTime;
-
         UpdateInfo();
         Timer();
         if (gameLevelTime <= 0.0f) GameLevelUp();
@@ -90,6 +102,24 @@ public class GameManager : MonoBehaviour
             }
             canUpgradeCheck = false;
         }
+    }
+    public void KilledZombie(int type)
+    {
+        killedZombieInfo[type]++;
+    }
+    private void KilledZombieInfo()
+    {
+        normalZTxt.text = killedZombieInfo[0].ToString() + " 付府";
+        fastZTxt.text = killedZombieInfo[1].ToString() + " 付府";
+        longZTxt.text = killedZombieInfo[2].ToString() + " 付府";
+        tankZTxt.text = killedZombieInfo[3].ToString() + " 付府";
+        //bossZTxt.text = killedZombieInfo[4].ToString() + " 付府";
+    }
+    public void SettingBtnOnClick()
+    {
+        settingGo.SetActive(true);
+        isStopGame = true;
+        Time.timeScale = 0.0f;
     }
     public Army ReturnArmy(int num)
     {
@@ -171,6 +201,7 @@ public class GameManager : MonoBehaviour
     }
     private void EndGame()
     {
+        KilledZombieInfo();
         SkillLevelReset();
         gameOverSet.SetActive(true);
         Time.timeScale = 0.0f;

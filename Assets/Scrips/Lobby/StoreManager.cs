@@ -46,16 +46,19 @@ public class StoreManager : MonoBehaviour
         {
             AccountInfo.instance.LoseCash(1,100);
             AccountInfo.instance.GetCash(0, 1500);
+            AccountInfo.instance.questCount[3] += 100;
         }
         else if (buyAmountType == 1 && AccountInfo.instance.CashInfo(1) >= 600)
         {
             AccountInfo.instance.LoseCash(1, 600);
             AccountInfo.instance.GetCash(0, 10000);
+            AccountInfo.instance.questCount[3] += 600;
         }
         else if (buyAmountType == 2 && AccountInfo.instance.CashInfo(1) >= 3000)
         {
             AccountInfo.instance.LoseCash(1, 3000);
             AccountInfo.instance.GetCash(0, 50000);
+            AccountInfo.instance.questCount[3] += 3000;
         }
         buyGoldGo.SetActive(false);
     }
@@ -73,6 +76,8 @@ public class StoreManager : MonoBehaviour
                 AccountInfo.instance.LoseCash(1, 100);
                 DrawGos[0].SetActive(true);
                 DrawGun(-1);
+                AccountInfo.instance.questCount[3] += 100;
+                AccountInfo.instance.questCount[0]++;
             }
             
         }else if (num == 1) //10¿Â ªÃ±‚
@@ -82,6 +87,8 @@ public class StoreManager : MonoBehaviour
                 AccountInfo.instance.LoseCash(1, 900);
                 DrawGos[1].SetActive(true);
                 for(int count = 0; count <10; count++) DrawGun(count);
+                AccountInfo.instance.questCount[3] += 300;
+                AccountInfo.instance.questCount[0] += 10;
             }
             
         }

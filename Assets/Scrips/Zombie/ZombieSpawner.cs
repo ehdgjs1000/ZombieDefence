@@ -35,20 +35,32 @@ public class ZombieSpawner : MonoBehaviour
         switch (ranZombie)
         {
             case 0:
-                GameObject zombieN =  Instantiate(normalZombies[0], new Vector3(ranX, 0.5f, ranZ), Quaternion.Euler(0, 180, 0));
+                GameObject zombieN = ObjectPool.instance.MakeObj("normalZombie");
+                zombieN.transform.position = new Vector3(ranX, 0.5f, ranZ);
+                zombieN.transform.rotation = Quaternion.Euler(0, 180, 0);
                 zombieN.GetComponent<EnemyCtrl>().InitHp(GameManager.instance.gameHpLevel);
+                StartCoroutine(zombieN.GetComponent<EnemyCtrl>().ReUseZombie());
                 break;
             case 1:
-                GameObject zombieF = Instantiate(fastZombies[0], new Vector3(ranX, 0.5f, ranZ), Quaternion.Euler(0, 180, 0));
+                GameObject zombieF = ObjectPool.instance.MakeObj("fastZombie");
+                zombieF.transform.position = new Vector3(ranX, 0.5f, ranZ);
+                zombieF.transform.rotation = Quaternion.Euler(0, 180, 0);
                 zombieF.GetComponent<EnemyCtrl>().InitHp(GameManager.instance.gameHpLevel);
+                StartCoroutine(zombieF.GetComponent<EnemyCtrl>().ReUseZombie());
                 break;
             case 2:
-                GameObject zombieT = Instantiate(tankerZombies[0], new Vector3(ranX, 0.5f, ranZ), Quaternion.Euler(0, 180, 0));
+                GameObject zombieT = ObjectPool.instance.MakeObj("tankZombie");
+                zombieT.transform.position = new Vector3(ranX, 0.5f, ranZ);
+                zombieT.transform.rotation = Quaternion.Euler(0, 180, 0);
                 zombieT.GetComponent<EnemyCtrl>().InitHp(GameManager.instance.gameHpLevel);
+                StartCoroutine(zombieT.GetComponent<EnemyCtrl>().ReUseZombie());
                 break;
             case 3:
-                GameObject zombieL = Instantiate(longZombies[0], new Vector3(ranX, 0.5f, ranZ), Quaternion.Euler(0, 180, 0));
+                GameObject zombieL = ObjectPool.instance.MakeObj("longZombie");
+                zombieL.transform.position = new Vector3(ranX, 0.5f, ranZ);
+                zombieL.transform.rotation = Quaternion.Euler(0, 180, 0);
                 zombieL.GetComponent<EnemyCtrl>().InitHp(GameManager.instance.gameHpLevel);
+                StartCoroutine(zombieL.GetComponent<EnemyCtrl>().ReUseZombie());
                 break;
         }
         

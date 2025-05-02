@@ -60,6 +60,8 @@ public class UpgradePanel : MonoBehaviour
     {
         if (canUpgrade && AccountInfo.instance.CashInfo(0) >= upgradeCost[weapon.weaponLevel])
         {
+            AccountInfo.instance.questCount[4]+= upgradeCost[weapon.weaponLevel];
+            AccountInfo.instance.questCount[5]++;
             AccountInfo.instance.LoseCash(0, upgradeCost[weapon.weaponLevel]);
             weapon.damage *= 1.1f;
             weapon.fireRate *= 0.9f;

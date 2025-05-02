@@ -8,7 +8,7 @@ public class AccountInfo : MonoBehaviour
 
     private int Gold = 100000;
     private int Crystal = 100000;
-    public int stemina = 30;
+    public int stemina = 15;
 
     //Gun Info
     [Header("Gun Info")]
@@ -25,6 +25,10 @@ public class AccountInfo : MonoBehaviour
     public int[] dmrLevel;
     public int[] specialLevel;
 
+    public bool isLogIn = true;
+    public float[] questCount = new float[6];
+    public bool[] isClear = new bool[7] {false, false, false, false, false, false, false};
+
 
     private void Awake()
     {
@@ -37,6 +41,10 @@ public class AccountInfo : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void Update()
+    {
+
     }
 
     public int CashInfo(int type) //#0 Gold #1 Crystal

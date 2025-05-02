@@ -19,7 +19,7 @@ public class Army : MonoBehaviour
     public float fireRate;
     public float reloadingTime;
     private float tempFireRate;
-    private float attackRange;
+    public float attackRange;
     public float maxbulletCount; 
     public bool isReloading = false;
     private float remainBulletCount;

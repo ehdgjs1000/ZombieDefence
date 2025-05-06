@@ -20,6 +20,7 @@ public class UpgradePanel : MonoBehaviour
     [SerializeField] private Text reloadTxt;
     [SerializeField] private Text maxMagTxt;
     [SerializeField] private Text upgradeCostText;
+    [SerializeField] private Image upgradeBorderImg;
     private int weaponNum=0;
     private WeaponData.WeaponType weaponType;
 
@@ -32,6 +33,7 @@ public class UpgradePanel : MonoBehaviour
     {
         if (canUpgrade) upgradeInfoTxt.SetActive(true);
         else upgradeInfoTxt.SetActive(false);
+        UpgradeBorderColor();
     }
     public void SetPanelInfo(Sprite _weaponImage, string _damageTxt, string _fireRateTxt,
         string _reloadTxt, string _maxMagTxt, WeaponData _weaponData,
@@ -54,7 +56,29 @@ public class UpgradePanel : MonoBehaviour
     {
         canUpgrade = _canUpgrade;
     }
-
+    private void UpgradeBorderColor()
+    {
+        switch (weapon.grade)
+        {
+            case WeaponData.WeaponGrade.Normal:
+                upgradeBorderImg.color = Color.white;
+                break;
+            case WeaponData.WeaponGrade.Special:
+                upgradeBorderImg.color = Color.green;
+                break;
+            case WeaponData.WeaponGrade.Epic:
+                upgradeBorderImg.color = Color.blue;
+                break;
+            case WeaponData.WeaponGrade.Hero:
+                Color color;
+                ColorUtility.TryParseHtmlString("#F000FF", out color);
+                upgradeBorderImg.color = color;
+                break;
+            case WeaponData.WeaponGrade.Legendary:
+                upgradeBorderImg.color = Color.yellow;
+                break;
+        }
+    }
     //업그레이드
     public void UpgradeBtnOnClick()
     {

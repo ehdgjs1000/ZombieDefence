@@ -17,6 +17,8 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private GameObject buyGoldGo;
     private int buyAmountType;
     [SerializeField] private GameObject buyCrystalGo;
+    [SerializeField] private GameObject cardOkayBtn;
+    [SerializeField] private GameObject cardExitBtn;
 
     private void Awake()
     {
@@ -25,6 +27,8 @@ public class StoreManager : MonoBehaviour
     }
     private void CardFlipReset()
     {
+        cardExitBtn.SetActive(false);
+        cardOkayBtn.SetActive(true);
         for(int a = 0; a < card10.Length; a++) card10CF[a].ResetFlip();
         card1CF.ResetFlip();
     }
@@ -93,9 +97,24 @@ public class StoreManager : MonoBehaviour
             
         }
     }
+    public void DrawOkayOnClick()
+    {
+        StartCoroutine(DrawPlay());
+    }
+    IEnumerator DrawPlay()
+    {
+        cardOkayBtn.SetActive(false);
+        StartCoroutine(FilpAll());
+        yield return new WaitForSeconds(1.3f);
+        cardExitBtn.SetActive(true);
+    }
     public void DrawExitBtnOnClick()
     {
-        StartCoroutine(FilpAll());
+        CardFlipReset();
+        for (int a = 0; a < DrawGos.Length; a++)
+        {
+            DrawGos[a].SetActive(false);
+        }
     }
     IEnumerator FilpAll()
     {
@@ -103,12 +122,6 @@ public class StoreManager : MonoBehaviour
         {
             card10CF[a].FlipBtnOnClick();
             yield return new WaitForSeconds(0.1f);
-        }
-        yield return new WaitForSeconds(0.1f);
-        CardFlipReset();
-        for (int a = 0; a < DrawGos.Length; a++)
-        {
-            DrawGos[a].SetActive(false);
         }
     }
 
@@ -220,14 +233,14 @@ public class StoreManager : MonoBehaviour
         {
             Image[] card1Imgs = card1.GetComponentsInChildren<Image>();
             card1Imgs[1].sprite = gunSprites[gunSpriteNum];
-            CardBackColor(gunGrade,card1Imgs[2]);
+            CardBackColor(gunGrade,card1Imgs[3]);
             CardBackColor(gunGrade, card1Imgs[0]);
         }
         else
         {
             Image[] card10Imgs = card10[count].GetComponentsInChildren<Image>();
             card10Imgs[1].sprite = gunSprites[gunSpriteNum];
-            CardBackColor(gunGrade, card10Imgs[2]);
+            CardBackColor(gunGrade, card10Imgs[3]);
             CardBackColor(gunGrade, card10Imgs[0]);
         } 
     }

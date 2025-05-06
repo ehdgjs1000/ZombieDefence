@@ -89,6 +89,9 @@ public class EnemyCtrl : MonoBehaviour
         GameManager.instance.KilledZombie(zombieType);
         AccountInfo.instance.questCount[2]++;
 
+        float ranBomb = Random.Range(0.0f, 100.0f);
+        if (ranBomb <= 0.2f) Ability.instance.bombCount++;
+
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
 

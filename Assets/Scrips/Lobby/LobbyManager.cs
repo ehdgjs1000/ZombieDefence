@@ -27,6 +27,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private Text goldTxt;
     [SerializeField] private Text CrystalTxt;
     [SerializeField] private Text steminaTxt;
+    [SerializeField] private Text levelTxt;
 
     [SerializeField] private GameObject propsGO;
     [SerializeField] private GameObject chapterClearGo;
@@ -53,6 +54,8 @@ public class LobbyManager : MonoBehaviour
         {
             tempWeaponDatas[a] = weaponDatas[a];
         }
+        BackEndGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
+
     }
     private void OnApplicationQuit()
     {
@@ -65,16 +68,22 @@ public class LobbyManager : MonoBehaviour
     private void Start()
     {
         SwapBtnOnlick(1);
+        BackEndGameData.Instance.GameDataLoad();
         //SetArmies();
     }
     private void Update()
     {
-        goldTxt.text = AccountInfo.instance.CashInfo(0).ToString();
-        CrystalTxt.text = AccountInfo.instance.CashInfo(1).ToString();
-        steminaTxt.text = AccountInfo.instance.stemina.ToString();
-
         SynchAccountToLobby();
         SteminaCharging();
+    }
+    public void UpdateGameData()
+    {
+        Debug.Log("Update Data Called");
+        levelTxt.text = "Lv." + $"{BackEndGameData.Instance.UserGameData.level}";
+
+        steminaTxt.text = $"{BackEndGameData.Instance.UserGameData.energy}";
+        goldTxt.text = $"{BackEndGameData.Instance.UserGameData.gold}";
+        CrystalTxt.text = $"{BackEndGameData.Instance.UserGameData.crystal}";
     }
     public void GetStemina(int amount)
     {

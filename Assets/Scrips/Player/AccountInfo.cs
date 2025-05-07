@@ -5,9 +5,10 @@ using UnityEngine;
 public class AccountInfo : MonoBehaviour
 {
     public static AccountInfo instance;
+    [SerializeField] private UserInfo user;
 
-    private int Gold = 100000;
-    private int Crystal = 100000;
+    public int Gold;
+    private int Crystal;
     public int stemina = 15;
 
     //Gun Info
@@ -41,12 +42,29 @@ public class AccountInfo : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        user.GetUserInfoFromBackEnd();
     }
-    private void Update()
+    private void Start()
     {
-
+        StartCoroutine(AccountInfoAwake());
     }
-
+    public IEnumerator AccountInfoAwake()
+    {
+        Gold = BackEndGameData.Instance.UserGameData.gold;
+        Crystal = BackEndGameData.Instance.UserGameData.crystal;
+        yield return new WaitForSeconds(0.1f);
+        BackEndGameData.Instance.GameDataUpdate(DoNothing);
+    }
+    public void SyncAccountToBackEnd()
+    {
+        BackEndGameData.Instance.UserGameData.gold = Gold;
+        BackEndGameData.Instance.UserGameData.crystal = Crystal;
+        BackEndGameData.Instance.GameDataUpdate(DoNothing);
+    }
+    public void DoNothing()
+    {
+        
+    }
     public int CashInfo(int type) //#0 Gold #1 Crystal
     {
         if (type == 0) return Gold;

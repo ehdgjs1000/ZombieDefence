@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text speedUpTxt;
     public float tempTimeScale = 1.0f;
     private int gold = 0;
+    private bool isGameOver = false;
     [SerializeField] private GameObject gameOverSet;
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private GameObject settingGo;
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
         Timer();
         if (gameLevelTime <= 0.0f) GameLevelUp();
         if (gameHpLevelTime <= 0.0f) GameHpLevelUp();
-        if (hp <= 0.0f) EndGame();
+        if (hp <= 0.0f && !isGameOver) GameOver();
 
         //Upgrade check
         if (canUpgradeCheck)
@@ -199,17 +200,42 @@ public class GameManager : MonoBehaviour
     {
         haveWeaponType[weaponType] = true;
     }
-    private void EndGame()
+    private void GameOver()
     {
         KilledZombieInfo();
-        SkillLevelReset();
+        isGameOver = true;
+        int killedZombieCount = 0;
+        bool canLevelUp = true;
+        for (int a = 0; a < killedZombieInfo.Length; a++)
+        {
+            killedZombieCount += killedZombieInfo[a];
+        }
+        //뒤끝 서버 연동 및 레벨업
+        //추후 레벨 필요 경험치 량에 따른 조정 필요!!
+        BackEndGameData.Instance.UserGameData.exp += killedZombieCount;
+        while (canLevelUp)
+        {
+            if (BackEndGameData.Instance.UserGameData.exp >= 100)
+            {
+                BackEndGameData.Instance.UserGameData.exp -= 100;
+                BackEndGameData.Instance.UserGameData.level++;
+            }
+            else canLevelUp = false;
+        }
+
         gameOverSet.SetActive(true);
+        BackEndGameData.Instance.GameDataUpdate(AfterGameOver);
+    }
+    private void AfterGameOver()
+    {
+        SkillLevelReset();
+        AccountInfo.instance.GetCash(0, gold);
+        AccountInfo.instance.SyncAccountToBackEnd();
         Time.timeScale = 0.0f;
     }
     public void ToLobbyBtnOnClick()
     {
         tempTimeScale = 1.0f;
-        AccountInfo.instance.GetCash(0,gold);
         gameOverSet.SetActive(false);
         SceneManager.LoadScene(0);
     }

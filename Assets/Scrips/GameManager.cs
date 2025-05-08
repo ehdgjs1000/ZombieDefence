@@ -229,7 +229,7 @@ public class GameManager : MonoBehaviour
     private void AfterGameOver()
     {
         SkillLevelReset();
-        AccountInfo.instance.GetCash(0, gold);
+        BackEndGameData.Instance.UserGameData.gold += gold;
         AccountInfo.instance.SyncAccountToBackEnd();
         Time.timeScale = 0.0f;
     }

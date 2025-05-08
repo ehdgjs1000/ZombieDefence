@@ -78,6 +78,7 @@ public class LobbyManager : MonoBehaviour
     }
     public void UpdateGameData()
     {
+        BackEndGameData.Instance.GameDataUpdate();
         levelTxt.text = "Lv." + $"{BackEndGameData.Instance.UserGameData.level}";
         steminaTxt.text = $"{BackEndGameData.Instance.UserGameData.energy}";
         goldTxt.text = $"{BackEndGameData.Instance.UserGameData.gold}";
@@ -86,7 +87,6 @@ public class LobbyManager : MonoBehaviour
     public void GetStemina(int amount)
     {
         BackEndGameData.Instance.UserGameData.energy += amount;
-        BackEndGameData.Instance.GameDataUpdate();
         UpdateGameData();
 
 
@@ -94,7 +94,6 @@ public class LobbyManager : MonoBehaviour
     public void LoseStemian(int amount)
     {
         BackEndGameData.Instance.UserGameData.energy -= amount;
-        BackEndGameData.Instance.GameDataUpdate();
         UpdateGameData();
     }
     public void SetArmies()
@@ -111,7 +110,7 @@ public class LobbyManager : MonoBehaviour
     }
     private void SteminaCharging()
     {
-        if (AccountInfo.instance.stemina >= 30)
+        if (BackEndGameData.Instance.UserGameData.energy >= 30)
         {
             steminaChargeCount = 1000; //스테미나 충전 시간
             //steminaChargeCountTxt.SetActive(false);
@@ -130,7 +129,6 @@ public class LobbyManager : MonoBehaviour
             {
                 //보상 다 본 후
                 BackEndGameData.Instance.UserGameData.energy += 5;
-                BackEndGameData.Instance.GameDataUpdate();
                 UpdateGameData();
             }
         }
@@ -141,7 +139,6 @@ public class LobbyManager : MonoBehaviour
             {
                 BackEndGameData.Instance.UserGameData.crystal -= 200;
                 BackEndGameData.Instance.UserGameData.energy += 30;
-                BackEndGameData.Instance.GameDataUpdate();
                 UpdateGameData();
             }
         }
@@ -176,12 +173,11 @@ public class LobbyManager : MonoBehaviour
     }
     public void StartBtnOnClick()
     {
-        if(AccountInfo.instance.stemina >= 5)
+        if(BackEndGameData.Instance.UserGameData.energy >= 5)
         {
             SceneManager.LoadScene(1);
 
             BackEndGameData.Instance.UserGameData.energy -= 5;
-            BackEndGameData.Instance.GameDataUpdate();
             UpdateGameData();
 
             AccountInfo.instance.questCount[1]++;
@@ -216,6 +212,54 @@ public class LobbyManager : MonoBehaviour
         chapterClearGo.SetActive(chapterClearGoActive);
     }
     
+    public void SyncLobbyToAccount()
+    {
+        int pistolC = 0;
+        int smgC = 0;
+        int rifleC = 0;
+        int srC = 0;
+        int dmrC = 0;
+        int specialC = 0;
+        for (int a = 0; a < weaponDatas.Length; a++)
+        {
+            if (weaponDatas[a].type == WeaponData.WeaponType.Pistol)
+            {
+                weaponDatas[a].weaponLevel = AccountInfo.instance.pistolLevel[pistolC];
+                weaponDatas[a].weaponCount = AccountInfo.instance.pistolCount[pistolC];
+                pistolC++;
+            }
+            else if (weaponDatas[a].type == WeaponData.WeaponType.SMG)
+            {
+                weaponDatas[a].weaponLevel = AccountInfo.instance.smgLevel[smgC];
+                weaponDatas[a].weaponCount = AccountInfo.instance.smgCount[smgC];
+                smgC++;
+            }
+            else if (weaponDatas[a].type == WeaponData.WeaponType.Rifle)
+            {
+                weaponDatas[a].weaponLevel = AccountInfo.instance.rifleLevel[rifleC];
+                weaponDatas[a].weaponCount = AccountInfo.instance.rifleCount[rifleC];
+                rifleC++;
+            }
+            else if (weaponDatas[a].type == WeaponData.WeaponType.SR)
+            {
+                weaponDatas[a].weaponLevel = AccountInfo.instance.srLevel[srC];
+                weaponDatas[a].weaponCount = AccountInfo.instance.srCount[srC];
+                srC++;
+            }
+            else if (weaponDatas[a].type == WeaponData.WeaponType.DMR)
+            {
+                weaponDatas[a].weaponLevel = AccountInfo.instance.dmrLevel[dmrC];
+                weaponDatas[a].weaponCount = AccountInfo.instance.dmrCount[dmrC];
+                dmrC++;
+            }
+            else
+            {
+                weaponDatas[a].weaponLevel = AccountInfo.instance.specialLevel[specialC];
+                weaponDatas[a].weaponCount = AccountInfo.instance.specialLevel[specialC];
+                specialC++;
+            }
+        }
+    }
     private void SynchAccountToLobby()
     {
         int pistolC = 0;
@@ -229,31 +273,37 @@ public class LobbyManager : MonoBehaviour
             if(weaponDatas[a].type == WeaponData.WeaponType.Pistol)
             {
                 AccountInfo.instance.pistolLevel[pistolC] = weaponDatas[a].weaponLevel;
+                AccountInfo.instance.pistolCount[pistolC] = weaponDatas[a].weaponCount;
                 pistolC++;
             }
             else if (weaponDatas[a].type == WeaponData.WeaponType.SMG)
             {
                 AccountInfo.instance.smgLevel[smgC] = weaponDatas[a].weaponLevel;
+                AccountInfo.instance.smgCount[smgC] = weaponDatas[a].weaponCount;
                 smgC++;
             }
             else if (weaponDatas[a].type == WeaponData.WeaponType.Rifle)
             {
                 AccountInfo.instance.rifleLevel[rifleC] = weaponDatas[a].weaponLevel;
+                AccountInfo.instance.rifleCount[rifleC] = weaponDatas[a].weaponCount;
                 rifleC++;
             }
             else if (weaponDatas[a].type == WeaponData.WeaponType.SR)
             {
                 AccountInfo.instance.srLevel[srC] = weaponDatas[a].weaponLevel;
+                AccountInfo.instance.srCount[srC] = weaponDatas[a].weaponCount;
                 srC++;
             }
             else if (weaponDatas[a].type == WeaponData.WeaponType.DMR)
             {
                 AccountInfo.instance.dmrLevel[dmrC] = weaponDatas[a].weaponLevel;
+                AccountInfo.instance.dmrCount[dmrC] = weaponDatas[a].weaponCount;
                 dmrC++;
             }
             else
             {
                 AccountInfo.instance.specialLevel[specialC] = weaponDatas[a].weaponLevel;
+                AccountInfo.instance.specialCount[specialC] = weaponDatas[a].weaponCount;
                 specialC++;
             }
         }

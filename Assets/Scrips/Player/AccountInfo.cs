@@ -7,9 +7,9 @@ public class AccountInfo : MonoBehaviour
     public static AccountInfo instance;
     [SerializeField] private UserInfo user;
 
-    public int Gold;
-    public int Crystal;
-    public int stemina = 15;
+    int Gold;
+    int Crystal;
+    int stemina = 15;
 
     //Gun Info
     [Header("Gun Info")]
@@ -53,7 +53,7 @@ public class AccountInfo : MonoBehaviour
     {
         Debug.Log("Called");
         yield return new WaitForSeconds(0.1f);
-        BackEndGameData.Instance.GameDataUpdate(DoNothing);
+        BackEndGameData.Instance.GameDataUpdate();
         Gold = BackEndGameData.Instance.UserGameData.gold;
         Crystal = BackEndGameData.Instance.UserGameData.crystal;
     }
@@ -61,11 +61,7 @@ public class AccountInfo : MonoBehaviour
     {
         BackEndGameData.Instance.UserGameData.gold = Gold;
         BackEndGameData.Instance.UserGameData.crystal = Crystal;
-        BackEndGameData.Instance.GameDataUpdate(DoNothing);
-    }
-    public void DoNothing()
-    {
-        
+        BackEndGameData.Instance.GameDataUpdate();
     }
     public int CashInfo(int type) //#0 Gold #1 Crystal
     {
@@ -73,16 +69,5 @@ public class AccountInfo : MonoBehaviour
         else if (type == 1) return Crystal;
         else return 999;
     }
-    public void GetCash(int type, int amount)
-    {
-        if (type == 0) Gold += amount;
-        else if (type == 1) Crystal += amount;
-    }
-    public void LoseCash(int type, int amount)
-    {
-        if (type == 0) Gold -= amount;
-        else if (type == 1) Crystal -= amount;
-    }
-
 
 }

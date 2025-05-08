@@ -255,7 +255,9 @@ public class StoreManager : MonoBehaviour
             card10Imgs[1].sprite = gunSprites[gunSpriteNum];
             CardBackColor(gunGrade, card10Imgs[3]);
             CardBackColor(gunGrade, card10Imgs[0]);
-        } 
+        }
+
+        LobbyManager.instance.SyncLobbyToAccount();
     }
 
     private void CardBackColor(int grade, Image card)

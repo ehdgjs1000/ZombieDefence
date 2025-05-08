@@ -30,8 +30,9 @@ public class QuestReward : MonoBehaviour
         {
             //보상제공
             isCleard = true;
-            AccountInfo.instance.GetCash(0,rewardGold);
-            AccountInfo.instance.GetCash(1,rewardCrystal);
+            BackEndGameData.Instance.UserGameData.gold += rewardGold;
+            BackEndGameData.Instance.UserGameData.gold += rewardCrystal;
+            LobbyManager.instance.UpdateGameData();
             clearBg.SetActive(true);
         }
     }

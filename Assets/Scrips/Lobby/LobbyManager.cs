@@ -171,6 +171,10 @@ public class LobbyManager : MonoBehaviour
     {
         return weaponDatas[num];
     }
+    public int ReturnWeaponDatasLength()
+    {
+        return weaponDatas.Length;
+    }
     public void StartBtnOnClick()
     {
         if(BackEndGameData.Instance.UserGameData.energy >= 5)
@@ -259,6 +263,8 @@ public class LobbyManager : MonoBehaviour
                 specialC++;
             }
         }
+        Save.instance.SaveGameJson();
+
     }
     private void SynchAccountToLobby()
     {
@@ -307,6 +313,7 @@ public class LobbyManager : MonoBehaviour
                 specialC++;
             }
         }
+        
     }
     public void ArmyBtnOnClick()
     {

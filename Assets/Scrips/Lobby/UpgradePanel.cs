@@ -93,44 +93,33 @@ public class UpgradePanel : MonoBehaviour
             if(0<=weaponNum && weaponNum < 3)
             {
                 AccountInfo.instance.pistolCount[weaponNum] -= Mathf.Pow(2, weapon.weaponLevel+1);
-                weapon.weaponLevel++;
-                //weapon.weaponCount -= AccountInfo.instance.pistolCount[weaponNum];
                 AccountInfo.instance.pistolLevel[weaponNum]++;
             }else if(weaponNum >=3 && weaponNum < 5)
             {
                 AccountInfo.instance.smgCount[weaponNum-3] -= Mathf.Pow(2, weapon.weaponLevel + 1);
-                weapon.weaponLevel++;
-                //weapon.weaponCount -= AccountInfo.instance.smgCount[weaponNum];
                 AccountInfo.instance.smgLevel[weaponNum-3]++;
             }
             else if (weaponNum >= 5 && weaponNum < 9)
             {
                 AccountInfo.instance.rifleCount[weaponNum - 5] -= Mathf.Pow(2, weapon.weaponLevel + 1);
-                weapon.weaponLevel++;
-                //weapon.weaponCount -= AccountInfo.instance.rifleCount[weaponNum];
                 AccountInfo.instance.rifleLevel[weaponNum - 5]++;
             }
             else if (weaponNum >= 9 && weaponNum < 11)
             {
                 AccountInfo.instance.srCount[weaponNum - 9] -= Mathf.Pow(2, weapon.weaponLevel + 1);
-                weapon.weaponLevel++;
-                //weapon.weaponCount -= AccountInfo.instance.srCount[weaponNum];
                 AccountInfo.instance.srLevel[weaponNum - 9]++;
             }
             else if (weaponNum >= 11 && weaponNum < 13)
             {
                 AccountInfo.instance.dmrCount[weaponNum - 11] -= Mathf.Pow(2, weapon.weaponLevel+1);
-                weapon.weaponLevel++;
-                //weapon.weaponCount -= AccountInfo.instance.dmrCount[weaponNum];
                 AccountInfo.instance.dmrLevel[weaponNum - 11]++;
             }
             else if (weaponNum >= 13 )
             {
                 AccountInfo.instance.specialCount[weaponNum - 13] -= Mathf.Pow(2, weapon.weaponLevel + 1);
-                weapon.weaponLevel++;
-                //weapon.weaponCount -= AccountInfo.instance.specialCount[weaponNum];
                 AccountInfo.instance.specialLevel[weaponNum - 13]++;
             }
+            weapon.weaponLevel++;
             canUpgrade = false;
             this.gameObject.SetActive(false);
         }

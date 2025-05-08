@@ -7,11 +7,9 @@ public class AccountInfo : MonoBehaviour
     public static AccountInfo instance;
     [SerializeField] private UserInfo user;
 
-    int Gold;
-    int Crystal;
-    int stemina = 15;
+    public int Gold;
+    public int Crystal;
 
-    //Gun Info
     [Header("Gun Info")]
     public float[] pistolCount;
     public float[] smgCount;

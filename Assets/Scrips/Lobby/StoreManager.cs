@@ -107,8 +107,9 @@ public class StoreManager : MonoBehaviour
                 AccountInfo.instance.questCount[0] += 10;
                 UpdateServer();
             }
-            
         }
+        LobbyManager.instance.SyncLobbyToAccount();
+
     }
     public void DrawOkayOnClick()
     {
@@ -256,8 +257,6 @@ public class StoreManager : MonoBehaviour
             CardBackColor(gunGrade, card10Imgs[3]);
             CardBackColor(gunGrade, card10Imgs[0]);
         }
-
-        LobbyManager.instance.SyncLobbyToAccount();
     }
 
     private void CardBackColor(int grade, Image card)

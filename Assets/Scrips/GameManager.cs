@@ -230,12 +230,14 @@ public class GameManager : MonoBehaviour
     {
         SkillLevelReset();
         BackEndGameData.Instance.UserGameData.gold += gold;
+        Debug.Log(BackEndGameData.Instance.UserGameData.gold);
         AccountInfo.instance.SyncAccountToBackEnd();
         Time.timeScale = 0.0f;
     }
     public void ToLobbyBtnOnClick()
     {
         tempTimeScale = 1.0f;
+        Time.timeScale = 1.0f;
         gameOverSet.SetActive(false);
         SceneManager.LoadScene(0);
     }

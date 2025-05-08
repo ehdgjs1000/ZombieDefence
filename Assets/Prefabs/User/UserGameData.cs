@@ -20,19 +20,3 @@ public class UserGameData
         energy = 30;
     }
 }
-public class UserWeaponData
-{
-    public float[] pistolCount;
-    public float[] smgCount;
-    public float[] rifleCount;
-    public float[] srCount;
-    public float[] dmrCount;
-    public float[] specialCount;
-    public int[] pistolLevel;
-    public int[] rifleLevel;
-    public int[] smgLevel;
-    public int[] srLevel;
-    public int[] dmrLevel;
-    public int[] specialLevel;
-
-}

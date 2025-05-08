@@ -43,25 +43,36 @@ public class StoreManager : MonoBehaviour
         buyGoldGo.SetActive(true);
         buyAmountType = num;
     }
+    private void UpdateServer()
+    {
+        BackEndGameData.Instance.GameDataUpdate();
+        LobbyManager.instance.UpdateGameData();
+    }
     //°ñµå È®½ÇÈ÷ ±¸¸Å
     public void BuyGoldOnClick()
     {
-        if(buyAmountType == 0 && AccountInfo.instance.CashInfo(1) >= 100)
+        if(buyAmountType == 0 && BackEndGameData.Instance.UserGameData.crystal >= 100)
         {
-            AccountInfo.instance.LoseCash(1,100);
-            AccountInfo.instance.GetCash(0, 1500);
+            BackEndGameData.Instance.UserGameData.crystal -= 100;
+            BackEndGameData.Instance.UserGameData.gold += 1500;
+            UpdateServer();
+
             AccountInfo.instance.questCount[3] += 100;
         }
-        else if (buyAmountType == 1 && AccountInfo.instance.CashInfo(1) >= 600)
+        else if (buyAmountType == 1 && BackEndGameData.Instance.UserGameData.crystal >= 600)
         {
-            AccountInfo.instance.LoseCash(1, 600);
-            AccountInfo.instance.GetCash(0, 10000);
+            BackEndGameData.Instance.UserGameData.crystal -= 600;
+            BackEndGameData.Instance.UserGameData.gold += 10000;
+            UpdateServer();
+
             AccountInfo.instance.questCount[3] += 600;
         }
-        else if (buyAmountType == 2 && AccountInfo.instance.CashInfo(1) >= 3000)
+        else if (buyAmountType == 2 && BackEndGameData.Instance.UserGameData.crystal >= 3000)
         {
-            AccountInfo.instance.LoseCash(1, 3000);
-            AccountInfo.instance.GetCash(0, 50000);
+            BackEndGameData.Instance.UserGameData.crystal -= 3000;
+            BackEndGameData.Instance.UserGameData.gold += 50000;
+            UpdateServer();
+
             AccountInfo.instance.questCount[3] += 3000;
         }
         buyGoldGo.SetActive(false);
@@ -75,24 +86,26 @@ public class StoreManager : MonoBehaviour
     {
         if (num == 0) //ÇÑÀå »Ì±â
         {
-            if(AccountInfo.instance.CashInfo(1) >= 100)
+            if(BackEndGameData.Instance.UserGameData.crystal >= 100)
             {
-                AccountInfo.instance.LoseCash(1, 100);
+                BackEndGameData.Instance.UserGameData.crystal -=100;
                 DrawGos[0].SetActive(true);
                 DrawGun(-1);
                 AccountInfo.instance.questCount[3] += 100;
                 AccountInfo.instance.questCount[0]++;
+                UpdateServer();
             }
             
         }else if (num == 1) //10Àå »Ì±â
         {
-            if(AccountInfo.instance.CashInfo(1) >= 900)
+            if(BackEndGameData.Instance.UserGameData.crystal >= 900)
             {
-                AccountInfo.instance.LoseCash(1, 900);
+                BackEndGameData.Instance.UserGameData.crystal -= 900;
                 DrawGos[1].SetActive(true);
                 for(int count = 0; count <10; count++) DrawGun(count);
                 AccountInfo.instance.questCount[3] += 300;
                 AccountInfo.instance.questCount[0] += 10;
+                UpdateServer();
             }
             
         }

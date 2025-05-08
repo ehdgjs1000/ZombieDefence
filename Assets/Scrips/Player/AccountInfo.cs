@@ -8,7 +8,7 @@ public class AccountInfo : MonoBehaviour
     [SerializeField] private UserInfo user;
 
     public int Gold;
-    private int Crystal;
+    public int Crystal;
     public int stemina = 15;
 
     //Gun Info
@@ -42,6 +42,7 @@ public class AccountInfo : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        BackEndGameData.Instance.GameDataLoad();
         user.GetUserInfoFromBackEnd();
     }
     private void Start()
@@ -50,10 +51,11 @@ public class AccountInfo : MonoBehaviour
     }
     public IEnumerator AccountInfoAwake()
     {
-        Gold = BackEndGameData.Instance.UserGameData.gold;
-        Crystal = BackEndGameData.Instance.UserGameData.crystal;
+        Debug.Log("Called");
         yield return new WaitForSeconds(0.1f);
         BackEndGameData.Instance.GameDataUpdate(DoNothing);
+        Gold = BackEndGameData.Instance.UserGameData.gold;
+        Crystal = BackEndGameData.Instance.UserGameData.crystal;
     }
     public void SyncAccountToBackEnd()
     {

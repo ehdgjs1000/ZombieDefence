@@ -78,20 +78,24 @@ public class LobbyManager : MonoBehaviour
     }
     public void UpdateGameData()
     {
-        Debug.Log("Update Data Called");
         levelTxt.text = "Lv." + $"{BackEndGameData.Instance.UserGameData.level}";
-
         steminaTxt.text = $"{BackEndGameData.Instance.UserGameData.energy}";
         goldTxt.text = $"{BackEndGameData.Instance.UserGameData.gold}";
         CrystalTxt.text = $"{BackEndGameData.Instance.UserGameData.crystal}";
     }
     public void GetStemina(int amount)
     {
-        AccountInfo.instance.stemina += amount;
+        BackEndGameData.Instance.UserGameData.energy += amount;
+        BackEndGameData.Instance.GameDataUpdate();
+        UpdateGameData();
+
+
     }
     public void LoseStemian(int amount)
     {
-        AccountInfo.instance.stemina -= amount;
+        BackEndGameData.Instance.UserGameData.energy -= amount;
+        BackEndGameData.Instance.GameDataUpdate();
+        UpdateGameData();
     }
     public void SetArmies()
     {
@@ -103,15 +107,6 @@ public class LobbyManager : MonoBehaviour
                 ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
             }
         }
-        
-    }
-    public void Save()
-    {
-        PlayerPrefs.SetInt("Gold", AccountInfo.instance.CashInfo(0));
-        PlayerPrefs.SetInt("Crystal", AccountInfo.instance.CashInfo(1));
-    }
-    public void Load()
-    {
         
     }
     private void SteminaCharging()
@@ -131,18 +126,23 @@ public class LobbyManager : MonoBehaviour
     {
         if (amount == 5)
         {
-            if (AccountInfo.instance.stemina <= 25)
+            if (BackEndGameData.Instance.UserGameData.energy <= 25)
             {
                 //보상 다 본 후
-                AccountInfo.instance.stemina += 5;
+                BackEndGameData.Instance.UserGameData.energy += 5;
+                BackEndGameData.Instance.GameDataUpdate();
+                UpdateGameData();
             }
         }
         else if (amount == 30)
         {
-            if (AccountInfo.instance.CashInfo(1) >= 200 && AccountInfo.instance.stemina < 30)
+            if (BackEndGameData.Instance.UserGameData.crystal >= 200 &&
+                BackEndGameData.Instance.UserGameData.energy < 30)
             {
-                AccountInfo.instance.LoseCash(1, 200);
-                AccountInfo.instance.stemina += 30;
+                BackEndGameData.Instance.UserGameData.crystal -= 200;
+                BackEndGameData.Instance.UserGameData.energy += 30;
+                BackEndGameData.Instance.GameDataUpdate();
+                UpdateGameData();
             }
         }
     }
@@ -179,7 +179,11 @@ public class LobbyManager : MonoBehaviour
         if(AccountInfo.instance.stemina >= 5)
         {
             SceneManager.LoadScene(1);
-            AccountInfo.instance.stemina -= 5;
+
+            BackEndGameData.Instance.UserGameData.energy -= 5;
+            BackEndGameData.Instance.GameDataUpdate();
+            UpdateGameData();
+
             AccountInfo.instance.questCount[1]++;
             ChangeScene.instance.SetArmies(chooseArmyGos, chooseArmyCount);
         }

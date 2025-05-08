@@ -24,7 +24,6 @@ public class UserInfo : MonoBehaviour
                 //Json 데이터 파싱 성공
                 try
                 {
-                    Debug.Log("success");
                     JsonData json = callback.GetReturnValuetoJSON()["row"];
                     
                     data.gamerId = json["gamerId"].ToString();

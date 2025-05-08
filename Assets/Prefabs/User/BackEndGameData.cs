@@ -157,7 +157,49 @@ public class BackEndGameData
             });
 
         }
+    }
+    public void GameDataUpdate()
+    {
+        if (userGameData == null)
+        {
+            Debug.LogError("서버에서 다운받거나 새로 삽입한 데이터가 존재하지 않습니다. + " +
+                "Insert 혹은 Load를 통해 데이터를 생성해주세요.");
+            return;
+        }
 
+        Param param = new Param()
+        {
+            {"level", userGameData.level},
+            {"exp", userGameData.exp },
+            {"gold", userGameData.gold},
+            {"crystal", userGameData.crystal },
+            {"energy", userGameData.energy}
+        };
 
+        //게임 정보의 고유값(gameDataRowInDate)가 없으면 에러 메세지 출력
+        if (string.IsNullOrEmpty(gameDataRowInData))
+        {
+            Debug.LogError("유저의 inDate정보가 없어 게임 정보 데이터 수정에 실패했습니다.");
+        }
+        //게임 정보의 고유값이 있으면 테이블에 저장되어 있는 값 중 inDate 컬럼의 값과
+        //소유하는 유저의 owner_inDate가 일치하는 row를 검색하여 수정하는 UpdateV2()를 호출
+        else
+        {
+            Debug.Log($"{gameDataRowInData}의 게임정보 데이터 수정을 요청합니다.");
+
+            Backend.GameData.UpdateV2("USER_DATA", gameDataRowInData, Backend.UserInDate, param, callback =>
+            {
+                if (callback.IsSuccess())
+                {
+                    Debug.Log($"게임 정보 데이터 수정에 성공했습니다. : {callback}");
+                }
+                else
+                {
+                    Debug.Log($"게임 정보 데이터 수정에 실패했습니다. : {callback}");
+                }
+
+            });
+
+        }
     }
 }

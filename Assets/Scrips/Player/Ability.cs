@@ -12,6 +12,8 @@ public class Ability : MonoBehaviour
     [SerializeField] private GameObject bombGo;
     [SerializeField] private TextMeshProUGUI bombRemainTxt;
     [SerializeField] private GameObject noBombBg;
+    [SerializeField] private GameObject planeGo;
+    [SerializeField] private GameObject planeSpawnPos;
     
     private void Awake()
     {
@@ -33,12 +35,19 @@ public class Ability : MonoBehaviour
             StartCoroutine(SpawnBomb(ranX, ranZ));
         }
     }
+
     IEnumerator SpawnBomb(float posX, float posZ)
     {
+        GameObject plane =  Instantiate(planeGo);
+        plane.transform.position = planeSpawnPos.transform.position;
+
         Vector3 pos = new Vector3(posX, 10, posZ);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
 
         Instantiate(bombGo, pos, Quaternion.Euler(90,0,0));
+
+        yield return new WaitForSeconds(4.5f);
+        Destroy(plane);
     }
 
 }

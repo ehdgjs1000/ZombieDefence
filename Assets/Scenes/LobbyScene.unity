@@ -52047,6 +52047,7 @@ MonoBehaviour:
   - {fileID: 1763988701741249}
   - {fileID: 1439174516080529}
   speed: 10
+  isIngamePlane: 0
 --- !u!33 &33862345715197655
 MeshFilter:
   m_ObjectHideFlags: 0

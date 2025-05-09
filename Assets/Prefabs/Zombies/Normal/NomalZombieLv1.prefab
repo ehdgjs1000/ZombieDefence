@@ -7527,6 +7527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91394fd9fdbd11145b54522fda2e715f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombieType: 0
   isLongRange: 0
   hp: 25
   exp: 25

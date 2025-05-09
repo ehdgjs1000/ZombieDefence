@@ -6861,7 +6861,7 @@ MonoBehaviour:
   isLongRange: 0
   hp: 20
   exp: 25
-  moveSpeed: 0.6
+  moveSpeed: 1.2
   attackRange: 1
   damage: 10
   gold: 1

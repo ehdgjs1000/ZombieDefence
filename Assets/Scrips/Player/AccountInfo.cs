@@ -48,7 +48,6 @@ public class AccountInfo : MonoBehaviour
     }
     public IEnumerator AccountInfoAwake()
     {
-        Debug.Log("Called");
         yield return new WaitForSeconds(0.1f);
         BackEndGameData.Instance.GameDataUpdate();
         Gold = BackEndGameData.Instance.UserGameData.gold;

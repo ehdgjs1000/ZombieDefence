@@ -20,6 +20,10 @@ public class ChangeScene : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void SyncArmieos()
+    {
+
+    }
     public void SetArmies(Army[] _armies, int _chooseArmyCount)
     {
         chooseArmyCount = _chooseArmyCount;

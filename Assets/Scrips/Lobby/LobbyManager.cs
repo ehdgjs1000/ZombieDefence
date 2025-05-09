@@ -15,7 +15,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] public Army[] chooseArmyGos;
     [SerializeField] private Image[] chooseArmyGosSprites;
     [SerializeField] private Sprite[] armySprites;
-    private int chooseArmyCount = 0;
+    public int chooseArmyCount = 0;
 
     //WeaponDatas
     [SerializeField] private WeaponData[] weaponDatas;
@@ -72,9 +72,9 @@ public class LobbyManager : MonoBehaviour
         //SetArmies();
 
         //저장된 army 세팅
-        if (ChangeScene.instance.chooseArmyCount > 0)
+        if (chooseArmyCount > 0)
         {
-            for (int a = 0; a < ChangeScene.instance.chooseArmyCount; a++)
+            for (int a = 0; a < chooseArmyCount; a++)
             {
                 ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
             }
@@ -337,6 +337,7 @@ public class LobbyManager : MonoBehaviour
         borderImgs[num].GetComponentsInChildren<Image>()[1].color = Color.white;
 
         chooseArmyCount--;
+        Save.instance.SaveEqiopedWeaponJson();
     }
     private void ArmySpriteChange(int _a, int a)
     {
@@ -379,6 +380,7 @@ public class LobbyManager : MonoBehaviour
     }
     public void ChooseArmy(int _a)
     {
+        Debug.Log("ChooseArmy Called");
         int a = 0; 
         while (a <= chooseArmyGos.Length && chooseArmyCount<3)
         {
@@ -389,16 +391,23 @@ public class LobbyManager : MonoBehaviour
             {
                 chooseArmyGos[a] = armyGos[_a];
                 chooseArmyGosSprites[a].sprite = armySprites[_a];
-                
-                if(themaNum == 2)ArmySpriteChange(_a, a);
-                
                 chooseArmyCount++;
+                if (themaNum == 2) ArmySpriteChange(_a, a);
                 break;
             }else if (chooseArmyGos[a] != null)
             {
+                chooseArmyGosSprites[a].sprite = armySprites[_a];
+                if (themaNum == 2) ArmySpriteChange(_a, a);
                 a++;
             }
-        }
+            //if (themaNum == 2) ArmySpriteChange(_a, a);
+        } 
+        Save.instance.SaveEqiopedWeaponJson();
+    }
+    public void LoadChooseArmy(int slot, int weaponNum)
+    {
+        chooseArmyGos[slot] = armyGos[weaponNum];
+        Save.instance.SaveEqiopedWeaponJson();
     }
     public void SwapBtnOnlick(int num)
     {

@@ -8,6 +8,7 @@ public class PlaneCtrl : MonoBehaviour
     [SerializeField] private GameObject[] wingGos;
     public float speed;
     private float moveTime = 7.0f;
+    public bool isIngamePlane = false;
     
 
     // Update is called once per frame
@@ -19,8 +20,10 @@ public class PlaneCtrl : MonoBehaviour
             moveTime = 7.0f;
             transform.position = initPos.position;
         }
-        this.transform.position += new Vector3(speed * 0.01f, 0, 0);
-        for(int a = 0; a<wingGos.Length; a++)
+        if(!isIngamePlane) this.transform.position += new Vector3(speed * 0.01f, 0, 0);
+        else this.transform.position += new Vector3(0,0, speed * 0.01f);
+
+        for (int a = 0; a<wingGos.Length; a++)
         {
             wingGos[a].transform.Rotate(new Vector3(0,0,600) * Time.deltaTime);
 

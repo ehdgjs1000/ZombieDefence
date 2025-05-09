@@ -3953,6 +3953,7 @@ Transform:
   - {fileID: 2087527493}
   - {fileID: 1320355203}
   - {fileID: 1455660224}
+  - {fileID: 1203224059}
   m_Father: {fileID: 2114240782}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &640963781
@@ -7336,6 +7337,37 @@ RectTransform:
   m_AnchoredPosition: {x: 400, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1203224058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1203224059}
+  m_Layer: 0
+  m_Name: PlaneInitPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1203224059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203224058}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.059935924, y: 10.913691, z: -0.4384984}
+  m_LocalScale: {x: 0.06666667, y: 1, z: 0.02}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 635821737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1215530242
 GameObject:
   m_ObjectHideFlags: 0
@@ -8497,6 +8529,8 @@ MonoBehaviour:
   bombGo: {fileID: 1010893337590061155, guid: 8d3d78466f3caa2439ea8ea2b6469b52, type: 3}
   bombRemainTxt: {fileID: 2057563998}
   noBombBg: {fileID: 605466960}
+  planeGo: {fileID: 9187598704009496994, guid: 1633444896bc4ff49a8b04036587240d, type: 3}
+  planeSpawnPos: {fileID: 1203224058}
 --- !u!1001 &1426315243
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -90,7 +90,7 @@ public class EnemyCtrl : MonoBehaviour
         QuestManager.instance.questCount[2]++;
 
         float ranBomb = Random.Range(0.0f, 100.0f);
-        if (ranBomb <= 0.2f) Ability.instance.bombCount++;
+        if (ranBomb <= 0.2f) SpawnItem();
 
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
@@ -121,11 +121,17 @@ public class EnemyCtrl : MonoBehaviour
     }
     private void SpawnItem()
     {
-        int ranProb = Random.Range(0,100);
-        if(ranProb <= 100) // 3으로 변경
+        int spawnItem = Random.Range(0,3);
+        if(spawnItem == 1) 
         {
-            //아이템 생성
             
+        }else if (spawnItem == 2)
+        {
+
+        }
+        else
+        {
+
         }
 
     }

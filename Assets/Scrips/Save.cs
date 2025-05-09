@@ -111,6 +111,13 @@ public class Save : MonoBehaviour
         weaponData = JsonConvert.SerializeObject(saveWeaponList, Formatting.Indented);
         File.WriteAllText(weaponFilePath, weaponData);
     }
+    public void ResetWeaponJson()
+    {
+        string weaponFilePath = Application.persistentDataPath + "/WeaponData.json";
+        string weaponData = null;
+        saveWeaponList.Clear();
+        File.WriteAllText(weaponFilePath, null);
+    }
 
 
 }

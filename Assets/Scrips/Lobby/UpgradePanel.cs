@@ -84,8 +84,8 @@ public class UpgradePanel : MonoBehaviour
     {
         if (canUpgrade && AccountInfo.instance.CashInfo(0) >= upgradeCost[weapon.weaponLevel])
         {
-            AccountInfo.instance.questCount[4]+= upgradeCost[weapon.weaponLevel];
-            AccountInfo.instance.questCount[5]++;
+            QuestManager.instance.questCount[4]+= upgradeCost[weapon.weaponLevel];
+            QuestManager.instance.questCount[5]++;
             BackEndGameData.Instance.UserGameData.gold -= upgradeCost[weapon.weaponLevel];
             weapon.damage *= 1.1f;
             weapon.fireRate *= 0.9f;
@@ -123,6 +123,16 @@ public class UpgradePanel : MonoBehaviour
             canUpgrade = false;
             this.gameObject.SetActive(false);
         }
+        else if(!canUpgrade)
+        {
+            //무기 갯수 충족하지 못했을떄
+            PopUpMessageBase.instance.SetMessage("업그레이드 할 수 없습니다.");
+        }
+        else
+        {
+            PopUpMessageBase.instance.SetMessage("골드가 부족합니다.");
+        }
         LobbyManager.instance.SyncLobbyToAccount();
+        LobbyManager.instance.UpdateGameData();
     }
 }

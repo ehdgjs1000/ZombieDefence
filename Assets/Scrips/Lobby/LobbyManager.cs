@@ -70,6 +70,15 @@ public class LobbyManager : MonoBehaviour
         SwapBtnOnlick(1);
         BackEndGameData.Instance.GameDataLoad();
         //SetArmies();
+
+        //저장된 army 세팅
+        if (ChangeScene.instance.chooseArmyCount > 0)
+        {
+            for (int a = 0; a < ChangeScene.instance.chooseArmyCount; a++)
+            {
+                ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
+            }
+        }
     }
     private void Update()
     {
@@ -83,13 +92,13 @@ public class LobbyManager : MonoBehaviour
         steminaTxt.text = $"{BackEndGameData.Instance.UserGameData.energy}";
         goldTxt.text = $"{BackEndGameData.Instance.UserGameData.gold}";
         CrystalTxt.text = $"{BackEndGameData.Instance.UserGameData.crystal}";
+        AccountInfo.instance.Gold = BackEndGameData.Instance.UserGameData.gold;
+        AccountInfo.instance.Crystal = BackEndGameData.Instance.UserGameData.crystal;
     }
     public void GetStemina(int amount)
     {
         BackEndGameData.Instance.UserGameData.energy += amount;
         UpdateGameData();
-
-
     }
     public void LoseStemian(int amount)
     {
@@ -102,12 +111,12 @@ public class LobbyManager : MonoBehaviour
         {
             for (int a = 0; a < ChangeScene.instance.ArmyCount(); a++)
             {
-                //chooseArmyGos[a] = ChangeScene.instance.GetArmy(a);
                 ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
             }
         }
         
     }
+    //사용 했던 Weapon저장 용도
     private void SteminaCharging()
     {
         if (BackEndGameData.Instance.UserGameData.energy >= 30)
@@ -177,21 +186,21 @@ public class LobbyManager : MonoBehaviour
     }
     public void StartBtnOnClick()
     {
-        if(BackEndGameData.Instance.UserGameData.energy >= 5)
+        //선택 총기 없을경우 예외처리
+        if(BackEndGameData.Instance.UserGameData.energy >= 5 )
         {
             SceneManager.LoadScene(1);
 
             BackEndGameData.Instance.UserGameData.energy -= 5;
             UpdateGameData();
 
-            AccountInfo.instance.questCount[1]++;
+            QuestManager.instance.questCount[1]++;
             ChangeScene.instance.SetArmies(chooseArmyGos, chooseArmyCount);
         }
         else
         {
             //게임 실행 불가
         }
-        
     }
     public void QuestCloseBtnOnClick()
     {
@@ -329,6 +338,45 @@ public class LobbyManager : MonoBehaviour
 
         chooseArmyCount--;
     }
+    private void ArmySpriteChange(int _a, int a)
+    {
+        Color color;
+        switch (armyGos[_a].GetComponent<Army>().weaponGrade)
+        {
+            case 0:
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.white;
+                ColorUtility.TryParseHtmlString("#B0B0B0", out color);
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
+
+                break;
+            case 1:
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.green;
+                ColorUtility.TryParseHtmlString("#00AD07", out color);
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
+                break;
+            case 2:
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.blue;
+                ColorUtility.TryParseHtmlString("#4042FF", out color);
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
+                break;
+            case 3:
+                ColorUtility.TryParseHtmlString("#F000FF", out color);
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = color;
+                ColorUtility.TryParseHtmlString("#A600A3", out color);
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
+                break;
+            case 4:
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.yellow;
+                ColorUtility.TryParseHtmlString("#C0B700", out color);
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
+                break;
+            case 5:
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.red;
+                ColorUtility.TryParseHtmlString("#D10000", out color);
+                chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
+                break;
+        }
+    }
     public void ChooseArmy(int _a)
     {
         int a = 0; 
@@ -341,42 +389,9 @@ public class LobbyManager : MonoBehaviour
             {
                 chooseArmyGos[a] = armyGos[_a];
                 chooseArmyGosSprites[a].sprite = armySprites[_a];
-                Color color;
-                switch (armyGos[_a].GetComponent<Army>().weaponGrade)
-                {
-                    case 0:
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.white;
-                        ColorUtility.TryParseHtmlString("#B0B0B0", out color);
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
-                            
-                        break;
-                    case 1:
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.green;
-                        ColorUtility.TryParseHtmlString("#00AD07", out color);
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
-                        break;
-                    case 2:
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.blue;
-                        ColorUtility.TryParseHtmlString("#4042FF", out color);
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
-                        break;
-                    case 3:
-                        ColorUtility.TryParseHtmlString("#F000FF", out color);
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = color;
-                        ColorUtility.TryParseHtmlString("#A600A3", out color);
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
-                        break;
-                    case 4:
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.yellow;
-                        ColorUtility.TryParseHtmlString("#C0B700", out color);
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
-                        break;
-                    case 5:
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[2].color = Color.red;
-                        ColorUtility.TryParseHtmlString("#D10000", out color);
-                        chooseArmyGosSprites[a].GetComponentsInParent<Image>()[1].color = color;
-                        break;
-                }
+                
+                if(themaNum == 2)ArmySpriteChange(_a, a);
+                
                 chooseArmyCount++;
                 break;
             }else if (chooseArmyGos[a] != null)

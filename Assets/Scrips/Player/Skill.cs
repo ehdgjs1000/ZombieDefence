@@ -53,18 +53,6 @@ public class Skill : MonoBehaviour
     {
         // Skill Exception
         if (!GameManager.instance.haveWeaponType[skills[ranNum].weaponType]) SkillChoose();
-        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponNormal)
-        {
-            if(skills[ranNum].skillLevel >= 5) SkillChoose();
-        }
-        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponSpecial)
-        {
-            if(skills[ranNum].skillLevel >= 3) SkillChoose();
-        }
-        if (skills[ranNum].skillType == SkillData.SkillType.UpgradeWeaponEpic)
-        {
-            if(skills[ranNum].skillLevel >= 3) SkillChoose();
-        }
 
     }
     private void OnEnable()

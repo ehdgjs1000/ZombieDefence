@@ -25,7 +25,6 @@ public class AccountInfo : MonoBehaviour
     public int[] specialLevel;
 
     public bool isLogIn = true;
-    public float[] questCount = new float[6];
     public bool[] isClear = new bool[7] {false, false, false, false, false, false, false};
 
 
@@ -57,9 +56,12 @@ public class AccountInfo : MonoBehaviour
     }
     public void SyncAccountToBackEnd()
     {
-        BackEndGameData.Instance.UserGameData.gold = Gold;
-        BackEndGameData.Instance.UserGameData.crystal = Crystal;
         BackEndGameData.Instance.GameDataUpdate();
+        Gold = BackEndGameData.Instance.UserGameData.gold;
+        Crystal = BackEndGameData.Instance.UserGameData.crystal;
+        //BackEndGameData.Instance.UserGameData.gold = Gold;
+        //BackEndGameData.Instance.UserGameData.crystal = Crystal;
+        //BackEndGameData.Instance.GameDataUpdate();
     }
     public int CashInfo(int type) //#0 Gold #1 Crystal
     {

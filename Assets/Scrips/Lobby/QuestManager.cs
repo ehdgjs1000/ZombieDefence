@@ -15,6 +15,8 @@ public class QuestManager : MonoBehaviour
     private bool[] canClick = new bool[] {false, false, false, false, false, false, false};
     [SerializeField] private GameObject[] clearBGs;
     [SerializeField] private GameObject[] canClearImage;
+
+    public float[] questCount = new float[6];
     private float[] questAmount = new float[] { 3,3,1000,100,2000,3};
     private int[] questReward = new int[] { 15,15,20,20,20,10,20};
 
@@ -49,12 +51,12 @@ public class QuestManager : MonoBehaviour
         questRewardText.text = questClearAmount.ToString();
         
         if (AccountInfo.instance.isLogIn) canClick[0] = true;
-        if (AccountInfo.instance.questCount[0] >= questAmount[0]) canClick[1] = true;
-        if (AccountInfo.instance.questCount[1] >= questAmount[1]) canClick[2] = true;
-        if (AccountInfo.instance.questCount[2] >= questAmount[2]) canClick[3] = true;
-        if (AccountInfo.instance.questCount[3] >= questAmount[3]) canClick[4] = true;
-        if (AccountInfo.instance.questCount[4] >= questAmount[4]) canClick[5] = true;
-        if (AccountInfo.instance.questCount[5] >= questAmount[5]) canClick[6] = true;
+        if (questCount[0] >= questAmount[0]) canClick[1] = true;
+        if (questCount[1] >= questAmount[1]) canClick[2] = true;
+        if (questCount[2] >= questAmount[2]) canClick[3] = true;
+        if (questCount[3] >= questAmount[3]) canClick[4] = true;
+        if (questCount[4] >= questAmount[4]) canClick[5] = true;
+        if (questCount[5] >= questAmount[5]) canClick[6] = true;
 
         questProgressImg.fillAmount = questClearAmount / 100;
 
@@ -63,13 +65,13 @@ public class QuestManager : MonoBehaviour
             if (a == 0) questConds[a].text = "1";
             else
             {
-                questConds[a].text = AccountInfo.instance.questCount[a-1].ToString();
+                questConds[a].text = questCount[a-1].ToString();
             }
         }
         for (int a = 0; a < questConds.Length; a++)
         {
             if (a == 0) questProgresses[a].fillAmount = 1;
-            else questProgresses[a].fillAmount =AccountInfo.instance.questCount[a-1] / questAmount[a - 1];
+            else questProgresses[a].fillAmount = questCount[a-1] / questAmount[a - 1];
         }
     }
     public void QuestClearBtnOnClick(int num)

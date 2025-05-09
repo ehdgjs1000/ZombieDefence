@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
     private void GameHpLevelUp()
     {
         gameHpLevelTime = 60.0f;
-        gameHpLevel *= 1.3f;
+        gameHpLevel *= 1.15f;
     }
     public IEnumerator ArmyGetAttack(float damage)
     {
@@ -210,6 +210,7 @@ public class GameManager : MonoBehaviour
         {
             killedZombieCount += killedZombieInfo[a];
         }
+
         //뒤끝 서버 연동 및 레벨업
         //추후 레벨 필요 경험치 량에 따른 조정 필요!!
         BackEndGameData.Instance.UserGameData.exp += killedZombieCount;

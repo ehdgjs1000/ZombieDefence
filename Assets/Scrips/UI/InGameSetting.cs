@@ -35,6 +35,7 @@ public class InGameSetting : MonoBehaviour
     }
     public void ExitBtnOnClick()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(0);
     }
 

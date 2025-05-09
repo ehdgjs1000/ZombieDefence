@@ -57,7 +57,7 @@ public class StoreManager : MonoBehaviour
             BackEndGameData.Instance.UserGameData.gold += 1500;
             UpdateServer();
 
-            AccountInfo.instance.questCount[3] += 100;
+            QuestManager.instance.questCount[3] += 100;
         }
         else if (buyAmountType == 1 && BackEndGameData.Instance.UserGameData.crystal >= 600)
         {
@@ -65,7 +65,7 @@ public class StoreManager : MonoBehaviour
             BackEndGameData.Instance.UserGameData.gold += 10000;
             UpdateServer();
 
-            AccountInfo.instance.questCount[3] += 600;
+            QuestManager.instance.questCount[3] += 600;
         }
         else if (buyAmountType == 2 && BackEndGameData.Instance.UserGameData.crystal >= 3000)
         {
@@ -73,7 +73,11 @@ public class StoreManager : MonoBehaviour
             BackEndGameData.Instance.UserGameData.gold += 50000;
             UpdateServer();
 
-            AccountInfo.instance.questCount[3] += 3000;
+            QuestManager.instance.questCount[3] += 3000;
+        }
+        else
+        {
+            PopUpMessageBase.instance.SetMessage("다이아가 부족합니다.");
         }
         buyGoldGo.SetActive(false);
     }
@@ -91,21 +95,30 @@ public class StoreManager : MonoBehaviour
                 BackEndGameData.Instance.UserGameData.crystal -=100;
                 DrawGos[0].SetActive(true);
                 DrawGun(-1);
-                AccountInfo.instance.questCount[3] += 100;
-                AccountInfo.instance.questCount[0]++;
+                QuestManager.instance.questCount[3] += 100;
+                QuestManager.instance.questCount[0]++;
                 UpdateServer();
+            }
+            else
+            {
+                //다이아가 없을 경우
+                PopUpMessageBase.instance.SetMessage("다이아가 부족합니다.");
             }
             
         }else if (num == 1) //10장 뽑기
         {
-            if(BackEndGameData.Instance.UserGameData.crystal >= 900)
+            if (BackEndGameData.Instance.UserGameData.crystal >= 900)
             {
                 BackEndGameData.Instance.UserGameData.crystal -= 900;
                 DrawGos[1].SetActive(true);
-                for(int count = 0; count <10; count++) DrawGun(count);
-                AccountInfo.instance.questCount[3] += 300;
-                AccountInfo.instance.questCount[0] += 10;
+                for (int count = 0; count < 10; count++) DrawGun(count);
+                QuestManager.instance.questCount[3] += 300;
+                QuestManager.instance.questCount[0] += 10;
                 UpdateServer();
+            }
+            else
+            {
+                PopUpMessageBase.instance.SetMessage("다이아가 부족합니다.");
             }
         }
         LobbyManager.instance.SyncLobbyToAccount();

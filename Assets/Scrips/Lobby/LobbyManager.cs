@@ -69,14 +69,14 @@ public class LobbyManager : MonoBehaviour
     {
         SwapBtnOnlick(1);
         BackEndGameData.Instance.GameDataLoad();
-        //SetArmies();
 
         //저장된 army 세팅
         if (chooseArmyCount > 0)
         {
             for (int a = 0; a < chooseArmyCount; a++)
             {
-                ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
+                //ChangeScene에서 소유하고 있는 weapon Num
+                StartCoroutine(ChooseArmy(chooseArmyGos[a].ReturnArmyWeaponData()));
             }
         }
     }
@@ -111,7 +111,7 @@ public class LobbyManager : MonoBehaviour
         {
             for (int a = 0; a < ChangeScene.instance.ArmyCount(); a++)
             {
-                ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
+                StartCoroutine(ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData()));
             }
         }
         
@@ -326,7 +326,7 @@ public class LobbyManager : MonoBehaviour
     }
     public void ArmyBtnOnClick()
     {
-        if(weaponLevel >0)ChooseArmy(weaponNum);
+        if(weaponLevel >0)StartCoroutine(ChooseArmy(weaponNum));
     }
     public void ChooseArmyBtnOnClick(int num)
     {
@@ -378,30 +378,49 @@ public class LobbyManager : MonoBehaviour
                 break;
         }
     }
-    public void ChooseArmy(int _a)
+    public IEnumerator ChooseArmy(int _a)
     {
+        yield return new WaitForSeconds(0.05f);
         Debug.Log("ChooseArmy Called");
         int a = 0; 
-        while (a <= chooseArmyGos.Length && chooseArmyCount<3)
+        if(_a == -1 && chooseArmyCount < 3)
         {
-            if (chooseArmyGos[0] == armyGos[_a]) break;
-            else if (chooseArmyGos[1] == armyGos[_a]) break;
-            else if (chooseArmyGos[2] == armyGos[_a]) break;
-            if (chooseArmyGos[a] == null)
+            for(int i = 0; i < chooseArmyGos.Length; i++)
             {
-                chooseArmyGos[a] = armyGos[_a];
-                chooseArmyGosSprites[a].sprite = armySprites[_a];
-                chooseArmyCount++;
-                if (themaNum == 2) ArmySpriteChange(_a, a);
-                break;
-            }else if (chooseArmyGos[a] != null)
-            {
-                chooseArmyGosSprites[a].sprite = armySprites[_a];
-                if (themaNum == 2) ArmySpriteChange(_a, a);
-                a++;
+                if (chooseArmyGos[i] == null) break;
+                chooseArmyGosSprites[i].sprite = armySprites[chooseArmyGos[i].ReturnArmyWeaponData()];
+                if (themaNum == 2) ArmySpriteChange(chooseArmyGos[i].ReturnArmyWeaponData(), i);
             }
-            //if (themaNum == 2) ArmySpriteChange(_a, a);
-        } 
+            Save.instance.SaveEqiopedWeaponJson();
+            yield return null;
+        }
+        else
+        {
+            while (a <= chooseArmyGos.Length && chooseArmyCount < 3)
+            {
+                if (chooseArmyGos[0] == armyGos[_a]) break;
+                else if (chooseArmyGos[1] == armyGos[_a]) break;
+                else if (chooseArmyGos[2] == armyGos[_a]) break;
+                if (chooseArmyGos[a] == null)
+                {
+                    Debug.Log("chooseArmyGos null");
+                    chooseArmyGos[a] = armyGos[_a];
+                    chooseArmyGosSprites[a].sprite = armySprites[_a];
+                    chooseArmyCount++;
+                    if (themaNum == 2) ArmySpriteChange(_a, a);
+                    break;
+                }
+                else if (chooseArmyGos[a] != null)
+                {
+                    Debug.Log("chooseArmyGos Not null : " + chooseArmyGos[a].ReturnArmyWeaponData());
+                    chooseArmyGosSprites[a].sprite = armySprites[chooseArmyGos[a].ReturnArmyWeaponData()];
+
+                    //if (themaNum == 2) ArmySpriteChange(_a, a);
+                    a++;
+                }
+                //if (themaNum == 2) ArmySpriteChange(_a, a);
+            }
+        }
         Save.instance.SaveEqiopedWeaponJson();
     }
     public void LoadChooseArmy(int slot, int weaponNum)
@@ -416,6 +435,7 @@ public class LobbyManager : MonoBehaviour
             if (a == num) themas[a].SetActive(true);
             else if(a != num) themas[a].SetActive(false);
         }
+        if (num == 2) StartCoroutine(ChooseArmy(-1));
         themaNum = num;
     }
 

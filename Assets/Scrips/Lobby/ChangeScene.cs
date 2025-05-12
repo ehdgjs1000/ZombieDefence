@@ -20,7 +20,7 @@ public class ChangeScene : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void SyncArmieos()
+    private void SyncArmies()
     {
 
     }

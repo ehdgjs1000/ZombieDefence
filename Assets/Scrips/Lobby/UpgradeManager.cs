@@ -47,7 +47,8 @@ public class UpgradeManager : MonoBehaviour
         {
             for (int a = 0; a < ChangeScene.instance.chooseArmyCount; a++)
             {
-                LobbyManager.instance.ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
+                StartCoroutine(LobbyManager.instance.ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData()));
+                //LobbyManager.instance.ChooseArmy(ChangeScene.instance.GetArmy(a).ReturnArmyWeaponData());
             }
         }
     }

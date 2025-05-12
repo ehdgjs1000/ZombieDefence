@@ -9,17 +9,22 @@ public class QuestReward : MonoBehaviour
     [SerializeField] private GameObject rewardItem;
     [SerializeField] GameObject clearBg;
 
+    [SerializeField] private int rewardOrder;
     [SerializeField] private int rewardNum = 0;
-    private bool isCleard = false;
-    private bool canClick = false;
+    public bool isCleard = false;
+    public bool canClick = false;
     private void Update()
     {
         CheckCanClick();
     }
+    private void Start()
+    {
+        if(BackEndGameData.Instance.UserQuestData.isRewardReceived[rewardOrder]) isCleard = true;
+    }
     private void CheckCanClick()
     {
         QuestClearCheck();
-        if (QuestManager.instance.questClearAmount >= rewardNum)
+        if (QuestManager.instance.questClearAmount >= rewardNum && !isCleard)
         {
             canClick = true;
         }
@@ -32,6 +37,7 @@ public class QuestReward : MonoBehaviour
             isCleard = true;
             BackEndGameData.Instance.UserGameData.gold += rewardGold;
             BackEndGameData.Instance.UserGameData.gold += rewardCrystal;
+            BackEndGameData.Instance.UserQuestData.isRewardReceived[rewardOrder] = true;
             LobbyManager.instance.UpdateGameData();
             clearBg.SetActive(true);
         }

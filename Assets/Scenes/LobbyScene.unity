@@ -289,10 +289,10 @@ RectTransform:
   - {fileID: 436195787}
   m_Father: {fileID: 346825814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -90}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5398517
 GameObject:
@@ -9453,10 +9453,10 @@ RectTransform:
   - {fileID: 656635824}
   m_Father: {fileID: 346825814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -210}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &373566119
 GameObject:
@@ -12890,6 +12890,18 @@ PrefabInstance:
       propertyPath: rewardNum
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardGold
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardCrystal
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 9217442050733932965, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -14423,6 +14435,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 407359b133fc3824db2c8a27144fa3f3, type: 3}
   - {fileID: 21300000, guid: d8d45a167bbba064abadc1048b9d4513, type: 3}
   - {fileID: 21300000, guid: 20701f894684b404ca6e0db3db113134, type: 3}
+  chooseArmyCount: 0
   weaponDatas:
   - {fileID: 11400000, guid: 35764015d4e8c974a95c6a907490f0ef, type: 2}
   - {fileID: 11400000, guid: fff239c0f3efcd74ab0e40e7107ef395, type: 2}
@@ -16922,10 +16935,10 @@ PrefabInstance:
     - target: {fileID: 5393151938994382045, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2083093257}
+      objectReference: {fileID: 723973146}
     - target: {fileID: 5393151938994382045, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: RewardBtnOnClick
       objectReference: {fileID: 0}
     - target: {fileID: 5393151938994382045, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -16938,6 +16951,18 @@ PrefabInstance:
     - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: rewardNum
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardGold
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardCrystal
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9217442050733932965, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: m_IsActive
@@ -16953,6 +16978,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5122269343452060178, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
   m_PrefabInstance: {fileID: 723973144}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &723973146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+  m_PrefabInstance: {fileID: 723973144}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a81585aa84bb1945afc2240a7790779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &725577214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18589,10 +18625,10 @@ RectTransform:
   - {fileID: 1585313245}
   m_Father: {fileID: 346825814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -150}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &811740078
 GameObject:
@@ -19525,7 +19561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &861389962
 Transform:
   m_ObjectHideFlags: 0
@@ -21374,10 +21410,10 @@ RectTransform:
   - {fileID: 1960405482}
   m_Father: {fileID: 346825814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -270}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &970750279
 GameObject:
@@ -22490,6 +22526,18 @@ PrefabInstance:
     - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: rewardNum
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardGold
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardCrystal
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9217442050733932965, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: m_IsActive
@@ -25553,10 +25601,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 346825814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -330}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1179972936
 GameObject:
@@ -26628,6 +26676,18 @@ PrefabInstance:
     - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: rewardNum
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardGold
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardCrystal
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9217442050733932965, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: m_IsActive
@@ -32740,6 +32800,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6dad27dfeda24694b8be194044383abe, type: 2}
   - {fileID: 11400000, guid: 17955b4e28abd25479c2ae1f7f04e893, type: 2}
   - {fileID: 11400000, guid: 3cc99fa2735004c40949254c982dc69d, type: 2}
+  saveEquipedList: []
+  loadEquipedList: []
+  equipedWeaponDatas: 000000000000000000000000
 --- !u!4 &1481786223
 Transform:
   m_ObjectHideFlags: 0
@@ -35214,10 +35277,10 @@ RectTransform:
   - {fileID: 373566120}
   m_Father: {fileID: 346825814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -30}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1570728027
 GameObject:
@@ -39077,6 +39140,14 @@ MonoBehaviour:
   - {fileID: 656141150}
   - {fileID: 1674146488}
   - {fileID: 1177108561}
+  questProText:
+  - {fileID: 1807912556}
+  - {fileID: 1469323338}
+  - {fileID: 1297314032}
+  - {fileID: 344379954}
+  - {fileID: 1512013521}
+  - {fileID: 603314274}
+  - {fileID: 45224974}
 --- !u!1001 &1698976984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48661,7 +48732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2080626959
 Transform:
   m_ObjectHideFlags: 0
@@ -48679,11 +48750,6 @@ Transform:
   - {fileID: 1813618962}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2083093257 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4904634521196322089, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
-  m_PrefabInstance: {fileID: 723973144}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2086130432
 GameObject:
   m_ObjectHideFlags: 0
@@ -52269,6 +52335,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1251873295}
+    - target: {fileID: 5393151938994382045, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RewardBtnOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardGold
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023460817026216716, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
+      propertyPath: rewardCrystal
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9217442050733932965, guid: cfa3e3937ae3eb845ac97322536dacb1, type: 3}
       propertyPath: m_IsActive
       value: 0

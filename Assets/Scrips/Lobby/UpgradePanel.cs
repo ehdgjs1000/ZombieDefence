@@ -84,8 +84,9 @@ public class UpgradePanel : MonoBehaviour
     {
         if (canUpgrade && AccountInfo.instance.CashInfo(0) >= upgradeCost[weapon.weaponLevel])
         {
-            QuestManager.instance.questCount[4]+= upgradeCost[weapon.weaponLevel];
-            QuestManager.instance.questCount[5]++;
+
+            BackEndGameData.Instance.UserQuestData.questCount[4]+= upgradeCost[weapon.weaponLevel];
+            BackEndGameData.Instance.UserQuestData.questCount[5]++;
             BackEndGameData.Instance.UserGameData.gold -= upgradeCost[weapon.weaponLevel];
             weapon.damage *= 1.1f;
             weapon.fireRate *= 0.9f;

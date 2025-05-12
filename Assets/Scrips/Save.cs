@@ -79,7 +79,6 @@ public class Save : MonoBehaviour
     {
         string equipedWeaponFilePath = Application.persistentDataPath + "/EquipedWeaponData.json";
         string equipedWeaponData = null;
-        Debug.Log(equipedWeaponFilePath);
         saveEquipedList.Clear();
         File.WriteAllText(equipedWeaponFilePath, null);
 
@@ -152,11 +151,9 @@ public class Save : MonoBehaviour
         Debug.Log("Save");
         string weaponFilePath = Application.persistentDataPath + "/WeaponData.json";
         string weaponData = null;
-        Debug.Log(weaponFilePath);
         saveWeaponList.Clear(); 
         File.WriteAllText(weaponFilePath, null);
 
-        Debug.Log("weaponDatasLenght" + " : "+ weaponDatas.Length);
         for (int a = 0; a < weaponDatas.Length; a++)
         {
             saveWeaponList.Add(new SaveWeapon(weaponDatas[a].weaponNum, weaponDatas[a].fireRate,

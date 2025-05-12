@@ -225,13 +225,14 @@ public class GameManager : MonoBehaviour
         }
 
         gameOverSet.SetActive(true);
+        BackEndGameData.Instance.UserQuestData.questCount[1]++;
+        BackEndGameData.Instance.UserQuestData.questCount[2] += killedZombieCount;
         BackEndGameData.Instance.GameDataUpdate(AfterGameOver);
     }
     private void AfterGameOver()
     {
         SkillLevelReset();
         BackEndGameData.Instance.UserGameData.gold += gold;
-        Debug.Log(BackEndGameData.Instance.UserGameData.gold);
         AccountInfo.instance.SyncAccountToBackEnd();
         Time.timeScale = 0.0f;
     }

@@ -54,6 +54,7 @@ public class LobbyManager : MonoBehaviour
         {
             tempWeaponDatas[a] = weaponDatas[a];
         }
+        BackEndGameData.Instance.GameDataLoad();
         BackEndGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
 
     }
@@ -68,14 +69,13 @@ public class LobbyManager : MonoBehaviour
     private void Start()
     {
         SwapBtnOnlick(1);
-        BackEndGameData.Instance.GameDataLoad();
+        
 
         //저장된 army 세팅
         if (chooseArmyCount > 0)
         {
             for (int a = 0; a < chooseArmyCount; a++)
             {
-                //ChangeScene에서 소유하고 있는 weapon Num
                 StartCoroutine(ChooseArmy(chooseArmyGos[a].ReturnArmyWeaponData()));
             }
         }
@@ -194,7 +194,7 @@ public class LobbyManager : MonoBehaviour
             BackEndGameData.Instance.UserGameData.energy -= 5;
             UpdateGameData();
 
-            QuestManager.instance.questCount[1]++;
+            BackEndGameData.Instance.UserQuestData.questCount[1]++;
             ChangeScene.instance.SetArmies(chooseArmyGos, chooseArmyCount);
         }
         else
@@ -381,7 +381,6 @@ public class LobbyManager : MonoBehaviour
     public IEnumerator ChooseArmy(int _a)
     {
         yield return new WaitForSeconds(0.05f);
-        Debug.Log("ChooseArmy Called");
         int a = 0; 
         if(_a == -1 && chooseArmyCount < 3)
         {

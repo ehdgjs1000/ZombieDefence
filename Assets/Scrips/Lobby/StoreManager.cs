@@ -55,25 +55,22 @@ public class StoreManager : MonoBehaviour
         {
             BackEndGameData.Instance.UserGameData.crystal -= 100;
             BackEndGameData.Instance.UserGameData.gold += 1500;
+            BackEndGameData.Instance.UserQuestData.questCount[3] += 100;
             UpdateServer();
-
-            QuestManager.instance.questCount[3] += 100;
         }
         else if (buyAmountType == 1 && BackEndGameData.Instance.UserGameData.crystal >= 600)
         {
             BackEndGameData.Instance.UserGameData.crystal -= 600;
             BackEndGameData.Instance.UserGameData.gold += 10000;
+            BackEndGameData.Instance.UserQuestData.questCount[3] += 600;
             UpdateServer();
-
-            QuestManager.instance.questCount[3] += 600;
         }
         else if (buyAmountType == 2 && BackEndGameData.Instance.UserGameData.crystal >= 3000)
         {
             BackEndGameData.Instance.UserGameData.crystal -= 3000;
             BackEndGameData.Instance.UserGameData.gold += 50000;
+            BackEndGameData.Instance.UserQuestData.questCount[3] += 3000;
             UpdateServer();
-
-            QuestManager.instance.questCount[3] += 3000;
         }
         else
         {
@@ -95,8 +92,8 @@ public class StoreManager : MonoBehaviour
                 BackEndGameData.Instance.UserGameData.crystal -=100;
                 DrawGos[0].SetActive(true);
                 DrawGun(-1);
-                QuestManager.instance.questCount[3] += 100;
-                QuestManager.instance.questCount[0]++;
+                BackEndGameData.Instance.UserQuestData.questCount[3] += 100;
+                BackEndGameData.Instance.UserQuestData.questCount[0]++;
                 UpdateServer();
             }
             else
@@ -112,8 +109,8 @@ public class StoreManager : MonoBehaviour
                 BackEndGameData.Instance.UserGameData.crystal -= 900;
                 DrawGos[1].SetActive(true);
                 for (int count = 0; count < 10; count++) DrawGun(count);
-                QuestManager.instance.questCount[3] += 300;
-                QuestManager.instance.questCount[0] += 10;
+                BackEndGameData.Instance.UserQuestData.questCount[3] += 900;
+                BackEndGameData.Instance.UserQuestData.questCount[0] += 10;
                 UpdateServer();
             }
             else

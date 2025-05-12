@@ -87,7 +87,7 @@ public class EnemyCtrl : MonoBehaviour
         GameManager.instance.GainExp(exp);
         GameManager.instance.GetGold(gold);
         GameManager.instance.KilledZombie(zombieType);
-        QuestManager.instance.questCount[2]++;
+        BackEndGameData.Instance.UserQuestData.questCount[2]++;
 
         float ranBomb = Random.Range(0.0f, 100.0f);
         if (ranBomb <= 0.2f) SpawnItem();

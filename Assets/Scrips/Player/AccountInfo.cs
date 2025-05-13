@@ -24,7 +24,7 @@ public class AccountInfo : MonoBehaviour
     public int[] dmrLevel;
     public int[] specialLevel;
 
-    public bool isLogIn = true;
+
     public bool[] isClear = new bool[7] {false, false, false, false, false, false, false};
 
 

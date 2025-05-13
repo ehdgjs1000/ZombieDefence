@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text timeTxt;
     [SerializeField] private Text gameOverTimeTxt;
     private int speedUpType = 0;
-    [SerializeField] private Text speedUpTxt;
+    [SerializeField] private TextMeshProUGUI speedUpTxt;
     public float tempTimeScale = 1.0f;
     private int gold = 0;
     private bool isGameOver = false;

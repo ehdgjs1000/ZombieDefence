@@ -250,11 +250,11 @@ public class BackEndGameData
             {"Q5Received", UserQuestData.isReceived[4] },
             {"Q6Received", UserQuestData.isReceived[5] },
             {"Q7Received", UserQuestData.isReceived[6] },
-            {"R1Received", userQuestData.isReceived[0] },
-            {"R2Received", userQuestData.isReceived[1] },
-            {"R3Received", userQuestData.isReceived[2] },
-            {"R4Received", userQuestData.isReceived[3] },
-            {"R5Received", userQuestData.isReceived[4] },
+            {"R1Received", userQuestData.isRewardReceived[0] },
+            {"R2Received", userQuestData.isRewardReceived[1] },
+            {"R3Received", userQuestData.isRewardReceived[2] },
+            {"R4Received", userQuestData.isRewardReceived[3] },
+            {"R5Received", userQuestData.isRewardReceived[4] },
             {"questClearAmount", userQuestData.questClearAmount }
         };
 
@@ -348,11 +348,11 @@ public class BackEndGameData
             {"Q5Received", UserQuestData.isReceived[4] },
             {"Q6Received", UserQuestData.isReceived[5] },
             {"Q7Received", UserQuestData.isReceived[6] },
-            {"R1Received", userQuestData.isReceived[0] },
-            {"R2Received", userQuestData.isReceived[1] },
-            {"R3Received", userQuestData.isReceived[2] },
-            {"R4Received", userQuestData.isReceived[3] },
-            {"R5Received", userQuestData.isReceived[4] },
+            {"R1Received", userQuestData.isRewardReceived[0] },
+            {"R2Received", userQuestData.isRewardReceived[1] },
+            {"R3Received", userQuestData.isRewardReceived[2] },
+            {"R4Received", userQuestData.isRewardReceived[3] },
+            {"R5Received", userQuestData.isRewardReceived[4] },
             {"questClearAmount", userQuestData.questClearAmount}
         };
 

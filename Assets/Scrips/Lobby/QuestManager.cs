@@ -60,7 +60,7 @@ public class QuestManager : MonoBehaviour
         if (questClearAmount >= 100) questClearAmount = 100;
         questRewardText.text = questClearAmount.ToString();
         
-        if (AccountInfo.instance.isLogIn) canClick[0] = true;
+        canClick[0] = true;
         if (BackEndGameData.Instance.UserQuestData.questCount[0] >= questAmount[0]) canClick[1] = true;
         if (BackEndGameData.Instance.UserQuestData.questCount[1] >= questAmount[1]) canClick[2] = true;
         if (BackEndGameData.Instance.UserQuestData.questCount[2] >= questAmount[2]) canClick[3] = true;
@@ -105,7 +105,6 @@ public class QuestManager : MonoBehaviour
             BackEndGameData.Instance.UserQuestData.questClearAmount = questClearAmount;
             BackEndGameData.Instance.UserQuestData.isReceived[num] = true;
             AccountInfo.instance.isClear[num] = true;
-            Debug.Log("Lobbymanager");
             BackEndGameData.Instance.GameDataUpdate();
         }
     }

@@ -257,14 +257,14 @@ public class StoreManager : MonoBehaviour
         {
             Image[] card1Imgs = card1.GetComponentsInChildren<Image>();
             card1Imgs[1].sprite = gunSprites[gunSpriteNum];
-            CardBackColor(gunGrade,card1Imgs[3]);
+            CardBackColor(gunGrade,card1Imgs[2]);
             CardBackColor(gunGrade, card1Imgs[0]);
         }
         else
         {
             Image[] card10Imgs = card10[count].GetComponentsInChildren<Image>();
             card10Imgs[1].sprite = gunSprites[gunSpriteNum];
-            CardBackColor(gunGrade, card10Imgs[3]);
+            CardBackColor(gunGrade, card10Imgs[2]);
             CardBackColor(gunGrade, card10Imgs[0]);
         }
     }

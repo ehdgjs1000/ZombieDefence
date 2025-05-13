@@ -187,7 +187,7 @@ public class LobbyManager : MonoBehaviour
     public void StartBtnOnClick()
     {
         //선택 총기 없을경우 예외처리
-        if(BackEndGameData.Instance.UserGameData.energy >= 5 )
+        if(BackEndGameData.Instance.UserGameData.energy >= 5  && chooseArmyCount > 0)
         {
             SceneManager.LoadScene(1);
 

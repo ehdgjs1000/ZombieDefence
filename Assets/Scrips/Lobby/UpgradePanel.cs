@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UpgradePanel : MonoBehaviour
 {
@@ -14,11 +15,11 @@ public class UpgradePanel : MonoBehaviour
     //weaponInfo
     public WeaponData weapon;
     [SerializeField] private Image weaponImage;
-    [SerializeField] private Text levelTxt;
-    [SerializeField] private Text damageTxt;
-    [SerializeField] private Text fireRateTxt;
-    [SerializeField] private Text reloadTxt;
-    [SerializeField] private Text maxMagTxt;
+    [SerializeField] private TextMeshProUGUI levelTxt;
+    [SerializeField] private TextMeshProUGUI damageTxt;
+    [SerializeField] private TextMeshProUGUI fireRateTxt;
+    [SerializeField] private TextMeshProUGUI reloadTxt;
+    [SerializeField] private TextMeshProUGUI maxMagTxt;
     [SerializeField] private Text upgradeCostText;
     [SerializeField] private Image upgradeBorderImg;
     private int weaponNum=0;

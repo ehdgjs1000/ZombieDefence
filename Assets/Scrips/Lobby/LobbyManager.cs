@@ -29,6 +29,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private Text steminaTxt;
     [SerializeField] private Text levelTxt;
 
+    [SerializeField] private GameObject chapterRewardGO;
     [SerializeField] private GameObject propsGO;
     [SerializeField] private GameObject chapterClearGo;
     private bool chapterClearGoActive = false;
@@ -211,6 +212,10 @@ public class LobbyManager : MonoBehaviour
     {
         QuestGo.SetActive(true);
         propsGO.SetActive(false);
+    }
+    public void chapterRewardExitOnClick()
+    {
+        chapterRewardGO.SetActive(false);
     }
     public void ChapterClearBtnOnClick()
     {

@@ -15,12 +15,12 @@ MonoBehaviour:
   type: 1
   grade: 3
   itemName: P90
-  fireRate: 0.12
-  maxBulletCount: 40
-  damage: 19
+  fireRate: 0.08
+  maxBulletCount: 45
+  damage: 60
   bulletShootCount: 1
-  range: 16
-  reloadingTime: 3.5
+  range: 13
+  reloadingTime: 2.5
   weaponImage: {fileID: 21300000, guid: 5ef7aa828d99d4641a03a7aaf7e50356, type: 3}
   weaponLevel: 0
   weaponCount: 0

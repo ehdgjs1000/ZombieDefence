@@ -136,7 +136,7 @@ public class Army : MonoBehaviour
             srBullet.transform.rotation = Quaternion.Euler(0, 0, 0);
             srBullet.transform.rotation = this.transform.rotation;*/
             GameObject srBullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
-            srBullet.GetComponent<SrBulletCtrl>().SetBulletInfo(damage, 10);
+            srBullet.GetComponent<SrBulletCtrl>().SetBulletInfo(damage * SkillManager.instance.GetWeaponData(weaponType)[0]/100, 10);
         }
         
 

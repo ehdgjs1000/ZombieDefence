@@ -14,7 +14,7 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] private int zombieType;
     [SerializeField] private bool isLongRange;
     [SerializeField] private float hp;
-    private float tempHp;
+    private float initHp;
     [SerializeField] private float exp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackRange;
@@ -29,14 +29,14 @@ public class EnemyCtrl : MonoBehaviour
     private void Awake()
     {
         //몬스터 체력 설정
-        tempHp = hp;
+        initHp = hp;
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
     }
     private void Start()
     {
         float ranHpRate = Random.Range(0.7f, 1.3f);
-        hp = tempHp * GameManager.instance.gameLevel * ranHpRate;
+        hp = initHp * GameManager.instance.gameLevel * ranHpRate;
     }
     private void Update()
     {
@@ -51,14 +51,10 @@ public class EnemyCtrl : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         float ranHpRate = Random.Range(0.7f, 1.3f);
-        hp = tempHp * GameManager.instance.gameLevel * ranHpRate;
+        hp = initHp * GameManager.instance.gameLevel * ranHpRate;
         isDie = false;
         canMove = true;
         boxCollider.enabled = true;
-    }
-    public void InitHp(float hpTimes)
-    {
-        tempHp *= hpTimes;
     }
     private void AttackCheck()
     {

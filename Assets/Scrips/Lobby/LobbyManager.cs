@@ -56,7 +56,7 @@ public class LobbyManager : MonoBehaviour
             tempWeaponDatas[a] = weaponDatas[a];
         }
         BackEndGameData.Instance.GameDataLoad();
-        BackEndGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
+        //BackEndGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
 
     }
     private void OnApplicationQuit()
@@ -69,6 +69,7 @@ public class LobbyManager : MonoBehaviour
 
     private void Start()
     {
+        BackEndGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
         SwapBtnOnlick(1);
         
 
@@ -418,6 +419,21 @@ public class LobbyManager : MonoBehaviour
                     chooseArmyGosSprites[a].sprite = armySprites[chooseArmyGos[a].ReturnArmyWeaponData()];
                     a++;
                 }
+            }
+        }
+        for(int i = 0; i<3;i++)
+        {
+            if (chooseArmyGos[i] == null)
+            {
+                Color color = chooseArmyGosSprites[i].color;
+                color.a = 0;
+                chooseArmyGosSprites[i].color = color;
+            }
+            else
+            {
+                Color color = chooseArmyGosSprites[i].color;
+                color.a = 1;
+                chooseArmyGosSprites[i].color = color;
             }
         }
         Save.instance.SaveEqiopedWeaponJson();

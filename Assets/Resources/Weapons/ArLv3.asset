@@ -17,9 +17,9 @@ MonoBehaviour:
   itemName: AK-47
   fireRate: 0.2
   maxBulletCount: 30
-  damage: 40
+  damage: 82
   bulletShootCount: 1
-  range: 20
+  range: 15
   reloadingTime: 2
   weaponImage: {fileID: 21300000, guid: 8b7c665bb3146e4468d74ae5fef73f0a, type: 3}
   weaponLevel: 0

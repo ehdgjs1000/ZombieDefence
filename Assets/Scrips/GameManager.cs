@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     public bool isStopGame = false;
     private int min;
     private float sec;
-    [SerializeField] private Text timeTxt;
-    [SerializeField] private Text gameOverTimeTxt;
+    [SerializeField] private TextMeshProUGUI timeTxt;
+    [SerializeField] private TextMeshProUGUI gameOverTimeTxt;
     private int speedUpType = 0;
     [SerializeField] private TextMeshProUGUI speedUpTxt;
     public float tempTimeScale = 1.0f;
@@ -28,8 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SkillData[] skillsDatas;
     [SerializeField] private Image expImage;
     [SerializeField] private Image hpImage;
-    [SerializeField] private Text hpTxt;
-    [SerializeField] private Text levelTxt;
+    [SerializeField] private TextMeshProUGUI hpTxt;
+    [SerializeField] private TextMeshProUGUI levelTxt;
     [SerializeField] private LevelUp uiLevelUp;
     private int level = 1;
     public float hp = 100.0f;
@@ -86,7 +86,9 @@ public class GameManager : MonoBehaviour
         gameLevelTime -= Time.deltaTime;
         gameHpLevelTime -= Time.deltaTime;
         UpdateInfo();
-        Timer();
+
+        if(!isGameOver) Timer();
+
         if (gameLevelTime <= 0.0f) GameLevelUp();
         if (gameHpLevelTime <= 0.0f) GameHpLevelUp();
         if (hp <= 0.0f && !isGameOver) GameOver();
@@ -166,8 +168,9 @@ public class GameManager : MonoBehaviour
     }
     private void GameHpLevelUp()
     {
+        Debug.Log("GameLevel UP");
         gameHpLevelTime = 60.0f;
-        gameHpLevel *= 1.15f;
+        gameHpLevel *= 1.3f;
     }
     public IEnumerator ArmyGetAttack(float damage)
     {
@@ -204,6 +207,7 @@ public class GameManager : MonoBehaviour
     {
         KilledZombieInfo();
         isGameOver = true;
+        gameOverTimeTxt = timeTxt;
         int killedZombieCount = 0;
         bool canLevelUp = true;
         for (int a = 0; a < killedZombieInfo.Length; a++)

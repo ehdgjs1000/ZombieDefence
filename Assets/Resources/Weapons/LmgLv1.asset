@@ -15,12 +15,12 @@ MonoBehaviour:
   type: 5
   grade: 5
   itemName: M249
-  fireRate: 0.01435795
+  fireRate: 0.2
   maxBulletCount: 100
-  damage: 541.73566
+  damage: 220
   bulletShootCount: 1
-  range: 20
-  reloadingTime: 0.35894883
+  range: 22
+  reloadingTime: 4
   weaponImage: {fileID: -2739807658926110822, guid: 18050bc5ddbcb9f4e8a573db7f543236, type: 3}
   weaponLevel: 0
   weaponCount: 0

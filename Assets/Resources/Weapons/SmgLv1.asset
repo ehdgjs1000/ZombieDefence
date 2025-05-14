@@ -17,10 +17,10 @@ MonoBehaviour:
   itemName: MP5
   fireRate: 0.08
   maxBulletCount: 25
-  damage: 15
+  damage: 19
   bulletShootCount: 1
-  range: 16
-  reloadingTime: 2
+  range: 12
+  reloadingTime: 1.6
   weaponImage: {fileID: 21300000, guid: 0a5c79c813da6664cbfae7e49fefc4f9, type: 3}
   weaponLevel: 0
   weaponCount: 0

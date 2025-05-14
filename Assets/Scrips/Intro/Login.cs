@@ -13,7 +13,7 @@ public class Login : LoginBase
     [SerializeField] private TMP_InputField inputFieldPW;
 
     [SerializeField] Button loginBtn;
-    private void Start()
+    private void Awake()
     {
         MainTainLogIn();
     }
@@ -35,7 +35,8 @@ public class Login : LoginBase
     {
         string mainTainID = PlayerPrefs.GetString("ID");
         string mainTainPW = PlayerPrefs.GetString("PW");
-        if(mainTainID != null && mainTainPW != null) ResponceToLogin(mainTainID, mainTainPW);
+        Debug.Log("Maintain Login" + "ID : " + mainTainID + " PW: "+mainTainPW);
+        if (mainTainID != null && mainTainPW != null) ResponceToLogin(mainTainID, mainTainPW);
     }
     /// <summary>
     /// 로그인 시도 후 서버로부터 전달받을 message를 기반으로 처리
@@ -47,9 +48,9 @@ public class Login : LoginBase
               StopCoroutine(nameof(LoginProcess));
               if (callback.IsSuccess())
               {
-                  SetMessage($"{inputFieldID.text}님 환영합니다");
-                  PlayerPrefs.SetString("ID", inputFieldID.text.ToString());
-                  PlayerPrefs.SetString("PW", inputFieldPW.text.ToString());
+                  SetMessage($"{ID}님 환영합니다");
+                  PlayerPrefs.SetString("ID", ID);
+                  PlayerPrefs.SetString("PW", PW);
 
                   Utils.LoadScene(SceneNames.LobbyScene);
               }

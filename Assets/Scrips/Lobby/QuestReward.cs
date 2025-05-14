@@ -36,7 +36,7 @@ public class QuestReward : MonoBehaviour
             //보상제공
             isCleard = true;
             BackEndGameData.Instance.UserGameData.gold += rewardGold;
-            BackEndGameData.Instance.UserGameData.gold += rewardCrystal;
+            BackEndGameData.Instance.UserGameData.crystal += rewardCrystal;
             BackEndGameData.Instance.UserQuestData.isRewardReceived[rewardOrder] = true;
             LobbyManager.instance.UpdateGameData();
             clearBg.SetActive(true);

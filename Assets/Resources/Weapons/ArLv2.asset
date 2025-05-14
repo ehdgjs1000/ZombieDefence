@@ -15,11 +15,11 @@ MonoBehaviour:
   type: 2
   grade: 2
   itemName: SCAR-H
-  fireRate: 0.15
-  maxBulletCount: 30
-  damage: 33
+  fireRate: 0.17
+  maxBulletCount: 27
+  damage: 36
   bulletShootCount: 1
-  range: 20
+  range: 15
   reloadingTime: 1.8
   weaponImage: {fileID: 21300000, guid: 0eb98dbd54282d94b9b9214c668fe8de, type: 3}
   weaponLevel: 0

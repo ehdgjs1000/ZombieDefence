@@ -11,6 +11,10 @@ public class ChapterReward : MonoBehaviour
     [SerializeField] private GameObject[] buyPromImg;
     [SerializeField] private bool[] promotionType;
 
+    public bool[] canProm0Receive = new bool[10];
+    public bool[] isProm0Received = new bool[10];
+
+
 
     private void Awake()
     {
@@ -20,6 +24,7 @@ public class ChapterReward : MonoBehaviour
     {
         PromotionUpdate();
         SyncPromServerToLocal();
+        Save.instance.LoadProm0Json();
     }
     public void BuyPromOnClick(int cost)
     {
@@ -34,6 +39,12 @@ public class ChapterReward : MonoBehaviour
             BuyPromotion.instance.CostUpdate(cost);
             BackEndGameData.Instance.UserGameData.promotionType = 2;
         }
+        ChapterReward[] prom0s = gameObject.GetComponentsInChildren<ChapterReward>();
+        for (int i = 0; i < prom0s.Length; i++)
+        {
+            prom0s[i].PromotionUpdate();
+        }
+        Save.instance.SaveProm0Json();
     }
     public void SyncPromServerToLocal()
     {

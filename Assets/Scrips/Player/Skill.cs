@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Skill : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class Skill : MonoBehaviour
     public int level;
 
     private Image icon;
-    private Text textLevel;
-    private Text textName;
-    private Text textDesc;
+    private TextMeshProUGUI textLevel;
+    private TextMeshProUGUI textName;
+    private TextMeshProUGUI textDesc;
     private int ranSkill;
 
 
@@ -21,7 +22,7 @@ public class Skill : MonoBehaviour
         icon = GetComponentsInChildren<Image>()[2];
         icon.sprite = skills[ranSkill].skillIcon;
 
-        Text[] texts = GetComponentsInChildren<Text>();
+        TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
         textLevel = texts[0];
         textName = texts[1];
         textDesc = texts[2];

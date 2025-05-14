@@ -135,7 +135,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a279cd6505e12fb43ac3c818eddcb663, type: 2}
+  - {fileID: 2100000, guid: 36a2d3225eba4f2458858b5dcd02d27e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -252,5 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  criticalChange: 20
   bulletSpeed: 5000
-  damagePopUpTr: {fileID: 1388630433099571573, guid: e464c07449820c742a06ae2c9254e11a, type: 3}
+  damagePopUpTr: {fileID: 3592313989245215019, guid: e464c07449820c742a06ae2c9254e11a, type: 3}

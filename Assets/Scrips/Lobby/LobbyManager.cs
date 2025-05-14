@@ -387,7 +387,7 @@ public class LobbyManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         int a = 0; 
-        if(_a == -1 && chooseArmyCount < 3)
+        if(_a == -1 && chooseArmyCount <= 3)
         {
             for(int i = 0; i < chooseArmyGos.Length; i++)
             {
@@ -407,7 +407,6 @@ public class LobbyManager : MonoBehaviour
                 else if (chooseArmyGos[2] == armyGos[_a]) break;
                 if (chooseArmyGos[a] == null)
                 {
-                    Debug.Log("chooseArmyGos null");
                     chooseArmyGos[a] = armyGos[_a];
                     chooseArmyGosSprites[a].sprite = armySprites[_a];
                     chooseArmyCount++;
@@ -416,13 +415,9 @@ public class LobbyManager : MonoBehaviour
                 }
                 else if (chooseArmyGos[a] != null)
                 {
-                    Debug.Log("chooseArmyGos Not null : " + chooseArmyGos[a].ReturnArmyWeaponData());
                     chooseArmyGosSprites[a].sprite = armySprites[chooseArmyGos[a].ReturnArmyWeaponData()];
-
-                    //if (themaNum == 2) ArmySpriteChange(_a, a);
                     a++;
                 }
-                //if (themaNum == 2) ArmySpriteChange(_a, a);
             }
         }
         Save.instance.SaveEqiopedWeaponJson();

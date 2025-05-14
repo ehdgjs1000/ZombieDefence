@@ -170,7 +170,6 @@ public class BackEndGameData
                     {
                         //불러온 게임 정보의 고유 값
                         gameQuestDataRowInData = gameQuestDataJson[0]["inDate"].ToString();
-                        Debug.Log("@@@@@@@@@@@@@@@" + gameQuestDataRowInData);
                         //불러온 게임 정보를 userGameData 변수에 저장
                         userQuestData.questCount[0] = int.Parse(gameQuestDataJson[0]["Q1Amount"].ToString());
                         userQuestData.questCount[1] = int.Parse(gameQuestDataJson[0]["Q2Amount"].ToString());

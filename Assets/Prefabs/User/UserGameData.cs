@@ -10,6 +10,7 @@ public class UserGameData
     public int gold;
     public int crystal;
     public int energy;
+    public int promotionType; //#0 freee #1 9,900 #2 27,000
 
     public void Reset()
     {
@@ -18,5 +19,6 @@ public class UserGameData
         gold = 100;
         crystal = 1000;
         energy = 30;
+        promotionType = 0;
     }
 }

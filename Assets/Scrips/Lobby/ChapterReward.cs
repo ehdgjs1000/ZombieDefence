@@ -5,29 +5,50 @@ using UnityEngine.UI;
 
 public class ChapterReward : MonoBehaviour
 {
-    [SerializeField] private bool isProm1 = false;
-    [SerializeField] private bool isProm2 = false;
-    public bool canGetProm1 = false;
-    public bool canGetProm2 = false;
-    [SerializeField] private GameObject cannotGetImg;
+    public static ChapterReward instance;
 
+    [SerializeField] private GameObject buyPromGO;
+    [SerializeField] private GameObject[] buyPromImg;
+    [SerializeField] private bool[] promotionType;
+
+
+    private void Awake()
+    {
+        if(instance == null) instance = this;
+    }
     private void Start()
     {
-        PromCheck();
+        PromotionUpdate();
+        SyncPromServerToLocal();
     }
-    private void PromCheck()
+    public void BuyPromOnClick(int cost)
     {
-        //서버와 연동해서 데이터 가져오기
-
-        if(canGetProm1)
+        if(cost == 9900 && !promotionType[0])
         {
-            cannotGetImg.SetActive(false);
-            isProm1 = true;
+            buyPromGO.SetActive(true);
+            BuyPromotion.instance.CostUpdate(cost);
+            BackEndGameData.Instance.UserGameData.promotionType = 1;
+        }else if (cost == 27000 && !promotionType[1])
+        {
+            buyPromGO.SetActive(true);
+            BuyPromotion.instance.CostUpdate(cost);
+            BackEndGameData.Instance.UserGameData.promotionType = 2;
         }
-        if(canGetProm2)
+    }
+    public void SyncPromServerToLocal()
+    {
+        if (BackEndGameData.Instance.UserGameData.promotionType == 1) promotionType[0] = true;
+        else if (BackEndGameData.Instance.UserGameData.promotionType == 2) promotionType[1] = true;
+    }
+    public void PromotionUpdate()
+    {
+        if(BackEndGameData.Instance.UserGameData.promotionType == 1)
         {
-            cannotGetImg.SetActive(false);
-            isProm2 = true;
+            buyPromImg[0].SetActive(false);
+        }else if (BackEndGameData.Instance.UserGameData.promotionType == 2)
+        {
+            buyPromImg[0].SetActive(false);
+            buyPromImg[1].SetActive(false);
         }
     }
 

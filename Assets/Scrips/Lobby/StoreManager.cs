@@ -151,11 +151,11 @@ public class StoreManager : MonoBehaviour
 
     public void DrawGun(int count)
     {
-        //#normal 91% #Special 8% #Epic 1% #Hero 3% #Legendary 0.15% #God 0.05%
-        float ranVal = Random.Range(0.0f,100.0f);
+        //#normal 85% #Special 10% #Epic 1% #Hero 3% #Legendary 0.15% #God 0.05%
+        float ranVal = Random.Range(0.00f,100.00f);
         int gunSpriteNum = 0;
         int gunGrade = 0;
-        if(ranVal <= 91) //normal
+        if(ranVal <= 84.00f) //normal
         {
             gunGrade = 0;
             int ranN = Random.Range(0,2);
@@ -170,7 +170,7 @@ public class StoreManager : MonoBehaviour
                     gunSpriteNum = 5;
                     break;
             }
-        }else if (ranVal > 91.0f && ranVal <=98.5f) //Special
+        }else if (ranVal > 84.00f && ranVal <= 95.00f) //Special
         {
             gunGrade = 1;
             int ranS = Random.Range(0,2);
@@ -185,7 +185,7 @@ public class StoreManager : MonoBehaviour
                     gunSpriteNum = 9;
                     break;
             }
-        }else if (ranVal >98.5f && ranVal<= 99.5f) //Epic
+        }else if (ranVal > 95.00f && ranVal<= 98.00f) //Epic
         {
             gunGrade = 2;
             int ranE = Random.Range(0, 3);
@@ -206,7 +206,7 @@ public class StoreManager : MonoBehaviour
             }
 
         }
-        else if (ranVal > 99.5f && ranVal <=99.8f) //Hero
+        else if (ranVal > 98.00f && ranVal <=99.50f) //Hero
         {
             gunGrade = 3;
             int ranH = Random.Range(0,4);
@@ -230,7 +230,7 @@ public class StoreManager : MonoBehaviour
                     break;
             }
         }
-        else if(ranVal > 99.8f && ranVal <= 99.95f) //Legendary
+        else if(ranVal > 99.50f && ranVal <= 99.89f) //Legendary
         {
             gunGrade = 4;
             int ranL = Random.Range(0,2);

@@ -97,6 +97,7 @@ public class QuestManager : MonoBehaviour
     }
     public void QuestClearBtnOnClick(int num)
     {
+        SoundManager.instance.BtnClickPlay();
         // 보상 적용
         if (canClick[num] && !BackEndGameData.Instance.UserQuestData.isReceived[num])
         {

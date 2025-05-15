@@ -15,6 +15,8 @@ public class Skill : MonoBehaviour
     private TextMeshProUGUI textDesc;
     private int ranSkill;
 
+    [SerializeField] private AudioClip upgradeClip;
+
 
     public void SkillUpdate()
     {
@@ -84,6 +86,8 @@ public class Skill : MonoBehaviour
     }
     public void Onclick()
     {
+        SoundManager.instance.PlaySound(upgradeClip);
+
         switch (skills[ranSkill].skillType)
         {
             case (SkillData.SkillType.UpgradeWeaponNormal):

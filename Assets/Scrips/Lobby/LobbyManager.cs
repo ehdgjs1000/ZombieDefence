@@ -40,6 +40,9 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private GameObject steminaChargeCountTxt;
     private float steminaChargeCount;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip testClip;
+
     //Main Datas
     private void Awake()
     {
@@ -134,6 +137,7 @@ public class LobbyManager : MonoBehaviour
     }
     public void SteminaBuyOnClick(int amount)
     {
+        SoundManager.instance.BtnClickPlay();
         if (amount == 5)
         {
             if (BackEndGameData.Instance.UserGameData.energy <= 25)
@@ -156,18 +160,22 @@ public class LobbyManager : MonoBehaviour
     }
     public void SteminaBtnOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         steminaPanel.SetActive(true);
     }
     public void SteminaExitOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         steminaPanel.SetActive(false);
     }
     public void SettingBtnOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         settingPanel.SetActive(true);
     }
     public void CloseSettingOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         settingPanel.SetActive(false);
     }
     public void HideProps()
@@ -188,9 +196,11 @@ public class LobbyManager : MonoBehaviour
     }
     public void StartBtnOnClick()
     {
+
         //선택 총기 없을경우 예외처리
         if(BackEndGameData.Instance.UserGameData.energy >= 5  && chooseArmyCount > 0)
         {
+            SoundManager.instance.BtnClickPlay();
             SceneManager.LoadScene(1);
 
             BackEndGameData.Instance.UserGameData.energy -= 5;
@@ -202,30 +212,36 @@ public class LobbyManager : MonoBehaviour
         else
         {
             //게임 실행 불가
+            SoundManager.instance.ErrorClipPlay();
         }
     }
     public void QuestCloseBtnOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         QuestGo.SetActive(false);
         propsGO.SetActive(true);
     }
     public void QuestOpenBtnOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         QuestGo.SetActive(true);
         propsGO.SetActive(false);
     }
     public void chapterRewardExitOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         chapterRewardGO.SetActive(false);
     }
     public void ChapterClearBtnOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         chapterClearGoActive = true;
         propsGO.SetActive(!chapterClearGoActive);
         chapterClearGo.SetActive(chapterClearGoActive);
     }
     public void ChapterCloseBtnOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         chapterClearGoActive = false;
         propsGO.SetActive(!chapterClearGoActive);
         chapterClearGo.SetActive(chapterClearGoActive);
@@ -337,6 +353,11 @@ public class LobbyManager : MonoBehaviour
     public void ChooseArmyBtnOnClick(int num)
     {
         chooseArmyGos[num] = null;
+
+        //장착 Weapon Sprite의 A값을 0으로 변경
+        Color color = chooseArmyGosSprites[num].color;
+        color.a = 0;
+        chooseArmyGosSprites[num].color = color;
         chooseArmyGosSprites[num].sprite = null;
 
         borderImgs[num].color = Color.black;
@@ -408,6 +429,11 @@ public class LobbyManager : MonoBehaviour
                 else if (chooseArmyGos[2] == armyGos[_a]) break;
                 if (chooseArmyGos[a] == null)
                 {
+                    //장착 칸의 Sprite 의 A값을 1로 변경
+                    Color color = chooseArmyGosSprites[a].color;
+                    color.a = 1;
+                    chooseArmyGosSprites[a].color = color;
+
                     chooseArmyGos[a] = armyGos[_a];
                     chooseArmyGosSprites[a].sprite = armySprites[_a];
                     chooseArmyCount++;

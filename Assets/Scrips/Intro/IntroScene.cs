@@ -9,16 +9,11 @@ public class IntroScene : MonoBehaviour
     [SerializeField] private SceneNames nextScene;
 
     private bool canClick = false;
-    [SerializeField] private AudioClip introBgm;
 
 
     private void Awake()
     {
         SystemSetup();
-    }
-    private void Start()
-    {
-        SoundManager.instance.PlaySound(introBgm);
     }
     private void SystemSetup()
     {

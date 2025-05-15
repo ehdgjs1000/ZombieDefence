@@ -34,12 +34,14 @@ public class StoreManager : MonoBehaviour
     }
     public void ExitGoldOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         buyGoldGo.SetActive(false);
     }
     
     //골드 구매 초기창
     public void TryBuyGoldOnClick(int num)
     {
+        SoundManager.instance.BtnClickPlay();
         buyGoldGo.SetActive(true);
         buyAmountType = num;
     }
@@ -53,6 +55,7 @@ public class StoreManager : MonoBehaviour
     {
         if(buyAmountType == 0 && BackEndGameData.Instance.UserGameData.crystal >= 100)
         {
+            SoundManager.instance.BtnClickPlay();
             BackEndGameData.Instance.UserGameData.crystal -= 100;
             BackEndGameData.Instance.UserGameData.gold += 1500;
             BackEndGameData.Instance.UserQuestData.questCount[3] += 100;
@@ -60,6 +63,7 @@ public class StoreManager : MonoBehaviour
         }
         else if (buyAmountType == 1 && BackEndGameData.Instance.UserGameData.crystal >= 600)
         {
+            SoundManager.instance.BtnClickPlay();
             BackEndGameData.Instance.UserGameData.crystal -= 600;
             BackEndGameData.Instance.UserGameData.gold += 10000;
             BackEndGameData.Instance.UserQuestData.questCount[3] += 600;
@@ -67,6 +71,7 @@ public class StoreManager : MonoBehaviour
         }
         else if (buyAmountType == 2 && BackEndGameData.Instance.UserGameData.crystal >= 3000)
         {
+            SoundManager.instance.BtnClickPlay();
             BackEndGameData.Instance.UserGameData.crystal -= 3000;
             BackEndGameData.Instance.UserGameData.gold += 50000;
             BackEndGameData.Instance.UserQuestData.questCount[3] += 3000;
@@ -74,12 +79,14 @@ public class StoreManager : MonoBehaviour
         }
         else
         {
+            SoundManager.instance.ErrorClipPlay();
             PopUpMessageBase.instance.SetMessage("다이아가 부족합니다.");
         }
         buyGoldGo.SetActive(false);
     }
     public void BuyGoldExitBtn()
     {
+        SoundManager.instance.BtnClickPlay();
         buyGoldGo.SetActive(false);
     }
 
@@ -89,6 +96,7 @@ public class StoreManager : MonoBehaviour
         {
             if(BackEndGameData.Instance.UserGameData.crystal >= 100)
             {
+                SoundManager.instance.BtnClickPlay();
                 BackEndGameData.Instance.UserGameData.crystal -=100;
                 DrawGos[0].SetActive(true);
                 DrawGun(-1);
@@ -98,6 +106,7 @@ public class StoreManager : MonoBehaviour
             }
             else
             {
+                SoundManager.instance.ErrorClipPlay();
                 //다이아가 없을 경우
                 PopUpMessageBase.instance.SetMessage("다이아가 부족합니다.");
             }
@@ -106,6 +115,7 @@ public class StoreManager : MonoBehaviour
         {
             if (BackEndGameData.Instance.UserGameData.crystal >= 900)
             {
+                SoundManager.instance.BtnClickPlay();
                 BackEndGameData.Instance.UserGameData.crystal -= 900;
                 DrawGos[1].SetActive(true);
                 for (int count = 0; count < 10; count++) DrawGun(count);
@@ -115,6 +125,7 @@ public class StoreManager : MonoBehaviour
             }
             else
             {
+                SoundManager.instance.ErrorClipPlay();
                 PopUpMessageBase.instance.SetMessage("다이아가 부족합니다.");
             }
         }
@@ -123,6 +134,7 @@ public class StoreManager : MonoBehaviour
     }
     public void DrawOkayOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         StartCoroutine(DrawPlay());
     }
     IEnumerator DrawPlay()
@@ -134,6 +146,7 @@ public class StoreManager : MonoBehaviour
     }
     public void DrawExitBtnOnClick()
     {
+        SoundManager.instance.BtnClickPlay();
         CardFlipReset();
         for (int a = 0; a < DrawGos.Length; a++)
         {

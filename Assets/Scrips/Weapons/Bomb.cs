@@ -11,6 +11,8 @@ public class Bomb : MonoBehaviour
 
     private Collider[] enemyColls;
 
+    [SerializeField] private AudioClip explosionClip;
+
     private void OnCollisionEnter(Collision co)
     {
         Explosion();
@@ -42,6 +44,7 @@ public class Bomb : MonoBehaviour
             }
         }
         Instantiate(explosionFx, transform.position,Quaternion.identity);
+        SoundManager.instance.PlaySound(explosionClip);
         Destroy(gameObject);
     }
 }

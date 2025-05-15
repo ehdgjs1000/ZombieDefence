@@ -14,6 +14,10 @@ public class Army : MonoBehaviour
     //#Upgrade Type
     //#0 Damge #1 fireRate #2 reloadingTime
 
+    [Header("Audio #0 Pistol #1 Smg #2 AR #3 Sr #4 DMR #5 LMG")]
+    [SerializeField] private AudioClip[] gunFireClips;
+    [SerializeField] private AudioClip[] gunReloadingClips;
+
     private bool canAttack = false; //공격 가능 여부
     public float damage; 
     public float fireRate;
@@ -43,6 +47,7 @@ public class Army : MonoBehaviour
     {
         WeaponInfoInit();
         GameManager.instance.SetHaveWeaponType(weaponType);
+        UpdateSFX();
     }
     private void Update()
     {
@@ -51,6 +56,17 @@ public class Army : MonoBehaviour
         remainBulletImg.fillAmount = (remainBulletCount/maxbulletCount);
 
         CheckEnemy();
+    }
+    private void UpdateSFX()
+    {
+        for(int a = 0; a < GameManager.instance.gunFireClips.Length; a++)
+        {
+            gunFireClips[a] = GameManager.instance.gunFireClips[a];
+        }
+        for (int a = 0; a< GameManager.instance.gunReloadingClips.Length; a++)
+        {
+            gunReloadingClips[a] = GameManager.instance.gunReloadingClips[a];
+        }
     }
     public void IncreaseMaxBullet(int amount)
     {
@@ -115,13 +131,24 @@ public class Army : MonoBehaviour
         tempFireRate *= SkillManager.instance.GetWeaponData(weaponType)[1]/100;
         reloadingTime *= SkillManager.instance.GetWeaponData(weaponType)[2]/100;*/
     }
-    private void AttackTest(EnemyCtrl enemy)
+    private void Attack(EnemyCtrl enemy)
     {
         //Data
         fireRate = tempFireRate* SkillManager.instance.GetWeaponData(weaponType)[1] / 100;
         remainBulletCount--;
+
+        //사운드 생성
+        AudioClip fireClip = GetComponent<AudioClip>();
+        if (weaponData.type == WeaponData.WeaponType.Pistol) fireClip = gunFireClips[0];
+        else if (weaponData.type == WeaponData.WeaponType.SMG) fireClip = gunFireClips[1];
+        else if (weaponData.type == WeaponData.WeaponType.Rifle) fireClip = gunFireClips[2];
+        else if (weaponData.type == WeaponData.WeaponType.SR) fireClip = gunFireClips[3];
+        else if (weaponData.type == WeaponData.WeaponType.DMR) fireClip = gunFireClips[4];
+        else if (weaponData.type == WeaponData.WeaponType.Special) fireClip = gunFireClips[5];
         if (!isSrArmy)
         {
+            SoundManager.instance.PlaySound(fireClip);
+
             /*GameObject bullet = ObjectPool.instance.MakeObj("bullet");
             bullet.transform.position = bulletSpawnPos.position;
             bullet.transform.rotation = this.transform.rotation;*/
@@ -131,6 +158,8 @@ public class Army : MonoBehaviour
         }
         else
         {
+            SoundManager.instance.PlaySound(fireClip);
+
             /*GameObject srBullet = ObjectPool.instance.MakeObj("srBullet");
             srBullet.transform.position = bulletSpawnPos.position;
             srBullet.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -152,6 +181,9 @@ public class Army : MonoBehaviour
     }
     private IEnumerator Reload()
     {
+        //총기에 따라 사운드 변경 하기
+        SoundManager.instance.PlaySound(gunReloadingClips[0]);
+
         isReloading = true;
         yield return new WaitForSeconds(reloadingTime * SkillManager.instance.GetWeaponData(weaponType)[2] / 100);
         isReloading = false;
@@ -173,7 +205,7 @@ public class Army : MonoBehaviour
                 this.transform.LookAt(enemyGO.transform.position);
                 EnemyCtrl enemy = enemyGO.GetComponent<EnemyCtrl>();
                 //공격
-                if (fireRate <= 0.0f && !isReloading) AttackTest(enemy);
+                if (fireRate <= 0.0f && !isReloading) Attack(enemy);
             }
             
             catch (System.ObjectDisposedException e)

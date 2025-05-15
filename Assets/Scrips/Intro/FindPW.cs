@@ -13,11 +13,13 @@ public class FindPW : LoginBase
     [SerializeField] private TMP_InputField inputFieldEmail;
 
     [SerializeField] private Button btnFindPW;
+    [SerializeField] private AudioClip btnClip;
 
     public void FindPWOnClick()
     {
         ResetUI();
 
+        SoundManager.instance.PlaySound(btnClip);
         if (IsFieldDataEmpty(imageID, inputFieldID.text, "아이디")) return;
         if (IsFieldDataEmpty(imageEmail, inputFieldID.text, "메일주소")) return;
 

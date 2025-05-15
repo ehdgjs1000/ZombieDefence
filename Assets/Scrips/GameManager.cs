@@ -56,6 +56,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text tankZTxt;
     [SerializeField] private Text bossZTxt;
 
+    [Header("Audio #0 Pistol #1 Smg #2 AR #3 Sr #4 DMR #5 LMG")]
+    public AudioClip[] gunFireClips;
+    public AudioClip[] gunReloadingClips;
+
 
     private void Awake()
     {

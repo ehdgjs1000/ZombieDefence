@@ -2002,6 +2002,20 @@ MonoBehaviour:
   remainBulletImg: {fileID: 8178940235293077812}
   weaponImg: {fileID: 5258519552874170805}
   isSrArmy: 0
+  gunFireClips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  gunReloadingClips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   damage: 0
   fireRate: 0
   reloadingTime: 0

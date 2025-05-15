@@ -12,6 +12,8 @@ public class Login : LoginBase
     [SerializeField] private Image imagePW;
     [SerializeField] private TMP_InputField inputFieldPW;
 
+    [SerializeField] private AudioClip btnClip;
+
     [SerializeField] Button loginBtn;
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class Login : LoginBase
     public void LoginOnClick()
     {
         ResetUI();
+        SoundManager.instance.PlaySound(btnClip);
 
         if (IsFieldDataEmpty(imageID, inputFieldID.text, "아이디")) return;
         if (IsFieldDataEmpty(imagePW, inputFieldPW.text, "패스워드")) return;

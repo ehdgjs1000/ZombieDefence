@@ -1270,6 +1270,7 @@ MonoBehaviour:
   imageEmail: {fileID: 1147191520}
   inputFiedlEmail: {fileID: 1147191519}
   btnFinId: {fileID: 1511064928}
+  btnClip: {fileID: 8300000, guid: edd56db7cac132546b2202bdca08ee6f, type: 3}
 --- !u!1001 &694915300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2045,6 +2046,7 @@ MonoBehaviour:
   imageEmail: {fileID: 1653014188}
   inputFieldEmail: {fileID: 1653014187}
   btnFindPW: {fileID: 345825449}
+  btnClip: {fileID: 8300000, guid: edd56db7cac132546b2202bdca08ee6f, type: 3}
 --- !u!1 &779436019 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1224194692352394, guid: cecba8cbb65991c42a1e7219f8210b9a, type: 3}
@@ -2848,6 +2850,7 @@ MonoBehaviour:
   inputFieldID: {fileID: 902533658}
   imagePW: {fileID: 196054460}
   inputFieldPW: {fileID: 196054459}
+  btnClip: {fileID: 8300000, guid: edd56db7cac132546b2202bdca08ee6f, type: 3}
   loginBtn: {fileID: 1281027136}
 --- !u!1 &1246667032
 GameObject:
@@ -4200,6 +4203,7 @@ MonoBehaviour:
   imageEmail: {fileID: 1332068018}
   inputFieldEmail: {fileID: 1332068017}
   btnRegisterAccount: {fileID: 1632882176}
+  btnClip: {fileID: 8300000, guid: edd56db7cac132546b2202bdca08ee6f, type: 3}
 --- !u!1 &1511064926
 GameObject:
   m_ObjectHideFlags: 0

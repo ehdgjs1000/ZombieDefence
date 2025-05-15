@@ -19,9 +19,12 @@ public class RegisterAccount : LoginBase
 
     [SerializeField] private Button btnRegisterAccount;
 
+    [SerializeField] private AudioClip btnClip;
+
     public void RegisterBtnOnClick()
     {
         ResetUI(imageID, imagePW, imageConfirmPW, imageEmail);
+        SoundManager.instance.PlaySound(btnClip);
 
         if (IsFieldDataEmpty(imageID, inputFieldID.text, "아이디")) return;
         if (IsFieldDataEmpty(imagePW, inputFieldPW.text, "패스워드")) return;

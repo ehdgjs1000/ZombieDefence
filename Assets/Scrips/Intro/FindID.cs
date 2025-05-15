@@ -11,10 +11,11 @@ public class FindID : LoginBase
     [SerializeField] private TMP_InputField inputFiedlEmail;
 
     [SerializeField] Button btnFinId;
-
+    [SerializeField] private AudioClip btnClip;
     public void FindIDOnClick()
     {
         ResetUI(imageEmail);
+        SoundManager.instance.PlaySound(btnClip);
         if (IsFieldDataEmpty(imageEmail, inputFiedlEmail.text, "메일 주소")) return;
 
         if (!inputFiedlEmail.text.Contains("@"))

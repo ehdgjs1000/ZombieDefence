@@ -1912,6 +1912,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e86f6fa10e8f2947989e1ceb9a8455f, type: 2}
   - {fileID: 11400000, guid: 0dfffe3575f8dcc4680aa218537efb37, type: 2}
   level: 0
+  upgradeClip: {fileID: 8300000, guid: 53ef6969568ccc049b5859bd10dbb2ee, type: 3}
 --- !u!4 &334016135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4561451306695836, guid: 63f52685b1f2fab498745a15377a2b35, type: 3}
@@ -5592,6 +5593,20 @@ MonoBehaviour:
   longZTxt: {fileID: 562534324}
   tankZTxt: {fileID: 84218765}
   bossZTxt: {fileID: 0}
+  gunFireClips:
+  - {fileID: 8300000, guid: 91e32318fb8fdad49a16473ed84d3c95, type: 3}
+  - {fileID: 8300000, guid: 981af4367cd0be147a27e0ca16cf091d, type: 3}
+  - {fileID: 8300000, guid: ea6aa483d366b9a46a76e8bdcaa9a793, type: 3}
+  - {fileID: 8300000, guid: ec8306ac29e76f344aef0215a26d3672, type: 3}
+  - {fileID: 8300000, guid: ec8306ac29e76f344aef0215a26d3672, type: 3}
+  - {fileID: 8300000, guid: 6d2c05a1ff67a9547a97b7ef8b30d618, type: 3}
+  gunReloadingClips:
+  - {fileID: 8300000, guid: df4d3f5a18cf8704981061f55d2bdd81, type: 3}
+  - {fileID: 8300000, guid: df4d3f5a18cf8704981061f55d2bdd81, type: 3}
+  - {fileID: 8300000, guid: df4d3f5a18cf8704981061f55d2bdd81, type: 3}
+  - {fileID: 8300000, guid: df4d3f5a18cf8704981061f55d2bdd81, type: 3}
+  - {fileID: 8300000, guid: df4d3f5a18cf8704981061f55d2bdd81, type: 3}
+  - {fileID: 8300000, guid: df4d3f5a18cf8704981061f55d2bdd81, type: 3}
 --- !u!1001 &837009712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11508,6 +11523,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e86f6fa10e8f2947989e1ceb9a8455f, type: 2}
   - {fileID: 11400000, guid: 0dfffe3575f8dcc4680aa218537efb37, type: 2}
   level: 0
+  upgradeClip: {fileID: 8300000, guid: 53ef6969568ccc049b5859bd10dbb2ee, type: 3}
 --- !u!1 &1755856944
 GameObject:
   m_ObjectHideFlags: 0
@@ -13405,6 +13421,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e86f6fa10e8f2947989e1ceb9a8455f, type: 2}
   - {fileID: 11400000, guid: 0dfffe3575f8dcc4680aa218537efb37, type: 2}
   level: 0
+  upgradeClip: {fileID: 8300000, guid: 53ef6969568ccc049b5859bd10dbb2ee, type: 3}
 --- !u!1 &2057563996
 GameObject:
   m_ObjectHideFlags: 0

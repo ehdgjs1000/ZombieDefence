@@ -152,3 +152,4 @@ MonoBehaviour:
   exploseRange: 15
   bombDamage: 9999
   explosionFx: {fileID: 2222854112884956613, guid: b047651fb6391c847bd9db272028937a, type: 3}
+  explosionClip: {fileID: 8300000, guid: 590b84143890dd741b8dd059477c040c, type: 3}

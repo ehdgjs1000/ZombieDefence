@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  bulletSpeed: 2500
+  criticalChange: 20
+  bulletSpeed: 5000
   damagePopUpTr: {fileID: 1388630433099571573, guid: e464c07449820c742a06ae2c9254e11a, type: 3}
 --- !u!96 &2202988954410623160
 TrailRenderer:

@@ -138,7 +138,7 @@ public class LobbyManager : MonoBehaviour
     public void SteminaBuyOnClick(int amount)
     {
         SoundManager.instance.BtnClickPlay();
-        if (amount == 5)
+        if (amount == 5 && BackEndGameData.Instance.UserGameData.energy < 30)
         {
             if (BackEndGameData.Instance.UserGameData.energy <= 25)
             {
@@ -213,6 +213,7 @@ public class LobbyManager : MonoBehaviour
         {
             //게임 실행 불가
             SoundManager.instance.ErrorClipPlay();
+            PopUpMessageBase.instance.SetMessage("스테미나가 부족합니다.");
         }
     }
     public void QuestCloseBtnOnClick()

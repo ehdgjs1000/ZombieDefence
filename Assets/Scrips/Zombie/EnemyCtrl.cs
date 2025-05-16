@@ -51,7 +51,8 @@ public class EnemyCtrl : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         float ranHpRate = Random.Range(0.7f, 1.3f);
-        hp = initHp * GameManager.instance.gameLevel * ranHpRate;
+        hp = initHp * GameManager.instance.gameHpLevel * ranHpRate;
+        if (ZombieSpawner.instance.isHardMode) hp *= 1.3f;
         isDie = false;
         canMove = true;
         boxCollider.enabled = true;
@@ -71,7 +72,7 @@ public class EnemyCtrl : MonoBehaviour
         isAttacking = true;
         animator.SetTrigger("ShortAttack");
         yield return new WaitForSeconds(1.5f);
-        StartCoroutine(GameManager.instance.ArmyGetAttack(damage));
+        if(!isDie) StartCoroutine(GameManager.instance.ArmyGetAttack(damage));
         isAttacking = false;
     }
     public void GetAttack(float damage)

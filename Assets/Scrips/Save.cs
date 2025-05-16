@@ -61,6 +61,10 @@ public class Save : MonoBehaviour
 {
     public static Save instance;
 
+    [SerializeField] public List<SaveWeapon> saveInitWeaponList;
+    [SerializeField] public List<SaveWeapon> loadInitWeaponList;
+    [SerializeField] public WeaponData[] weaponInitDatas = new WeaponData[14];
+
     [SerializeField] public List<SaveWeapon> saveWeaponList;
     [SerializeField] public List<SaveWeapon> loadWeaponList;
     [SerializeField] public WeaponData[] weaponDatas = new WeaponData[14];
@@ -109,6 +113,7 @@ public class Save : MonoBehaviour
     {
         string prom0filePatth = Application.persistentDataPath + "/Prom0.json";
         string prom0String = File.ReadAllText(prom0filePatth);
+        Debug.Log(prom0filePatth);
 
         loadProm0List = JsonConvert.DeserializeObject<List<SaveChapterRewardProm0>>(prom0String);
         if (loadProm0List != null)
@@ -210,12 +215,70 @@ public class Save : MonoBehaviour
         weaponData = JsonConvert.SerializeObject(saveWeaponList, Formatting.Indented);
         File.WriteAllText(weaponFilePath, weaponData);
     }
+    public void SaveWeaponInitJson()
+    {
+        string weaponFilePath = Application.persistentDataPath + "/WeaponData.json";
+        string weaponData = null;
+        saveWeaponList.Clear();
+        File.WriteAllText(weaponFilePath, null);
+
+        for (int a = 0; a < weaponDatas.Length; a++)
+        {
+            saveWeaponList.Add(new SaveWeapon(weaponDatas[a].weaponNum, weaponDatas[a].fireRate,
+                weaponDatas[a].maxBulletCount, weaponDatas[a].damage, weaponDatas[a].range,
+                weaponDatas[a].reloadingTime, weaponDatas[a].weaponLevel, weaponDatas[a].weaponCount,
+                weaponDatas[a].name));
+        }
+
+        weaponData = JsonConvert.SerializeObject(saveWeaponList, Formatting.Indented);
+        File.WriteAllText(weaponFilePath, weaponData);
+    }
+
+    MyTextDataArray myText;
+    [System.Serializable]
+    public class MyTextDataArray
+    {
+        public SaveWeapon[] data;
+    }
+    public void InitWeaponJson()
+    {
+        string weaponInitFilePath = Application.persistentDataPath + "/WeaponInitData.json";
+        string weaponInitData = null;
+        saveInitWeaponList.Clear();
+        File.WriteAllText(weaponInitFilePath, null);
+
+        /*string initWeaponJsonString = File.ReadAllText(Resources.Load("WeaponInitData.json").ToString());
+        loadInitWeaponList = JsonConvert.DeserializeObject<List<SaveWeapon>>(initWeaponJsonString);*/
+
+        TextAsset textData = Resources.Load("WeaponInitData") as TextAsset;
+        loadInitWeaponList = JsonConvert.DeserializeObject<List<SaveWeapon>>(textData.ToString());
+        Debug.Log(loadInitWeaponList[0].weaponName);
+
+        if (loadInitWeaponList != null)
+        {
+            for (int weaponNum = 0; weaponNum < loadInitWeaponList.Count; weaponNum++)
+            {
+                weaponDatas[weaponNum].weaponNum = loadInitWeaponList[weaponNum].weaponNum;
+                weaponDatas[weaponNum].fireRate = loadInitWeaponList[weaponNum].fireRate;
+                weaponDatas[weaponNum].maxBulletCount = loadInitWeaponList[weaponNum].maxBulletCount;
+                weaponDatas[weaponNum].damage = loadInitWeaponList[weaponNum].damage;
+                weaponDatas[weaponNum].range = loadInitWeaponList[weaponNum].range;
+
+                weaponDatas[weaponNum].reloadingTime = loadInitWeaponList[weaponNum].reloadingTime;
+                weaponDatas[weaponNum].weaponLevel = loadInitWeaponList[weaponNum].weaponLevel;
+                weaponDatas[weaponNum].weaponCount = loadInitWeaponList[weaponNum].weaponCount;
+            }
+        }
+        SaveWeaponInitJson();
+    }
     public void ResetWeaponJson()
     {
         //총기 정보 초기화
         string weaponFilePath = Application.persistentDataPath + "/WeaponData.json";
         saveWeaponList.Clear();
         File.WriteAllText(weaponFilePath, null);
+
+        InitWeaponJson();
 
         //장착했던 종기 정보 초기화
         string equipedWeaponFilePath = Application.persistentDataPath + "/EquipedWeaponData.json";

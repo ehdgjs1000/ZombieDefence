@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 using BackEnd;
 
 
@@ -25,6 +26,9 @@ public class RegisterAccount : LoginBase
     {
         ResetUI(imageID, imagePW, imageConfirmPW, imageEmail);
         SoundManager.instance.PlaySound(btnClip);
+
+        string weaponInitFilePath = Application.persistentDataPath + "/WeaponInitData.json";
+        File.WriteAllText(weaponInitFilePath, null);
 
         if (IsFieldDataEmpty(imageID, inputFieldID.text, "아이디")) return;
         if (IsFieldDataEmpty(imagePW, inputFieldPW.text, "패스워드")) return;

@@ -1,0 +1,156 @@
+[
+  {
+    "weaponNum": 0,
+    "fireRate": 0.5,
+    "maxBulletCount": 6.0,
+    "damage": 30.0,
+    "range": 10.0,
+    "reloadingTime": 2.0,
+    "weaponLevel": 1,
+    "weaponCount": 0.0,
+    "weaponName": "PistolLv1"
+  },
+  {
+    "weaponNum": 1,
+    "fireRate": 0.6,
+    "maxBulletCount": 10.0,
+    "damage": 90.0,
+    "range": 13.0,
+    "reloadingTime": 1.5,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "PistolLv2"
+  },
+  {
+    "weaponNum": 2,
+    "fireRate": 0.5,
+    "maxBulletCount": 8.0,
+    "damage": 150.0,
+    "range": 15.0,
+    "reloadingTime": 2.0,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "PistolLv3"
+  },
+  {
+    "weaponNum": 3,
+    "fireRate": 0.08,
+    "maxBulletCount": 25.0,
+    "damage": 19.0,
+    "range": 12.0,
+    "reloadingTime": 1.6,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "SmgLv1"
+  },
+  {
+    "weaponNum": 4,
+    "fireRate": 0.08,
+    "maxBulletCount": 45.0,
+    "damage": 60.0,
+    "range": 13.0,
+    "reloadingTime": 2.5,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "SmgLv2"
+  },
+  {
+    "weaponNum": 5,
+    "fireRate": 0.18,
+    "maxBulletCount": 20.0,
+    "damage": 18,
+    "range": 15.0,
+    "reloadingTime": 1.8,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "ArLv1"
+  },
+  {
+    "weaponNum": 6,
+    "fireRate": 0.17,
+    "maxBulletCount": 27.0,
+    "damage": 36.0,
+    "range": 15.0,
+    "reloadingTime": 1.8,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "ArLv2"
+  },
+  {
+    "weaponNum": 7,
+    "fireRate": 0.2,
+    "maxBulletCount": 30.0,
+    "damage": 82.0,
+    "range": 15.0,
+    "reloadingTime": 2.0,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "ArLv3"
+  },
+  {
+    "weaponNum": 8,
+    "fireRate": 0.14,
+    "maxBulletCount": 30.0,
+    "damage": 182.0,
+    "range": 15.0,
+    "reloadingTime": 1.7,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "ArLv4"
+  },
+  {
+    "weaponNum": 10,
+    "fireRate": 0.8,
+    "maxBulletCount": 10.0,
+    "damage": 250.0,
+    "range": 22.0,
+    "reloadingTime": 2.0,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "SrLv2"
+  },
+  {
+    "weaponNum": 9,
+    "fireRate": 1.2,
+    "maxBulletCount": 7.0,
+    "damage": 75,
+    "range": 20.0,
+    "reloadingTime": 1.5,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "SrLv1"
+  },
+  {
+    "weaponNum": 12,
+    "fireRate": 0.25,
+    "maxBulletCount": 18.0,
+    "damage": 300.0,
+    "range": 22.0,
+    "reloadingTime": 1.5,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "DmrLv2"
+  },
+  {
+    "weaponNum": 11,
+    "fireRate": 0.33,
+    "maxBulletCount": 15.0,
+    "damage": 88.0,
+    "range": 19.0,
+    "reloadingTime": 1.5,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "DmrLv1"
+  },
+  {
+    "weaponNum": 13,
+    "fireRate": 0.2,
+    "maxBulletCount": 100.0,
+    "damage": 220.0,
+    "range": 22.0,
+    "reloadingTime": 4.0,
+    "weaponLevel": 0,
+    "weaponCount": 0.0,
+    "weaponName": "LmgLv1"
+  }
+]

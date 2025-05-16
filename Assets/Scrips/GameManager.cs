@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private GameObject settingGo;
     [SerializeField] private Button settingBtn;
+    [SerializeField] private TextMeshProUGUI rewardCrystalTxt;
+    [SerializeField] private GameObject highScoreTxt;
 
     [Header("Level System")]
     [SerializeField] private Skill[] skills;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
     public float gameHpLevel = 1;
     private float gameLevelTime = 120.0f;
     private float gameHpLevelTime = 60.0f;
+    private float hpUpTime = 60.0f;
 
     [Header("Army info")]
     [SerializeField] private Transform[] armyPos;
@@ -90,8 +93,9 @@ public class GameManager : MonoBehaviour
         gameLevelTime -= Time.deltaTime;
         gameHpLevelTime -= Time.deltaTime;
         UpdateInfo();
+        HPUp();
 
-        if(!isGameOver) Timer();
+        if (!isGameOver) Timer();
 
         if (gameLevelTime <= 0.0f) GameLevelUp();
         if (gameHpLevelTime <= 0.0f) GameHpLevelUp();
@@ -108,6 +112,15 @@ public class GameManager : MonoBehaviour
                 if (a == ChangeScene.instance.chooseArmyCount) break;
             }
             canUpgradeCheck = false;
+        }
+    }
+    private void HPUp()
+    {
+        hpUpTime -= Time.deltaTime;
+        if(hpUpTime <= 0.0f)
+        {
+            hpUpTime = 30.0f;
+            hp += 1;
         }
     }
     public void KilledZombie(int type)
@@ -174,7 +187,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameLevel UP");
         gameHpLevelTime = 60.0f;
-        gameHpLevel *= 1.3f;
+        gameHpLevel *= 1.5f;
     }
     public IEnumerator ArmyGetAttack(float damage)
     {
@@ -231,21 +244,34 @@ public class GameManager : MonoBehaviour
             }
             else canLevelUp = false;
         }
+        //High Score
+        int tempHighScore = PlayerPrefs.GetInt("HighScore1");
+        if (tempHighScore < killedZombieCount)
+        {
+            //최고 스코어 갱신
+            highScoreTxt.SetActive(true);
+
+        }
 
         gameOverSet.SetActive(true);
         BackEndGameData.Instance.UserQuestData.questCount[1]++;
         BackEndGameData.Instance.UserQuestData.questCount[2] += killedZombieCount;
+        int rewardCrystal = killedZombieCount / 10;
+        BackEndGameData.Instance.UserGameData.crystal += rewardCrystal;
+        rewardCrystalTxt.text = rewardCrystal.ToString();
         BackEndGameData.Instance.GameDataUpdate(AfterGameOver);
     }
     private void AfterGameOver()
     {
         SkillLevelReset();
+        highScoreTxt.SetActive(false);
         BackEndGameData.Instance.UserGameData.gold += gold;
         AccountInfo.instance.SyncAccountToBackEnd();
         Time.timeScale = 0.0f;
     }
     public void ToLobbyBtnOnClick()
     {
+        ZombieSpawner.instance.dirLight.intensity = 0.75f;
         tempTimeScale = 1.0f;
         Time.timeScale = 1.0f;
         gameOverSet.SetActive(false);
@@ -273,7 +299,7 @@ public class GameManager : MonoBehaviour
     {
         level++;
         gainedExp -= needExp;
-        needExp *= 1.4f;
+        needExp *= 1.25f;
         for (int a = 0; a < skills.Length; a++)
         {
             skills[a].SkillUpdate();

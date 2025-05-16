@@ -89,6 +89,8 @@ public class LobbyManager : MonoBehaviour
     {
         SynchAccountToLobby();
         SteminaCharging();
+
+        steminaTxt.text = $"{BackEndGameData.Instance.UserGameData.energy}";
     }
     public void UpdateGameData()
     {

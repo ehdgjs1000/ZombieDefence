@@ -385,7 +385,6 @@ public class BackEndGameData
 
         if (string.IsNullOrEmpty(gameQuestDataRowInData))
         {
-            Debug.Log(gameQuestDataRowInData);
             Debug.LogError("유저의 inDate정보가 없어 게임 정보 데이터 수정에 실패했습니다.");
         }
         //게임 정보의 고유값이 있으면 테이블에 저장되어 있는 값 중 inDate 컬럼의 값과

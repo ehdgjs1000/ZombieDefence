@@ -129,7 +129,7 @@ public class BackEndGameData
                         gameDataRowInData = gameDataJson[0]["inDate"].ToString();
                         //불러온 게임 정보를 userGameData 변수에 저장
                         userGameData.level = int.Parse(gameDataJson[0]["level"].ToString());
-                        userGameData.exp = int.Parse(gameDataJson[0]["exp"].ToString());
+                        userGameData.exp = float.Parse(gameDataJson[0]["exp"].ToString());
                         userGameData.gold = int.Parse(gameDataJson[0]["gold"].ToString());
                         userGameData.crystal = int.Parse(gameDataJson[0]["crystal"].ToString());
                         userGameData.energy = int.Parse(gameDataJson[0]["energy"].ToString());

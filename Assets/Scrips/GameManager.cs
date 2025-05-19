@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour
             hpUpTime = 30.0f;
             hp += 1;
         }
+        if (hp > 100) hp = 100;
     }
     public void KilledZombie(int type)
     {
@@ -237,9 +238,9 @@ public class GameManager : MonoBehaviour
         BackEndGameData.Instance.UserGameData.exp += killedZombieCount;
         while (canLevelUp)
         {
-            if (BackEndGameData.Instance.UserGameData.exp >= 100)
+            if (BackEndGameData.Instance.UserGameData.exp >= Mathf.Pow(1.15f, BackEndGameData.Instance.UserGameData.level) *100)
             {
-                BackEndGameData.Instance.UserGameData.exp -= 100;
+                BackEndGameData.Instance.UserGameData.exp -= Mathf.Pow(1.15f, BackEndGameData.Instance.UserGameData.level) * 100;
                 BackEndGameData.Instance.UserGameData.level++;
             }
             else canLevelUp = false;

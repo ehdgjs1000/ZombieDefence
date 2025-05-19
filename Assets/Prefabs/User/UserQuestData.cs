@@ -15,6 +15,7 @@ public class UserQuestData
         for(int a = 0; a < questCount.Length; a++)
         {
             questCount[a] = 0;
+            Debug.Log(questCount[a]);
         }
         for(int b = 0; b < isReceived.Length; b++)
         {
@@ -24,5 +25,6 @@ public class UserQuestData
             isRewardReceived[c] = false;
         }
         questClearAmount = 0;
+        BackEndGameData.Instance.GameDataUpdate();
     }
 }

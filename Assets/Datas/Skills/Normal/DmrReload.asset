@@ -19,5 +19,5 @@ MonoBehaviour:
   upgradeAmount: 10
   skillLevel: 0
   skillName: "DMR \uC7A5\uC804 \uC18D\uB3C4 \uAC15\uD654"
-  skillIcon: {fileID: 21300000, guid: 97a1811e65df4d345b79c6b7d4ee3294, type: 3}
-  skillDesc: "\uC7A5\uC804\uC18D\uB3C4 10% \uC99D\uAC00"
+  skillIcon: {fileID: 21300000, guid: b1350f5d63f06fe408b314eecab880b8, type: 3}
+  skillDesc: "\uC7A5\uC804\uC18D\uB3C4 10% \uAC10\uC18C"

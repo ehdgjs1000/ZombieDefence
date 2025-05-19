@@ -19,5 +19,5 @@ MonoBehaviour:
   upgradeAmount: 8
   skillLevel: 0
   skillName: "SMG \uC5F0\uC0AC \uC18D\uB3C4 \uAC15\uD654"
-  skillIcon: {fileID: 21300000, guid: d6540cfb04bb3c64692793f56f95c512, type: 3}
+  skillIcon: {fileID: 21300000, guid: 70435509c03c92e4b9c4e3d2b7670bd6, type: 3}
   skillDesc: "\uC5F0\uC0AC\uC18D\uB3C4 8% \uC99D\uAC00"

@@ -24,6 +24,7 @@ public class Setting : MonoBehaviour
         Debug.Log("계정 초기화");
         PlayerPrefs.SetString("ID", null);
         PlayerPrefs.SetString("PW", null);
+        PlayerPrefs.DeleteAll();
 
         BackEndGameData.Instance.GameDataReset();
         Save.instance.ResetWeaponJson();

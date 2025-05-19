@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -26,7 +27,6 @@ public class RegisterAccount : LoginBase
     {
         ResetUI(imageID, imagePW, imageConfirmPW, imageEmail);
         SoundManager.instance.PlaySound(btnClip);
-
         string weaponInitFilePath = Application.persistentDataPath + "/WeaponInitData.json";
         File.WriteAllText(weaponInitFilePath, null);
 
@@ -65,6 +65,10 @@ public class RegisterAccount : LoginBase
 
                     //계정 생성에 성공했을 떄 해당 계정에 게임 정보 생성
                     BackEndGameData.Instance.GameDataInsert();
+                    PlayerPrefs.SetInt("UTCDay",DateTime.UtcNow.Day);
+                    PlayerPrefs.SetInt("UTCMonth", DateTime.UtcNow.Month);
+                    PlayerPrefs.SetInt("UTCYear", DateTime.UtcNow.Year);
+                    PlayerPrefs.SetInt("IsSkipTutorial" , 0);
 
                     Utils.LoadScene(SceneNames.LobbyScene);
                 });

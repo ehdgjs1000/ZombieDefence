@@ -29,6 +29,11 @@ public class QuestReward : MonoBehaviour
             canClick = true;
         }
     }
+    public void ResetQuest()
+    {
+        isCleard = false;
+        clearBg.SetActive(false);
+    }
     public void RewardBtnOnClick()
     {
         if (canClick && !isCleard) 

@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour
     //오디오소스 풀링
     public AudioSource[] audioPool;
 
-    public float soundsVolume;
+    public float soundsVolume = 0.5f;
     [SerializeField] private AudioClip btnClickClip;
     [SerializeField] private AudioClip errorClip;
 

@@ -1,162 +1,141 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using TMPro;
 
 public class Stemina : MonoBehaviour
 {
-    //UI
-    [SerializeField] private TextMeshProUGUI steminaRechargeTimeTxt;
+    [SerializeField] private Text energyText;
+    [SerializeField] private TextMeshProUGUI timerText;
+    private int maxEnergy = 30;
+    private int currentEnergy;
+    private int restoreDuration = 300;
+    private DateTime nextEnergyTime;
+    private DateTime lastEnergyTime;
+    private bool isRestoring = false;
 
-    private DateTime m_AppQuitTime = new DateTime(1970, 1, 1).ToLocalTime();
-    private const int MAX_STEMINA = 30;
-    public float steminaRechargeInterval = 300.0f;
-    private Coroutine m_RechargeTimerCoroutine = null;
-    private float m_RechargeRemainTime = 0;
-
-    private void Awake()
-    {
-        Init();
-    }
-    public void OnApplicationFocus(bool focus)
-    {
-        if (focus)
-        {
-            LoadAppQuitTime();
-            SetRechargeScheduler();
-        }
-        else
-        {
-            SaveAppQuitTime();
-            if (m_RechargeTimerCoroutine != null)
-            {
-                StopCoroutine(m_RechargeTimerCoroutine);
-            }
-        }
-    }
     private void Start()
     {
-        LoadAppQuitTime();
-    }
-    public void OnApplicationQuit()
-    {
-        SaveAppQuitTime();
-    }
-    private void Init()
-    {
-        m_RechargeRemainTime = 0.0f;
-        m_AppQuitTime = new DateTime(1970, 1, 1).ToLocalTime();
-        steminaRechargeTimeTxt.text = ("05:00");
-
-    }
-    private bool SaveAppQuitTime()
-    {
-        bool result = false;
-        try
+        if (!PlayerPrefs.HasKey("currentEnergy"))
         {
-            var appQuitTime = DateTime.Now.ToLocalTime().ToBinary().ToString();
-            PlayerPrefs.SetString("AppQuitTime", appQuitTime);
-            PlayerPrefs.SetFloat("RemainTime", m_RechargeRemainTime);
-            PlayerPrefs.Save();
-            result = true;
-
+            PlayerPrefs.SetInt("currentEnergy", 30);
+            Load();
+            StartCoroutine(RestoreEnergy());
         }
-        catch (Exception e)
+        else
         {
-            Debug.LogError("SaveAppQuitTime Failed (" + e.Message + ")");
+            Load();
+            StartCoroutine(RestoreEnergy());
         }
-        return result;
-
     }
-
-    private bool LoadAppQuitTime()
+    public void UseEnergy()
     {
-        bool result = false;
-        try
+        if (currentEnergy >= -1)
         {
-            if (PlayerPrefs.HasKey("AppQuitTime"))
+            currentEnergy--;
+            UpdateEnergy();
+
+            if (!isRestoring)
             {
-                var appQuitTime = string.Empty;
-                appQuitTime = PlayerPrefs.GetString("AppQuitTime");
-                m_AppQuitTime = DateTime.FromBinary(Convert.ToInt64(appQuitTime));
-                Debug.Log("AppQuitTime : " + m_AppQuitTime);
+                if (currentEnergy + 1 == maxEnergy)
+                {
+                    nextEnergyTime = AddDuration(DateTime.Now, restoreDuration);
+                }
+                StartCoroutine(RestoreEnergy());
             }
-            result = true;
 
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("LoadAppQuitTimeFailed (" + e.Message + ")");
-
-        }
-        return result;
-
-    }
-    private void SetRechargeScheduler(Action onFinish = null)
-    {
-        if (m_RechargeTimerCoroutine != null)
-        {
-            StopCoroutine(m_RechargeTimerCoroutine);
-        }
-        //몇분 나가있었는지
-        float timeDifferenceInSec = (int)((DateTime.Now.ToLocalTime() - m_AppQuitTime).TotalSeconds);
-        
-        //나가있는 동안 추가된 스태미너
-        float steminaToAdd = timeDifferenceInSec / steminaRechargeInterval;
-        BackEndGameData.Instance.UserGameData.energy += (int)steminaToAdd;
-
-        //다음 스태미너까지 남은 시간
-        var remainTime = PlayerPrefs.GetFloat("RemainTime") + timeDifferenceInSec % steminaRechargeInterval;
-
-
-
-        if (BackEndGameData.Instance.UserGameData.energy < MAX_STEMINA)
-        {
-            m_RechargeTimerCoroutine = StartCoroutine(DoRechargeTimer(remainTime, onFinish));
-        }
-        BackEndGameData.Instance.GameDataUpdate();
-    }
-    private IEnumerator DoRechargeTimer(float remainTime, Action onFinish = null)
-    {
-        if (remainTime <= 0.01f)
-        {
-            m_RechargeRemainTime = steminaRechargeInterval;
         }
         else
         {
-            m_RechargeRemainTime = steminaRechargeInterval - remainTime;
+            Debug.Log("No energy");
         }
-        SecToTimer(m_RechargeRemainTime);
-        steminaRechargeTimeTxt.text = (Mathf.FloorToInt(min).ToString() + ":" + Mathf.FloorToInt(sec).ToString());
-        while (m_RechargeRemainTime > 0)
-        {
-            SecToTimer(m_RechargeRemainTime);
-            steminaRechargeTimeTxt.text = (Mathf.FloorToInt(min).ToString() + ":" + Mathf.FloorToInt(sec).ToString());
-            m_RechargeRemainTime--;
-            yield return new WaitForSeconds(1f);
-        }
-        if (BackEndGameData.Instance.UserGameData.energy >= MAX_STEMINA)
-        {
-            BackEndGameData.Instance.UserGameData.energy = MAX_STEMINA;
-            m_RechargeRemainTime = 0;
-            SecToTimer(m_RechargeRemainTime);
-            steminaRechargeTimeTxt.text = ("05:00");
+    }
+    private IEnumerator RestoreEnergy()
+    {
+        UpdateEnergyTimer(); 
+        isRestoring = true;
 
-            m_RechargeTimerCoroutine = null;
+        while (currentEnergy < maxEnergy)
+        {
+            DateTime currentDateTime = DateTime.Now;
+            DateTime nextDateTime = nextEnergyTime;
+            bool isEnergyAdding = false;
+
+            while (currentDateTime > nextDateTime)
+            {
+                if (currentEnergy < maxEnergy)
+                {
+                    isEnergyAdding = true;
+                    currentEnergy++;
+                    UpdateEnergy();
+                    DateTime timeToAdd = lastEnergyTime > nextDateTime ? lastEnergyTime : nextDateTime;
+                    nextDateTime = AddDuration(timeToAdd,restoreDuration);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (isEnergyAdding == true)
+            {
+                lastEnergyTime = DateTime.Now;
+                nextEnergyTime = nextDateTime;
+            }
+
+            UpdateEnergyTimer();
+            UpdateEnergy();
+            Save();
+            yield return null;
+        }
+
+        isRestoring = false;
+
+    }
+    private DateTime AddDuration(DateTime dateTime, int duration)
+    {
+        return dateTime.AddSeconds(duration);
+    }
+    private DateTime StringToDate(string dateTime)
+    {
+        if (string.IsNullOrEmpty(dateTime))
+        {
+            return DateTime.Now;
         }
         else
         {
-            m_RechargeTimerCoroutine = StartCoroutine(DoRechargeTimer(steminaRechargeInterval, onFinish));
+            return DateTime.Parse(dateTime);
         }
     }
-    float min = 0;
-    float sec = 0;
-    private void SecToTimer(float totalSec)
+    private void UpdateEnergyTimer()
     {
-        min = totalSec / 60;
-        sec = totalSec % 60;
+        if (currentEnergy >= maxEnergy)
+        {
+            return;
+        }
+        TimeSpan time = nextEnergyTime - DateTime.Now;
+        string timeValue = string.Format("{0:D2}:{1:D1}", time.Minutes, time.Seconds);
+        timerText.text = timeValue;
 
+    }
+    private void UpdateEnergy()
+    {
+        //energyText.text = currentEnergy.ToString() + "/" + maxEnergy.ToString();
+    }
+
+    private void Load()
+    {
+        currentEnergy = PlayerPrefs.GetInt("currentEnergy");
+        nextEnergyTime = StringToDate(PlayerPrefs.GetString("nextEnergyTime"));
+        lastEnergyTime = StringToDate(PlayerPrefs.GetString("lastEnergyTime"));
+    }
+    private void Save()
+    {
+        PlayerPrefs.SetInt("currentEnergy", currentEnergy);
+        PlayerPrefs.SetString("nextEnergyTime", nextEnergyTime.ToString());
+        PlayerPrefs.SetString("lastEnergyTime", lastEnergyTime.ToString());
     }
 
 

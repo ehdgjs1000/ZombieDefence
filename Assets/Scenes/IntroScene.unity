@@ -4593,7 +4593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioPool: []
-  soundsVolume: 1
+  soundsVolume: 0.5
   btnClickClip: {fileID: 8300000, guid: edd56db7cac132546b2202bdca08ee6f, type: 3}
   errorClip: {fileID: 8300000, guid: 60035de05c5216f4c952ca6d10334219, type: 3}
 --- !u!4 &1933237897

@@ -18,6 +18,6 @@ MonoBehaviour:
   upgradeType: 0
   upgradeAmount: 20
   skillLevel: 0
-  skillName: "\uB370\uBBF8\uC9C0 \uC99D\uAC00"
-  skillIcon: {fileID: 21300000, guid: 574f38371e2d44f42b527ae990d5dde0, type: 3}
+  skillName: "\uAD8C\uCD1D \uB370\uBBF8\uC9C0 \uAC15\uD654"
+  skillIcon: {fileID: 21300000, guid: f45fafadaed7e1645b399dc4c2599959, type: 3}
   skillDesc: "\uB370\uBBF8\uC9C0 20% \uC99D\uAC00"

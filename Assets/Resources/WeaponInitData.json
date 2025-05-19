@@ -36,7 +36,7 @@
     "weaponNum": 3,
     "fireRate": 0.08,
     "maxBulletCount": 25.0,
-    "damage": 19.0,
+    "damage": 17.0,
     "range": 12.0,
     "reloadingTime": 1.6,
     "weaponLevel": 0,

@@ -315,7 +315,6 @@ public class BackEndGameData
     }
     public void GameDataUpdate()
     {
-        Debug.Log("Update Server");
         if (userGameData == null)
         {
             Debug.LogError("서버에서 다운받거나 새로 삽입한 데이터가 존재하지 않습니다. + " +
@@ -367,7 +366,7 @@ public class BackEndGameData
         //소유하는 유저의 owner_inDate가 일치하는 row를 검색하여 수정하는 UpdateV2()를 호출
         else
         {
-            Debug.Log($"{gameDataRowInData}의 게임정보 데이터 수정을 요청합니다.");
+            //Debug.Log($"{gameDataRowInData}의 게임정보 데이터 수정을 요청합니다.");
 
             Backend.GameData.UpdateV2("USER_DATA", gameDataRowInData, Backend.UserInDate, param, callback =>
             {
@@ -391,7 +390,7 @@ public class BackEndGameData
         //소유하는 유저의 owner_inDate가 일치하는 row를 검색하여 수정하는 UpdateV2()를 호출
         else
         {
-            Debug.Log($"{gameQuestDataRowInData}의 게임정보 데이터 수정을 요청합니다.");
+            //Debug.Log($"{gameQuestDataRowInData}의 게임정보 데이터 수정을 요청합니다.");
 
             Backend.GameData.UpdateV2("USER_QUESTDATA", gameQuestDataRowInData, Backend.UserInDate, questParam, callback =>
             {

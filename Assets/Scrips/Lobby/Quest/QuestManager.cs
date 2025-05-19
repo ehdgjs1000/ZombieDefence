@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class QuestManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class QuestManager : MonoBehaviour
     public float questClearAmount = 0;
 
    
-    private bool[] canClick = new bool[] {false, false, false, false, false, false, false};
+    public bool[] canClick = new bool[] {false, false, false, false, false, false, false};
     [SerializeField] private GameObject[] clearBGs;
     [SerializeField] private GameObject[] canClearImage;
 
@@ -25,6 +26,13 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] questConds;
     [SerializeField] private Image[] questProgresses;
     [SerializeField] private TextMeshProUGUI[] questProText;
+    [SerializeField] private QuestReward[] questRewards;
+
+    //Date
+    public DateTime nextResetTimeUTC; // 다음 초기화 시간
+    private int beforeUtcDay;
+    private int nowUtcDay;
+
 
     private void Awake()
     {
@@ -37,6 +45,7 @@ public class QuestManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        LoadUtcDay();
     }
     private void Start()
     {
@@ -50,6 +59,56 @@ public class QuestManager : MonoBehaviour
             ClearBgCheck();
         }  
     }
+    private void OnApplicationQuit()
+    {
+        SaveUtcDay();
+    }
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            LoadUtcDay();
+        }
+        else
+        {
+            SaveUtcDay();
+        }
+    }
+    public void ResetQuest()
+    {
+        SaveUtcDay();
+        //퀘스트 리셋
+        //BackEndGameData.Instance.ResetQuestData();
+        questClearAmount = 0;
+        BackEndGameData.Instance.UserQuestData.Reset();
+        for (int a = 0; a < 7; a++)
+        {
+            AccountInfo.instance.isClear[a] = false;
+        }
+        for (int a = 0; a < 5; a++)
+        {
+            questRewards[a].ResetQuest();
+        }
+        StartCoroutine(CheckQuestClearAmount());
+    }
+   
+    private void SaveUtcDay()
+    {
+        PlayerPrefs.SetInt("UTCDay", DateTime.UtcNow.Day);
+        PlayerPrefs.SetInt("UTCMonth", DateTime.UtcNow.Month);
+        PlayerPrefs.SetInt("UTCYear", DateTime.UtcNow.Year);
+    }
+    private void LoadUtcDay()
+    {
+        beforeUtcDay = PlayerPrefs.GetInt("UTCDay");
+        int beforeUtcMonth = PlayerPrefs.GetInt("UTCMonth");
+        int beforeUtcYear = PlayerPrefs.GetInt("UTCYear");
+        if (nowUtcDay > beforeUtcDay || DateTime.UtcNow.Month > beforeUtcMonth || DateTime.UtcNow.Year > beforeUtcYear)
+        {
+            ResetQuest();
+        }
+    }
+
     private IEnumerator CheckQuestClearAmount()
     {
         yield return new WaitForSeconds(0.05f);
@@ -61,12 +120,13 @@ public class QuestManager : MonoBehaviour
         questRewardText.text = questClearAmount.ToString();
         
         canClick[0] = true;
-        if (BackEndGameData.Instance.UserQuestData.questCount[0] >= questAmount[0]) canClick[1] = true;
-        if (BackEndGameData.Instance.UserQuestData.questCount[1] >= questAmount[1]) canClick[2] = true;
-        if (BackEndGameData.Instance.UserQuestData.questCount[2] >= questAmount[2]) canClick[3] = true;
-        if (BackEndGameData.Instance.UserQuestData.questCount[3] >= questAmount[3]) canClick[4] = true;
-        if (BackEndGameData.Instance.UserQuestData.questCount[4] >= questAmount[4]) canClick[5] = true;
-        if (BackEndGameData.Instance.UserQuestData.questCount[5] >= questAmount[5]) canClick[6] = true;
+        for (int a = 0; a < 6; a++)
+        {
+            if (BackEndGameData.Instance.UserQuestData.questCount[a] >= questAmount[a]) canClick[a+1] = true; else
+            {
+                canClick[a + 1] = false;
+            }
+        }
 
         questProgressImg.fillAmount = questClearAmount / 100;
 

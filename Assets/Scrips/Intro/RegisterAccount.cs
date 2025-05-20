@@ -65,9 +65,9 @@ public class RegisterAccount : LoginBase
 
                     //계정 생성에 성공했을 떄 해당 계정에 게임 정보 생성
                     BackEndGameData.Instance.GameDataInsert();
-                    PlayerPrefs.SetInt("UTCDay",DateTime.UtcNow.Day);
-                    PlayerPrefs.SetInt("UTCMonth", DateTime.UtcNow.Month);
-                    PlayerPrefs.SetInt("UTCYear", DateTime.UtcNow.Year);
+                    PlayerPrefs.SetInt("QUTCDay",DateTime.UtcNow.Day);
+                    PlayerPrefs.SetInt("QUTCMonth", DateTime.UtcNow.Month);
+                    PlayerPrefs.SetInt("QUTCYear", DateTime.UtcNow.Year);
                     PlayerPrefs.SetInt("IsSkipTutorial" , 0);
 
                     Utils.LoadScene(SceneNames.LobbyScene);

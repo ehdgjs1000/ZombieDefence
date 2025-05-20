@@ -251,7 +251,15 @@ public class GameManager : MonoBehaviour
         {
             //최고 스코어 갱신
             highScoreTxt.SetActive(true);
-
+            if (!PlayerPrefs.HasKey("HighScore1"))
+            {
+                PlayerPrefs.SetInt("HighScore1", killedZombieCount);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("HighScore1", killedZombieCount);
+            }
+            
         }
 
         gameOverSet.SetActive(true);

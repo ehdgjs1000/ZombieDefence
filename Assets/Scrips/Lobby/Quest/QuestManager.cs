@@ -98,14 +98,22 @@ public class QuestManager : MonoBehaviour
         PlayerPrefs.SetInt("UTCMonth", DateTime.UtcNow.Month);
         PlayerPrefs.SetInt("UTCYear", DateTime.UtcNow.Year);
     }
+    public void ResetQUTC()
+    {
+        PlayerPrefs.SetInt("QUTCDay", DateTime.UtcNow.Day);
+        PlayerPrefs.SetInt("QUTCMonth", DateTime.UtcNow.Month);
+        PlayerPrefs.SetInt("QUTCYear", DateTime.UtcNow.Year);
+    }
     private void LoadUtcDay()
     {
-        beforeUtcDay = PlayerPrefs.GetInt("UTCDay");
-        int beforeUtcMonth = PlayerPrefs.GetInt("UTCMonth");
-        int beforeUtcYear = PlayerPrefs.GetInt("UTCYear");
+        beforeUtcDay = PlayerPrefs.GetInt("QUTCDay");
+        Debug.Log("QUTCDay : " + beforeUtcDay);
+        int beforeUtcMonth = PlayerPrefs.GetInt("QUTCMonth");
+        int beforeUtcYear = PlayerPrefs.GetInt("QUTCYear");
         if (nowUtcDay > beforeUtcDay || DateTime.UtcNow.Month > beforeUtcMonth || DateTime.UtcNow.Year > beforeUtcYear)
         {
             ResetQuest();
+            ResetQUTC();
         }
     }
 

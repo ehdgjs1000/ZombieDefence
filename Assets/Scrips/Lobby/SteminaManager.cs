@@ -8,7 +8,7 @@ public class SteminaManager : MonoBehaviour
 {
     //UI
     [SerializeField] private TextMeshProUGUI steminaRechargeTimeTxt;
-
+    [SerializeField] private GameObject steminaPanel;
     private DateTime m_AppQuitTime = new DateTime(1970,1,1).ToLocalTime();
     private const int MAX_STEMINA = 30;
     public float steminaRechargeInterval = 300.0f;
@@ -42,6 +42,10 @@ public class SteminaManager : MonoBehaviour
     public void OnApplicationQuit()
     {
         SaveAppQuitTime();
+    }
+    public void SteminaBtnOnClick()
+    {
+        steminaPanel.SetActive(true);
     }
     private void Init()
     {

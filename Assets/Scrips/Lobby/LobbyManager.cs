@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
@@ -39,7 +40,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private GameObject steminaPanel;
     [SerializeField] private GameObject steminaChargeCountTxt;
     private float steminaChargeCount;
-
+    [SerializeField] private TextMeshProUGUI highScoreTxt;
     [Header("Audio")]
     [SerializeField] private AudioClip testClip;
 
@@ -74,7 +75,7 @@ public class LobbyManager : MonoBehaviour
     {
         BackEndGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
         SwapBtnOnlick(1);
-        
+        UpdateHighScore();
 
         //저장된 army 세팅
         if (chooseArmyCount > 0)
@@ -91,6 +92,11 @@ public class LobbyManager : MonoBehaviour
         SteminaCharging();
 
         steminaTxt.text = $"{BackEndGameData.Instance.UserGameData.energy}";
+    }
+    private void UpdateHighScore()
+    {
+        int highScore = PlayerPrefs.GetInt("HighScore1");
+        highScoreTxt.text = highScore.ToString();
     }
     public void UpdateGameData()
     {

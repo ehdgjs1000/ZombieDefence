@@ -32,10 +32,8 @@ public class FindID : LoginBase
     }
     private void FindCustomID()
     {
-        // 아이디 정보를 이메일로 발송
         Backend.BMember.FindCustomID(inputFiedlEmail.text, callback =>
         {
-            //아이디 찾기 버튼 활성화 
             btnFinId.interactable = true;
 
             if(callback.IsSuccess()){

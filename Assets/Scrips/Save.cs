@@ -245,7 +245,6 @@ public class Save : MonoBehaviour
         string weaponInitFilePath = Application.persistentDataPath + "/WeaponInitData.json";
         string weaponInitData = null;
         saveInitWeaponList.Clear();
-        File.WriteAllText(weaponInitFilePath, null);
 
         /*string initWeaponJsonString = File.ReadAllText(Resources.Load("WeaponInitData.json").ToString());
         loadInitWeaponList = JsonConvert.DeserializeObject<List<SaveWeapon>>(initWeaponJsonString);*/

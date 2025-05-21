@@ -30,6 +30,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private Text steminaTxt;
     [SerializeField] private Text levelTxt;
 
+    [SerializeField] private GameObject highScoreGo;
     [SerializeField] private GameObject chapterRewardGO;
     [SerializeField] private GameObject propsGO;
     [SerializeField] private GameObject chapterClearGo;
@@ -179,11 +180,13 @@ public class LobbyManager : MonoBehaviour
     public void SettingBtnOnClick()
     {
         SoundManager.instance.BtnClickPlay();
+        highScoreGo.SetActive(false);
         settingPanel.SetActive(true);
     }
     public void CloseSettingOnClick()
     {
         SoundManager.instance.BtnClickPlay();
+        highScoreGo.SetActive(true);
         settingPanel.SetActive(false);
     }
     public void HideProps()
@@ -217,33 +220,43 @@ public class LobbyManager : MonoBehaviour
             BackEndGameData.Instance.UserQuestData.questCount[1]++;
             ChangeScene.instance.SetArmies(chooseArmyGos, chooseArmyCount);
         }
-        else
+        else if(BackEndGameData.Instance.UserGameData.energy < 5)
         {
             //게임 실행 불가
             SoundManager.instance.ErrorClipPlay();
             PopUpMessageBase.instance.SetMessage("스테미나가 부족합니다.");
         }
+        else if (chooseArmyCount < 0)
+        {
+            //게임 실행 불가
+            SoundManager.instance.ErrorClipPlay();
+            PopUpMessageBase.instance.SetMessage("무기가 선택되지 않았습니다.");
+        }
     }
     public void QuestCloseBtnOnClick()
     {
         SoundManager.instance.BtnClickPlay();
+        highScoreGo.SetActive(true);
         QuestGo.SetActive(false);
         propsGO.SetActive(true);
     }
     public void QuestOpenBtnOnClick()
     {
         SoundManager.instance.BtnClickPlay();
+        highScoreGo.SetActive(false);
         QuestGo.SetActive(true);
         propsGO.SetActive(false);
     }
     public void chapterRewardExitOnClick()
     {
         SoundManager.instance.BtnClickPlay();
+        highScoreGo.SetActive(true);
         chapterRewardGO.SetActive(false);
     }
     public void ChapterClearBtnOnClick()
     {
         SoundManager.instance.BtnClickPlay();
+        highScoreGo.SetActive(false);
         chapterClearGoActive = true;
         propsGO.SetActive(!chapterClearGoActive);
         chapterClearGo.SetActive(chapterClearGoActive);
@@ -251,6 +264,7 @@ public class LobbyManager : MonoBehaviour
     public void ChapterCloseBtnOnClick()
     {
         SoundManager.instance.BtnClickPlay();
+        highScoreGo.SetActive(true);
         chapterClearGoActive = false;
         propsGO.SetActive(!chapterClearGoActive);
         chapterClearGo.SetActive(chapterClearGoActive);

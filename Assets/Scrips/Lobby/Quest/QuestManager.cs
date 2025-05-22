@@ -30,8 +30,6 @@ public class QuestManager : MonoBehaviour
 
     //Date
     public DateTime nextResetTimeUTC; // 다음 초기화 시간
-    private int beforeUtcDay;
-    private int nowUtcDay;
 
 
     private void Awake()
@@ -106,11 +104,10 @@ public class QuestManager : MonoBehaviour
     }
     private void LoadUtcDay()
     {
-        beforeUtcDay = PlayerPrefs.GetInt("QUTCDay");
-        Debug.Log("QUTCDay : " + beforeUtcDay);
+        int beforeUtcDay = PlayerPrefs.GetInt("QUTCDay");
         int beforeUtcMonth = PlayerPrefs.GetInt("QUTCMonth");
         int beforeUtcYear = PlayerPrefs.GetInt("QUTCYear");
-        if (nowUtcDay > beforeUtcDay || DateTime.UtcNow.Month > beforeUtcMonth || DateTime.UtcNow.Year > beforeUtcYear)
+        if (DateTime.UtcNow.Month != beforeUtcDay || DateTime.UtcNow.Month != beforeUtcMonth || DateTime.UtcNow.Year != beforeUtcYear)
         {
             ResetQuest();
             ResetQUTC();

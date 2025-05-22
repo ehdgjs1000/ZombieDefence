@@ -53,7 +53,6 @@ public class StoreManager : MonoBehaviour
         if(num == 0) buyGoldPanel.UpdatePurchaseGoldInfo(100,1500);
         else if(num == 1) buyGoldPanel.UpdatePurchaseGoldInfo(600,10000);
         else buyGoldPanel.UpdatePurchaseGoldInfo(3000,50000);
-
     }
     public void TryBuyCrystalOnClick(int num)
     {

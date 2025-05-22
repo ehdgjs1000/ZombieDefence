@@ -11,17 +11,33 @@ public class GoogldAdmobs : MonoBehaviour
   private string _adUnitId = "unused";
 #endif
     private RewardedAd _rewardedAd;
+    private int rewardType;//#0 stemina //#1 refreshSkill
 
+    public static GoogldAdmobs instance;
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
+    }
     public void Start()
     {
         MobileAds.Initialize(initStatus => { });
     }
     public void SteminaRewardOnClick()
     {
+        rewardType = 0;
+        LoadRewardedAd();
+    }
+    public void RefreshSkillsOnClick()
+    {
+        rewardType = 1;
         LoadRewardedAd();
     }
     //보상형 광고 로드
-    public void LoadRewardedAd()
+    public void LoadRewardedAd() 
     {
         // Clean up the old ad before loading a new one.
         if (_rewardedAd != null)
@@ -50,9 +66,7 @@ public class GoogldAdmobs : MonoBehaviour
 
                 ShowRewardedAd();
             });
-        
     }
-
 
     //리워드 콜백으로 보상형 광고 표시
     public void ShowRewardedAd()
@@ -65,10 +79,16 @@ public class GoogldAdmobs : MonoBehaviour
             _rewardedAd.Show((Reward reward) =>
             {
                 // TODO: Reward the user.
-                Debug.Log("광고 보상 :" + string.Format(rewardMsg, reward.Type, reward.Amount));
-                BackEndGameData.Instance.UserGameData.energy += 5;
-                BackEndGameData.Instance.GameDataUpdate();
 
+                if(rewardType == 0)
+                {
+                    Debug.Log("광고 보상 :" + string.Format(rewardMsg, reward.Type, reward.Amount));
+                    BackEndGameData.Instance.UserGameData.energy += 5;
+                    BackEndGameData.Instance.GameDataUpdate();
+                }else if (rewardType == 1)
+                {
+
+                }
             });
         }
     }

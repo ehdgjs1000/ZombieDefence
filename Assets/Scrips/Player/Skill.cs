@@ -51,6 +51,12 @@ public class Skill : MonoBehaviour
         }
 
     }
+    public void RefreshSkills()
+    {
+        Debug.Log("RefreshSkills");
+        SkillUpdate();
+        SkillInfoUpdate();
+    }
     //추가되는 Skill들 Gamemanager에서 Skilldata 추가 해주기
     private void SkillException(int ranNum)
     {
@@ -58,14 +64,14 @@ public class Skill : MonoBehaviour
         if (!GameManager.instance.haveWeaponType[skills[ranNum].weaponType]) SkillChoose();
 
     }
-    private void OnEnable()
+    private void SkillInfoUpdate()
     {
         Color color;
         textLevel.text = "Lv." + (skills[ranSkill].skillLevel + 1);
         Image skillBg = GetComponentInParent<Image>();
         switch (skills[ranSkill].skillType)
         {
-            
+
             case SkillData.SkillType.UpgradeWeaponNormal:
                 ColorUtility.TryParseHtmlString("#6F6F6F", out color);
                 skillBg.color = color;
@@ -83,6 +89,10 @@ public class Skill : MonoBehaviour
                 break;
 
         }
+    }
+    private void OnEnable()
+    {
+        SkillInfoUpdate();
     }
     public void Onclick()
     {

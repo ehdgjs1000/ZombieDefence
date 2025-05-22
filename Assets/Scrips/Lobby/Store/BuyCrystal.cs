@@ -23,7 +23,7 @@ public class BuyCrystal : MonoBehaviour, IStoreListener
     {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-        builder.AddProduct(crystal3000, ProductType.Consumable);
+        builder.AddProduct(crystal3000  , ProductType.Consumable);
         builder.AddProduct(crystal9900, ProductType.Consumable);
         builder.AddProduct(crystal49000, ProductType.Consumable);
 
@@ -41,6 +41,7 @@ public class BuyCrystal : MonoBehaviour, IStoreListener
         else if (amount == 49000) BackEndGameData.Instance.UserGameData.crystal += 13000;
 
         BackEndGameData.Instance.GameDataUpdate();
+        LobbyManager.instance.UpdateGameData();
     }
     public void FailedBuyCrystal()
     {

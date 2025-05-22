@@ -170,7 +170,6 @@ public class SteminaManager : MonoBehaviour
                 m_RechargeRemainTime = 1;
                 BackEndGameData.Instance.UserGameData.energy++;
             }
-            Debug.Log("m_RechargeRemainTime : " + m_RechargeRemainTime);
             yield return new WaitForSeconds(1f);
         }
         if (BackEndGameData.Instance.UserGameData.energy >= MAX_STEMINA)

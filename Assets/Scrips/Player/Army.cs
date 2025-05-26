@@ -157,9 +157,10 @@ public class Army : MonoBehaviour
             float rotZ = this.transform.rotation.z;
             float ranRotY = Random.Range(-2.0f, 2.0f);
 
-            GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position,
-               Quaternion.Euler(new Vector3(rotX,(rotY*100+ranRotY),rotZ)));
-            bullet.GetComponent<BulletCtrl>().SetBulletInfo(damage * SkillManager.instance.GetWeaponData(weaponType)[0] / 100
+            GameObject arBullet = Instantiate(bulletGO, bulletSpawnPos.position, this.transform.rotation);
+            /*GameObject bullet = Instantiate(bulletGO, bulletSpawnPos.position,
+               Quaternion.Euler(new Vector3(rotX,(rotY*100+ranRotY),rotZ)));*/
+            arBullet.GetComponent<BulletCtrl>().SetBulletInfo(damage * SkillManager.instance.GetWeaponData(weaponType)[0] / 100
                 , (int)SkillManager.instance.GetWeaponData(weaponType)[3]);
         }
         else

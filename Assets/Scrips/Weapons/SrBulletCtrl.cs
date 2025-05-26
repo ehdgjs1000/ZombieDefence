@@ -22,10 +22,12 @@ public class SrBulletCtrl : MonoBehaviour
     }
     private void Start()
     {
-        //rigid.velocity = transform.forward * bulletSpeed;
-
-        rigid.AddForce(transform.forward*bulletSpeed);
+        //rigid.AddForce(transform.forward*bulletSpeed);
         StartCoroutine(ObjectPool.instance.DeActive(4.0f, this.gameObject));
+    }
+    private void Update()
+    {
+        this.transform.position += transform.forward * bulletSpeed;
     }
 
     public void SetBulletInfo(float dmg, int _penetrateCount)
@@ -50,7 +52,14 @@ public class SrBulletCtrl : MonoBehaviour
                     damagePopUpTr.GetComponentInChildren<TextMeshPro>().color = Color.blue;
                 }
 
-                co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
+                if(co.gameObject.GetComponent<EnemyCtrl>() != null)
+                {
+                    co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
+                }else //보스 좀비
+                {
+                    co.gameObject.GetComponent<BossZombie>().GetAttack(damage);
+                }
+                
                 //Damage PopUp
                 DamagePopUp.Create(this.transform.position, damage);
             }

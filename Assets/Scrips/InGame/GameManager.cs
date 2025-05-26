@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public bool isStopGame = false;
     private int min;
-    private float sec;
+    public float sec;
     [SerializeField] private TextMeshProUGUI timeTxt;
     [SerializeField] private TextMeshProUGUI gameOverTimeTxt;
     private int speedUpType = 0;
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         UpdateInfo();
         HPUp();
 
-        if (!isGameOver) Timer();
+        if (!isGameOver && !ZombieSpawner.instance.isBossTime) Timer();
 
         if (gameLevelTime <= 0.0f) GameLevelUp();
         if (gameHpLevelTime <= 0.0f) GameHpLevelUp();
@@ -183,6 +183,12 @@ public class GameManager : MonoBehaviour
             sec = 0;
         }
         timeTxt.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
+        if (min>1 && min%5 == 0  && sec == 0 && !ZombieSpawner.instance.isBossTime)
+        {
+            Debug.Log("Spawn Boss Zombie");
+            ZombieSpawner.instance.isBossTime = true;
+        }
+            
     }
     private void GameHpLevelUp()
     {
@@ -204,15 +210,19 @@ public class GameManager : MonoBehaviour
             if (ChangeScene.instance.GetArmy(a) != null)
             {
                 armies[a] = ChangeScene.instance.GetArmy(a);
-                a++;
             }
-            else if (ChangeScene.instance.GetArmy(a) == null) break;
+            a++;
         }
         int armyNum = 0;
-        while (armyNum < armies.Length)
+        int armyConut = 0;
+        while (armyConut < armies.Length)
         {
-            armiesGO[armyNum] = Instantiate(armies[armyNum], armyPos[armyNum].position, Quaternion.identity);
-            armyNum++;
+            if(armies[armyConut] != null)
+            {
+                armiesGO[armyConut] = Instantiate(armies[armyConut], armyPos[armyNum].position, Quaternion.identity);
+                armyNum++;
+            }
+            armyConut++;
             if (armyNum == ChangeScene.instance.chooseArmyCount) break;
         }
 
@@ -309,6 +319,17 @@ public class GameManager : MonoBehaviour
         level++;
         gainedExp -= needExp;
         needExp *= 1.25f;
+        for (int a = 0; a < skills.Length; a++)
+        {
+            skills[a].SkillUpdate();
+        }
+        uiLevelUp.gameObject.SetActive(true);
+        uiLevelUp.ShowLevelUp();
+        StopGame();
+    }
+    public void BossLevelUp()
+    {
+        level++;
         for (int a = 0; a < skills.Length; a++)
         {
             skills[a].SkillUpdate();

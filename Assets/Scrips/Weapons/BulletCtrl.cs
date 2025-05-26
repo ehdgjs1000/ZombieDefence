@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class BulletCtrl : MonoBehaviour
@@ -13,7 +14,7 @@ public class BulletCtrl : MonoBehaviour
     private bool canPenetrate = false;
 
     [SerializeField] private GameObject damagePopUpTr;
-    
+
 
     private void Awake()
     {
@@ -22,9 +23,11 @@ public class BulletCtrl : MonoBehaviour
     }
     private void Start()
     {
-        rigid.AddForce(transform.forward*bulletSpeed);
-        Destroy(gameObject,2.0f);
-        //StartCoroutine(ObjectPool.instance.DeActive(2.0f, this.gameObject));
+        StartCoroutine(ObjectPool.instance.DeActive(2.0f, this.gameObject));
+    }
+    private void Update()
+    {
+        this.transform.position += transform.forward * bulletSpeed;
     }
 
     public void SetBulletInfo(float dmg, int _penetrateCount)
@@ -52,7 +55,14 @@ public class BulletCtrl : MonoBehaviour
                 }
 
                 //Enemy 데미지 적용
-                co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
+                if (co.gameObject.GetComponent<EnemyCtrl>() != null)
+                {
+                    co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
+                }
+                else //보스 좀비
+                {
+                    co.gameObject.GetComponent<BossZombie>().GetAttack(damage);
+                }
                 //Damage PopUp
                 DamagePopUp.Create(this.transform.position, damage);
 

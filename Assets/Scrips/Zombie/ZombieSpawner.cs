@@ -17,6 +17,9 @@ public class ZombieSpawner : MonoBehaviour
     private float spawnInterval = 0.1f;
     public float[] minSpawnInterval;
     public float[] maxSpawnInterval;
+    public bool isBossTime = false;
+    public bool isBossSpawn = false;
+    private int bossLevel = 0;
 
     //Clock
     [SerializeField] private GameObject clockHand;
@@ -40,9 +43,13 @@ public class ZombieSpawner : MonoBehaviour
     private void Update()
     {
         spawnInterval -= Time.deltaTime;
-        if (spawnInterval <= 0)
+        if (spawnInterval <= 0 && !isBossTime)
         {
             StartCoroutine(SpawnZombies());
+        }else if (isBossTime && !isBossSpawn)
+        {
+            isBossSpawn = true;
+            StartCoroutine(SpawnBoss());
         }
         ClockUpdate();
     }
@@ -92,6 +99,13 @@ public class ZombieSpawner : MonoBehaviour
             isHardMode = false;
             SpotLight.SetActive(true);
         }
+    }
+    IEnumerator SpawnBoss()
+    {
+        Instantiate(bossZombies[bossLevel],new Vector3(0,0.5f,18.0f), Quaternion.Euler(0, 180, 0));
+        bossLevel++;
+
+        yield return null;
     }
     IEnumerator SpawnZombies()
     {

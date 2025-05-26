@@ -6288,7 +6288,8 @@ MonoBehaviour:
   - {fileID: 8047579261906496781, guid: da82eceb0e6379c459ca30b25689fdea, type: 3}
   longZombies:
   - {fileID: 1051141870527931881, guid: d6230a31e2d47c741a94565d667e2e78, type: 3}
-  bossZombies: []
+  bossZombies:
+  - {fileID: 7318526339764565444, guid: 747e4d955980d2946a6e3f26571fb7c9, type: 3}
   minSpawnInterval:
   - 1
   - 0.9
@@ -6307,6 +6308,8 @@ MonoBehaviour:
   - 0.6
   - 0.5
   - 0.4
+  isBossTime: 0
+  isBossSpawn: 0
   clockHand: {fileID: 132223012}
   zombieScreamClip: {fileID: 8300000, guid: 4577a7cdff7b5e34c9fb00998e9542fe, type: 3}
   timeTxt: {fileID: 1061184468}
@@ -6915,6 +6918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStopGame: 0
+  sec: 0
   timeTxt: {fileID: 787279077}
   gameOverTimeTxt: {fileID: 640963785}
   speedUpTxt: {fileID: 1967057549}

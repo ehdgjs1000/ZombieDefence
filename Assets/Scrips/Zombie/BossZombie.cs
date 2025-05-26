@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class EnemyCtrl : MonoBehaviour
+public class BossZombie : MonoBehaviour
 {
     private bool canMove = true;
     private bool isDie = false;
     private bool isAttacking = false;
     private float attackCount = 0.0f;
     BoxCollider boxCollider;
-    Rigidbody rb;
+    Rigidbody rigid;
 
     [Header("Zombie Info")]
     [SerializeField] private int zombieType;
@@ -22,6 +23,8 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] private float damage;
     [SerializeField] private int gold;
     [SerializeField] private LayerMask armyLayer;
+    [SerializeField] private Image bossHpImage;
+    [SerializeField] private GameObject bossHpBg;
 
     [SerializeField] private GameObject[] items;
 
@@ -29,24 +32,23 @@ public class EnemyCtrl : MonoBehaviour
     private Animator animator;
     private void Awake()
     {
-        //몬스터 체력 설정
-        initHp = hp;
+        rigid = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
     }
     private void Start()
     {
-        float ranHpRate = Random.Range(0.7f, 1.3f);
-        hp = initHp * GameManager.instance.gameLevel * ranHpRate;
+        initHp = hp;
     }
     private void Update()
     {
         attackCount -= Time.deltaTime;
 
-        if (canMove && !GameManager.instance.isStopGame && !isAttacking) Move();
-        if (hp <= 0.0f && !isDie) StartCoroutine(EnemyDie());
+        bossHpImage.fillAmount = hp/initHp;
 
-        if(attackCount <= 0.0f) AttackCheck();
+        if (canMove && !GameManager.instance.isStopGame && canMove) Move();
+        if (hp <= 0.0f && !isDie) BossDie();
+        if (attackCount <= 0.0f) AttackCheck();
     }
     public IEnumerator ReUseZombie()
     {
@@ -61,73 +63,54 @@ public class EnemyCtrl : MonoBehaviour
     private void AttackCheck()
     {
         Physics.Raycast(this.transform.position, transform.forward,
-            out RaycastHit hitInfo,attackRange, armyLayer);
-        if(hitInfo.collider != null && !isAttacking)
+            out RaycastHit hitInfo, attackRange, armyLayer);
+        if (hitInfo.collider != null && !isAttacking)
         {
             StartCoroutine(Attack(damage));
         }
-        
+
     }
     IEnumerator Attack(float damage)
     {
+        canMove = false;
         isAttacking = true;
         animator.SetTrigger("ShortAttack");
         yield return new WaitForSeconds(1.5f);
-        if(!isDie) StartCoroutine(GameManager.instance.ArmyGetAttack(damage));
+        if (!isDie) StartCoroutine(GameManager.instance.ArmyGetAttack(damage));
         isAttacking = false;
     }
     public void GetAttack(float damage)
     {
         hp -= damage;
     }
-    private IEnumerator EnemyDie()
+    private void BossDie()
     {
-        GameManager.instance.GainExp(exp);
+        isDie = true;
+        bossHpBg.SetActive(false);
+        GameManager.instance.BossLevelUp();
         GameManager.instance.GetGold(gold);
         GameManager.instance.KilledZombie(zombieType);
-        BackEndGameData.Instance.UserQuestData.questCount[2]++;
 
         SpawnItem();
 
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
 
-        isDie = true;
         canMove = false;
 
-        int ranAnim = Random.Range(0,4);
-        switch (ranAnim)
-        {
-            case 0:
-                animator.SetTrigger("Die1");
-                break;
-            case 1:
-                animator.SetTrigger("Die2");
-                break;
-            case 2:
-                animator.SetTrigger("Die3");
-                break;
-            case 3:
-                animator.SetTrigger("Die4");
-
-                break;
-        }
+        animator.SetTrigger("Die1");
         SpawnItem();
-        StartCoroutine(ObjectPool.instance.DeActive(10.0f, this.gameObject));
-        yield return null;
+        GameManager.instance.sec += 1;
+        ZombieSpawner.instance.isBossSpawn = false;
+        ZombieSpawner.instance.isBossTime = false;
     }
     private void SpawnItem()
     {
-        int spawnItem = Random.Range(0,100);
-        if(spawnItem == 1) 
-        {
-            Ability.instance.bombCount++;
-        }
-
+        Ability.instance.bombCount++;
     }
     private void Move()
     {
-        this.transform.position += new Vector3(0,0,-0.01f*moveSpeed);
+        this.transform.position += new Vector3(0, 0, -0.01f * moveSpeed);
     }
 
 }

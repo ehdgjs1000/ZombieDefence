@@ -81,9 +81,13 @@ public class LobbyManager : MonoBehaviour
         //저장된 army 세팅
         if (chooseArmyCount > 0)
         {
-            for (int a = 0; a < chooseArmyCount; a++)
+            for (int a = 0; a < 3; a++)
             {
-                StartCoroutine(ChooseArmy(chooseArmyGos[a].ReturnArmyWeaponData()));
+                if(chooseArmyGos[a] != null)
+                {
+                    StartCoroutine(ChooseArmy(chooseArmyGos[a].ReturnArmyWeaponData()));
+                }
+                
             }
         }
     }
@@ -436,9 +440,12 @@ public class LobbyManager : MonoBehaviour
         {
             for(int i = 0; i < chooseArmyGos.Length; i++)
             {
-                if (chooseArmyGos[i] == null) break;
-                chooseArmyGosSprites[i].sprite = armySprites[chooseArmyGos[i].ReturnArmyWeaponData()];
-                if (themaNum == 2) ArmySpriteChange(chooseArmyGos[i].ReturnArmyWeaponData(), i);
+                if (chooseArmyGos[i] != null)
+                {
+                    chooseArmyGosSprites[i].sprite = armySprites[chooseArmyGos[i].ReturnArmyWeaponData()];
+                    if (themaNum == 2) ArmySpriteChange(chooseArmyGos[i].ReturnArmyWeaponData(), i);
+                }
+                
             }
             Save.instance.SaveEqiopedWeaponJson();
             yield return null;

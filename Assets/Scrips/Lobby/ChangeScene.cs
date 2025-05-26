@@ -33,9 +33,8 @@ public class ChangeScene : MonoBehaviour
             if (_armies[a] != null)
             {
                 armies[a] = _armies[a];
-                a++;
             }
-            else if (_armies[a] == null) break;
+            a++;
         }
     }
     public Army GetArmy(int num)

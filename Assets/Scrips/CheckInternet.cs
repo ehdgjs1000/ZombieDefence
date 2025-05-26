@@ -8,7 +8,7 @@ public class CheckInternet : MonoBehaviour
 {
     private void Start()
     {
-        StartCoroutine(CheckInteretConnection());
+        //StartCoroutine(CheckInteretConnection());
     }
 
     IEnumerator CheckInteretConnection()

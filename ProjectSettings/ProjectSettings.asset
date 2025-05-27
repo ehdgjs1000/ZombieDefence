@@ -164,6 +164,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.WeMG.WeMG_IHateZombies
+    Standalone: com.WeMG.WeMG-IHateZombies
   buildNumber:
     Standalone: 0
     VisionOS: 0

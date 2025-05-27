@@ -3730,7 +3730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6676723075864860905
 Transform:
   m_ObjectHideFlags: 0
@@ -4269,7 +4269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6459380363675307675
 Transform:
   m_ObjectHideFlags: 0
@@ -6985,7 +6985,7 @@ GameObject:
   - component: {fileID: 3286155884542208293}
   - component: {fileID: 5470834561053116662}
   m_Layer: 6
-  m_Name: BossZombie1
+  m_Name: BossZombie2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7140,7 +7140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieType: 4
   isLongRange: 0
-  hp: 4000
+  hp: 8000
   exp: 300
   moveSpeed: 1.5
   attackRange: 3

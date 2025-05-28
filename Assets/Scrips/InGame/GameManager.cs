@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public float tempTimeScale = 1.0f;
     private int gold = 0;
     private bool isGameOver = false;
+    [SerializeField] private TextMeshProUGUI endTimeTxt;
     [SerializeField] private GameObject gameOverSet;
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private GameObject settingGo;
@@ -256,21 +257,23 @@ public class GameManager : MonoBehaviour
             else canLevelUp = false;
         }
         //High Score
-        int tempHighScore = PlayerPrefs.GetInt("HighScore1");
-        if (tempHighScore < killedZombieCount)
+        if (PlayerPrefs.HasKey("HighScore1"))
         {
-            //최고 스코어 갱신
-            highScoreTxt.SetActive(true);
-            if (!PlayerPrefs.HasKey("HighScore1"))
+            int tempHighScore = PlayerPrefs.GetInt("HighScore1");
+            if (tempHighScore < killedZombieCount)
             {
+                highScoreTxt.SetActive(true);
                 PlayerPrefs.SetInt("HighScore1", killedZombieCount);
             }
-            else
-            {
-                PlayerPrefs.SetInt("HighScore1", killedZombieCount);
-            }
-            
         }
+        else
+        {
+            highScoreTxt.SetActive(true);
+            PlayerPrefs.SetInt("HighScore1", killedZombieCount);
+        }
+        //End Time
+        endTimeTxt.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
+
 
         gameOverSet.SetActive(true);
         BackEndGameData.Instance.UserQuestData.questCount[1]++;
@@ -290,6 +293,7 @@ public class GameManager : MonoBehaviour
     }
     public void ToLobbyBtnOnClick()
     {
+        highScoreTxt.SetActive(false);
         ZombieSpawner.instance.dirLight.intensity = 0.75f;
         tempTimeScale = 1.0f;
         Time.timeScale = 1.0f;

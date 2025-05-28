@@ -43,6 +43,7 @@ public class QuestReward : MonoBehaviour
             BackEndGameData.Instance.UserGameData.gold += rewardGold;
             BackEndGameData.Instance.UserGameData.crystal += rewardCrystal;
             BackEndGameData.Instance.UserQuestData.isRewardReceived[rewardOrder] = true;
+            if (rewardOrder == 4) BackEndGameData.Instance.UserGameData.energy += 5;
             LobbyManager.instance.UpdateGameData();
             clearBg.SetActive(true);
         }

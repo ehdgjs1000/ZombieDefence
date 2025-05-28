@@ -10,6 +10,7 @@ public class LobbyManager : MonoBehaviour
     public static LobbyManager instance;
 
     public GameObject[] themas;
+    [SerializeField] GameObject mainBg;
     public int themaNum = 0;
     //Setting Datas
     [SerializeField] private Army[] armyGos;
@@ -503,9 +504,17 @@ public class LobbyManager : MonoBehaviour
     {
         for (int a=0; a<themas.Length; a++)
         {
-            if (a == num) themas[a].SetActive(true);
-            else if(a != num) themas[a].SetActive(false);
+            if (a == num)
+            {
+                themas[a].SetActive(true);
+            }
+            else if(a != num)
+            {
+                themas[a].SetActive(false);
+            }
         }
+        if(num == 1) mainBg.SetActive(true);
+        else mainBg.SetActive(false);
         if (num == 2) StartCoroutine(ChooseArmy(-1));
         themaNum = num;
     }

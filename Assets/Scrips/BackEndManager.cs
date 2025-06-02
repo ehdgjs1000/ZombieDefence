@@ -27,7 +27,7 @@ public class BackEndManager : MonoBehaviour
 
         if (bro.IsSuccess())
         {
-            Debug.Log($"초기화 성공 : {bro}");
+            //Debug.Log($"초기화 성공 : {bro}");
         }
         else
         {

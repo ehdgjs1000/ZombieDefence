@@ -10,14 +10,14 @@ public class UserGameData
     public int gold;
     public int crystal;
     public int energy;
-    public int promotionType; //#0 freee #1 9,900 #2 27,000
+    public int promotionType; //#0 freee #1 9,900 #2 27,000 #3 2,900 -> 2¹è¼Ó
 
     public void Reset()
     {
         level = 1;
         exp = 0;
-        gold = 100;
-        crystal = 1000;
+        gold = 200;
+        crystal = 100;
         energy = 30;
         promotionType = 0;
     }

@@ -154,7 +154,12 @@ public class GameManager : MonoBehaviour
     public void SpeedUpBtnOnClick()
     {
         speedUpType++;
-        if(speedUpType >= 3)speedUpType = 0;
+        if (speedUpType >= 3) speedUpType = 0;
+
+        if (speedUpType == 2 && BackEndGameData.Instance.UserGameData.promotionType != 3)
+        {
+            speedUpType = 0;
+        }
         switch (speedUpType)
         {
             case 0:

@@ -43,10 +43,11 @@ public class QuestManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        LoadUtcDay();
+        
     }
     private void Start()
     {
+        LoadUtcDay();
         StartCoroutine(CheckQuestClearAmount());
     }
     private void Update()

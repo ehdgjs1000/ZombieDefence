@@ -56,9 +56,9 @@ public class ChapterReward : MonoBehaviour
         if(BackEndGameData.Instance.UserGameData.promotionType == 1)
         {
             buyPromImg[0].SetActive(false);
-        }else if (BackEndGameData.Instance.UserGameData.promotionType == 2)
+        }
+        if (BackEndGameData.Instance.UserGameData.promotionType == 2)
         {
-            buyPromImg[0].SetActive(false);
             buyPromImg[1].SetActive(false);
         }
     }

@@ -7,6 +7,7 @@ public class IntroScene : MonoBehaviour
 {
     [SerializeField] private Loading loading;
     [SerializeField] private SceneNames nextScene;
+    [SerializeField] AudioClip titleVoice;
 
     private bool canClick = false;
 
@@ -15,6 +16,7 @@ public class IntroScene : MonoBehaviour
     {
         SystemSetup();
     }
+
     private void SystemSetup()
     {
         //활성화 되지 않아도 실행

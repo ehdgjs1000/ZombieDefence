@@ -37,6 +37,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private GameObject chapterClearGo;
     private bool chapterClearGoActive = false;
     [SerializeField] private GameObject QuestGo;
+    [SerializeField] private GameObject zombieKillGo;
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private Image[] borderImgs;
     [SerializeField] private GameObject steminaPanel;
@@ -212,7 +213,7 @@ public class LobbyManager : MonoBehaviour
     }
     public void StartBtnOnClick()
     {
-
+        Debug.Log("StartOnClick");
         //선택 총기 없을경우 예외처리
         if(BackEndGameData.Instance.UserGameData.energy >= 5  && chooseArmyCount > 0)
         {
@@ -231,7 +232,7 @@ public class LobbyManager : MonoBehaviour
             SoundManager.instance.ErrorClipPlay();
             PopUpMessageBase.instance.SetMessage("스테미나가 부족합니다.");
         }
-        else if (chooseArmyCount < 0)
+        else if (chooseArmyCount <= 0)
         {
             //게임 실행 불가
             SoundManager.instance.ErrorClipPlay();
@@ -244,6 +245,20 @@ public class LobbyManager : MonoBehaviour
         highScoreGo.SetActive(true);
         QuestGo.SetActive(false);
         propsGO.SetActive(true);
+    }
+    public void ZombieKillCloseBtnOnClick()
+    {
+        SoundManager.instance.BtnClickPlay();
+        highScoreGo.SetActive(true);
+        zombieKillGo.SetActive(false);
+        propsGO.SetActive(true);
+    }
+    public void ZombieKillOpenBtnOnClick()
+    {
+        SoundManager.instance.BtnClickPlay();
+        highScoreGo.SetActive(false);
+        zombieKillGo.SetActive(true);
+        propsGO.SetActive(false);
     }
     public void QuestOpenBtnOnClick()
     {

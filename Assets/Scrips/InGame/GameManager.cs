@@ -247,6 +247,30 @@ public class GameManager : MonoBehaviour
         for (int a = 0; a < killedZombieInfo.Length; a++)
         {
             killedZombieCount += killedZombieInfo[a];
+            if (a == 0)
+            {
+                int ZombieConut = PlayerPrefs.GetInt("nZombieCount");
+                PlayerPrefs.SetInt("nZombieCount", ZombieConut + killedZombieInfo[a]);
+            }else if (a == 1)
+            {
+                int ZombieConut = PlayerPrefs.GetInt("fZombieCount");
+                PlayerPrefs.SetInt("fZombieCount", ZombieConut + killedZombieInfo[a]);
+            }
+            else if (a == 2)
+            {
+                int ZombieConut = PlayerPrefs.GetInt("lZombieCount");
+                PlayerPrefs.SetInt("lZombieCount", ZombieConut + killedZombieInfo[a]);
+            }
+            else if (a == 3)
+            {
+                int ZombieConut = PlayerPrefs.GetInt("tZombieCount");
+                PlayerPrefs.SetInt("tZombieCount", ZombieConut + killedZombieInfo[a]);
+            }
+            else
+            {
+                int ZombieConut = PlayerPrefs.GetInt("bZombieCount");
+                PlayerPrefs.SetInt("bZombieCount", ZombieConut + killedZombieInfo[a]);
+            }
         }
 
         //뒤끝 서버 연동 및 레벨업

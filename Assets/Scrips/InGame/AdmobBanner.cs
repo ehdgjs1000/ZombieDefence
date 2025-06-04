@@ -7,7 +7,14 @@ using GoogleMobileAds.Api;
 
 public class AdmobBanner : MonoBehaviour
 {
-    public string _adUnitId = "ca-app-pub-3940256099942544/6300978111";
+
+#if UNITY_EDITOR
+    private string _adUnitId = "ca-app-pub-3940256099942544/6300978111";
+#elif UNITY_ANDROID
+    private string _adUnitId = "ca-app-pub-9187119445756720/9405745942";
+#else
+  private string _adUnitId = "unused";
+#endif
     BannerView _bannerView;
 
 

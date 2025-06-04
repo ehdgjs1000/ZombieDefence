@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum SceneNames { IntroScene = 0, LoginScene, LobbyScene};
+public enum SceneNames { IntroScene = 0, LoginScene = 1, LobbyScene = 2, GameScnen = 3};
 public static class Utils
 {
     public static string GetActiveScene()

@@ -25,7 +25,7 @@ public class BulletCtrl : MonoBehaviour
     {
         StartCoroutine(ObjectPool.instance.DeActive(2.0f, this.gameObject));
     }
-    private void Update()
+    private void FixedUpdate()
     {
         this.transform.position += transform.forward * bulletSpeed;
     }

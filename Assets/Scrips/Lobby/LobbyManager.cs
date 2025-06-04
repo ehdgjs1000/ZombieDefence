@@ -79,6 +79,7 @@ public class LobbyManager : MonoBehaviour
         BackEndGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
         SwapBtnOnlick(1);
         UpdateHighScore();
+        UpdateGameData();
 
         //저장된 army 세팅
         if (chooseArmyCount > 0)
@@ -218,7 +219,7 @@ public class LobbyManager : MonoBehaviour
         if(BackEndGameData.Instance.UserGameData.energy >= 5  && chooseArmyCount > 0)
         {
             SoundManager.instance.BtnClickPlay();
-            SceneManager.LoadScene(1);
+            Utils.LoadScene(SceneNames.GameScnen);
 
             BackEndGameData.Instance.UserGameData.energy -= 5;
             UpdateGameData();

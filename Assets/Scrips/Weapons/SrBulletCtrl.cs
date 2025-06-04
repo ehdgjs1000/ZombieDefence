@@ -25,11 +25,10 @@ public class SrBulletCtrl : MonoBehaviour
         //rigid.AddForce(transform.forward*bulletSpeed);
         StartCoroutine(ObjectPool.instance.DeActive(4.0f, this.gameObject));
     }
-    private void Update()
+    private void FixedUpdate()
     {
         this.transform.position += transform.forward * bulletSpeed;
     }
-
     public void SetBulletInfo(float dmg, int _penetrateCount)
     {
         damage = dmg;

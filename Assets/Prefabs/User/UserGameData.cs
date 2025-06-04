@@ -16,8 +16,8 @@ public class UserGameData
     {
         level = 1;
         exp = 0;
-        gold = 200;
-        crystal = 100;
+        gold = 100;
+        crystal = 1000;
         energy = 30;
         promotionType = 0;
     }

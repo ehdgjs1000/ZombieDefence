@@ -20,8 +20,6 @@ public class Setting : MonoBehaviour
     }
     public void InitOkayOnClick()
     {
-        //초기화 진행
-        Debug.Log("계정 초기화");
         PlayerPrefs.SetString("ID", null);
         PlayerPrefs.SetString("PW", null);
         PlayerPrefs.DeleteAll();

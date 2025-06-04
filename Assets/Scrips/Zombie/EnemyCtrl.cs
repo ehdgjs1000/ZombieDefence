@@ -42,11 +42,13 @@ public class EnemyCtrl : MonoBehaviour
     private void Update()
     {
         attackCount -= Time.deltaTime;
-
-        if (canMove && !GameManager.instance.isStopGame && !isAttacking) Move();
         if (hp <= 0.0f && !isDie) StartCoroutine(EnemyDie());
 
         if(attackCount <= 0.0f) AttackCheck();
+    }
+    private void FixedUpdate()
+    {
+        if (canMove && !GameManager.instance.isStopGame && !isAttacking) Move();
     }
     public IEnumerator ReUseZombie()
     {

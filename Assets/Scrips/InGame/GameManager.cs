@@ -327,7 +327,7 @@ public class GameManager : MonoBehaviour
         tempTimeScale = 1.0f;
         Time.timeScale = 1.0f;
         gameOverSet.SetActive(false);
-        SceneManager.LoadScene(0);
+        Utils.LoadScene(SceneNames.LobbyScene);
     }
     private void GameLevelUp()
     {

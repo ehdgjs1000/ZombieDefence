@@ -26,6 +26,7 @@ public class UpgradePanel : MonoBehaviour
     private WeaponData.WeaponType weaponType;
 
 
+
     private void Awake()
     {
         if(instance == null) instance = this;

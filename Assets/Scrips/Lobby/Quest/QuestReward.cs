@@ -46,6 +46,8 @@ public class QuestReward : MonoBehaviour
             if (rewardOrder == 4) BackEndGameData.Instance.UserGameData.energy += 5;
             LobbyManager.instance.UpdateGameData();
             clearBg.SetActive(true);
+
+            PopUpRewardBase.instance.SetMessage(rewardGold, rewardCrystal);
         }
     }
     private void QuestClearCheck()

@@ -36,6 +36,7 @@ public class Army : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     private Collider[] enemyColls;
     [SerializeField] private int posNum;
+    [SerializeField] private Transform muzzleFlash;
 
     LineRenderer lineRenderer;
     private void Awake()
@@ -134,6 +135,7 @@ public class Army : MonoBehaviour
         if (!isSrArmy)
         {
             SoundManager.instance.PlaySound(gunFireClip);
+            Instantiate(muzzleFlash, bulletSpawnPos.position, Quaternion.identity);
 
             /*GameObject bullet = ObjectPool.instance.MakeObj("bullet");
             bullet.transform.position = bulletSpawnPos.position;

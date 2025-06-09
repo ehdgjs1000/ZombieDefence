@@ -14,6 +14,7 @@ public class BulletCtrl : MonoBehaviour
     private bool canPenetrate = false;
 
     [SerializeField] private GameObject damagePopUpTr;
+    [SerializeField] private Transform bloodParticle;
 
 
     private void Awake()
@@ -63,6 +64,8 @@ public class BulletCtrl : MonoBehaviour
                 {
                     co.gameObject.GetComponent<BossZombie>().GetAttack(damage);
                 }
+                Instantiate(bloodParticle, this.transform.position, Quaternion.identity);
+
                 //Damage PopUp
                 DamagePopUp.Create(new Vector3(this.transform.position.x,
                     this.transform.position.y + 0.5f, this.transform.position.z), damage);

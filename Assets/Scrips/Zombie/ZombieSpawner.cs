@@ -113,7 +113,7 @@ public class ZombieSpawner : MonoBehaviour
         if (gameLevel >= minSpawnInterval.Length) gameLevel = minSpawnInterval.Length;
         spawnInterval = Random.Range(minSpawnInterval[gameLevel], maxSpawnInterval[gameLevel]);
         //추후 레벨 시스템 도입하여 변경
-        float ranX = Random.Range(-3.8f, 3.5f);
+        float ranX = Random.Range(-3.4f, 3.1f);
         float ranZ = Random.Range(30.0f, 32.0f);
         int ranZombie = Random.Range(0,4);
         switch (ranZombie)

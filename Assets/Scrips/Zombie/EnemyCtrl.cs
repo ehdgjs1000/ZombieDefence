@@ -70,8 +70,7 @@ public class EnemyCtrl : MonoBehaviour
             canMove = false;
             animator.SetTrigger("Scream");
             yield return new WaitForSeconds(3.0f);
-
-            canMove = true;
+            if(!isDie) canMove = true;
         }
         yield return null;
     }

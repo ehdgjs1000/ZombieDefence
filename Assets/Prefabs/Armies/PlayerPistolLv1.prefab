@@ -2943,6 +2943,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   posNum: 0
+  muzzleFlash: {fileID: 2925078416503432213, guid: 2cf6eb0e65e021f45b61bd40ac330d4d, type: 3}
 --- !u!114 &670813752498390304
 MonoBehaviour:
   m_ObjectHideFlags: 0

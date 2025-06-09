@@ -16,6 +16,8 @@ public class GoogldAdmobs : MonoBehaviour
     private int rewardType;//#0 stemina //#1 refreshSkill
 
     public static GoogldAdmobs instance;
+
+    private float buttonClickTime = 0.0f;
     private void Awake()
     {
         if(instance == null)
@@ -28,15 +30,36 @@ public class GoogldAdmobs : MonoBehaviour
     {
         MobileAds.Initialize(initStatus => { });
     }
+    private void Update()
+    {
+        buttonClickTime -= Time.deltaTime;
+    }
     public void SteminaRewardOnClick()
     {
-        rewardType = 0;
-        LoadRewardedAd();
+        if (buttonClickTime <= 0.0f)
+        {
+            rewardType = 0;
+            buttonClickTime = 3.0f;
+            LoadRewardedAd();
+        }
+        else
+        {
+            PopUpMessageBase.instance.SetMessage("잠시 후 다시 눌러주세요.");
+        }
+        
     }
     public void RefreshSkillsOnClick()
     {
-        rewardType = 1;
-        LoadRewardedAd();
+        if (buttonClickTime <= 0.0f)
+        {
+            rewardType = 1;
+            buttonClickTime = 3.0f;
+            LoadRewardedAd();
+        }
+        else
+        {
+            PopUpMessageBase.instance.SetMessage("잠시 후 다시 눌러주세요.");
+        }
     }
     //보상형 광고 로드
     public void LoadRewardedAd() 

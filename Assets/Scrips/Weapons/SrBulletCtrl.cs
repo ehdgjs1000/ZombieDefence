@@ -58,9 +58,10 @@ public class SrBulletCtrl : MonoBehaviour
                 {
                     co.gameObject.GetComponent<BossZombie>().GetAttack(damage);
                 }
-                
+
                 //Damage PopUp
-                DamagePopUp.Create(this.transform.position, damage);
+                DamagePopUp.Create(new Vector3(this.transform.position.x,
+                    this.transform.position.y + 0.5f, this.transform.position.z), damage);
             }
         }
         catch (System.ObjectDisposedException e)

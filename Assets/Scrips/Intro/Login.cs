@@ -38,7 +38,6 @@ public class Login : LoginBase
     {
         string mainTainID = PlayerPrefs.GetString("ID");
         string mainTainPW = PlayerPrefs.GetString("PW");
-        Debug.Log("Maintain Login" + "ID : " + mainTainID + " PW: "+mainTainPW);
         if (mainTainID != null && mainTainPW != null) ResponceToLogin(mainTainID, mainTainPW);
     }
     /// <summary>

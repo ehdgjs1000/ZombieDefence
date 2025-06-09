@@ -253,5 +253,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   criticalChange: 20
-  bulletSpeed: 1.2
+  bulletSpeed: 1.8
   damagePopUpTr: {fileID: 3592313989245215019, guid: e464c07449820c742a06ae2c9254e11a, type: 3}

@@ -8,6 +8,8 @@ public class EnemyCtrl : MonoBehaviour
     private bool isDie = false;
     private bool isAttacking = false;
     private float attackCount = 0.0f;
+    public bool isCrawl = false;
+    private float screamTime = 3.0f;
     BoxCollider boxCollider;
     Rigidbody rb;
 
@@ -38,17 +40,40 @@ public class EnemyCtrl : MonoBehaviour
     {
         float ranHpRate = Random.Range(0.7f, 1.3f);
         hp = initHp * GameManager.instance.gameLevel * ranHpRate;
+
+        if (isCrawl) animator.SetTrigger("Crawl");
+        else animator.SetTrigger("Run");
     }
     private void Update()
     {
         attackCount -= Time.deltaTime;
-        if (hp <= 0.0f && !isDie) StartCoroutine(EnemyDie());
+        screamTime -= Time.deltaTime;
+        if (!isDie)
+        {
+            if (screamTime <= 0.0f && !isCrawl) StartCoroutine(Scream());
+            if (hp <= 0.0f) StartCoroutine(EnemyDie());
+        }
+        
 
         if(attackCount <= 0.0f) AttackCheck();
     }
     private void FixedUpdate()
     {
         if (canMove && !GameManager.instance.isStopGame && !isAttacking) Move();
+    }
+    public IEnumerator Scream()
+    {
+        screamTime = 3.0f;
+        int ranScream = Random.Range(0,10);
+        if(ranScream <= 0)
+        {
+            canMove = false;
+            animator.SetTrigger("Scream");
+            yield return new WaitForSeconds(3.0f);
+
+            canMove = true;
+        }
+        yield return null;
     }
     public IEnumerator ReUseZombie()
     {
@@ -66,6 +91,7 @@ public class EnemyCtrl : MonoBehaviour
             out RaycastHit hitInfo,attackRange, armyLayer);
         if(hitInfo.collider != null && !isAttacking)
         {
+            canMove = false;
             StartCoroutine(Attack(damage));
         }
         
@@ -73,7 +99,8 @@ public class EnemyCtrl : MonoBehaviour
     IEnumerator Attack(float damage)
     {
         isAttacking = true;
-        animator.SetTrigger("ShortAttack");
+        if (!isLongRange) animator.SetTrigger("ShortAttack");
+        else if (isLongRange) animator.SetTrigger("LongAttack");
         yield return new WaitForSeconds(1.5f);
         if(!isDie) StartCoroutine(GameManager.instance.ArmyGetAttack(damage));
         isAttacking = false;

@@ -19,15 +19,18 @@ public class SteminaManager : MonoBehaviour
     {
         Init();
     }
+    
     public void OnApplicationFocus(bool focus)
     {
         if (focus)
         {
+            Debug.Log("Focus");
             LoadAppQuitTime();
             SetRechargeScheduler();
         }
         else
         {
+            Debug.Log("Exit");
             SaveAppQuitTime();
             if (m_RechargeTimerCoroutine != null)
             {

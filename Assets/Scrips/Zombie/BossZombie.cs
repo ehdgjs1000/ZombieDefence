@@ -46,9 +46,12 @@ public class BossZombie : MonoBehaviour
 
         bossHpImage.fillAmount = hp/initHp;
 
-        if (canMove && !GameManager.instance.isStopGame && canMove) Move();
         if (hp <= 0.0f && !isDie) BossDie();
         if (attackCount <= 0.0f) AttackCheck();
+    }
+    private void FixedUpdate()
+    {
+        if (canMove && !GameManager.instance.isStopGame && canMove) Move();
     }
     public IEnumerator ReUseZombie()
     {
@@ -66,6 +69,7 @@ public class BossZombie : MonoBehaviour
             out RaycastHit hitInfo, attackRange, armyLayer);
         if (hitInfo.collider != null && !isAttacking)
         {
+            canMove = false;
             StartCoroutine(Attack(damage));
         }
 

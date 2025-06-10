@@ -735,9 +735,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 6270628348357470719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
+      propertyPath: m_InputType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270628348357470719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
+      propertyPath: m_ContentType
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9022285791044535719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
       propertyPath: m_text
-      value: "\uBE44\uBC00\uBC88\uD638"
+      value: "\uBE44\uBC00\uBC88\uD638\n"
       objectReference: {fileID: 0}
     - target: {fileID: 9022285791044535719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
       propertyPath: m_Enabled
@@ -1882,6 +1890,14 @@ PrefabInstance:
     - target: {fileID: 5876009910756795747, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270628348357470719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
+      propertyPath: m_InputType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270628348357470719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
+      propertyPath: m_ContentType
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9022285791044535719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
       propertyPath: m_text
@@ -3775,6 +3791,14 @@ PrefabInstance:
     - target: {fileID: 5876009910756795747, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270628348357470719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
+      propertyPath: m_InputType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270628348357470719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
+      propertyPath: m_ContentType
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9022285791044535719, guid: eab63e8c395347942b76e2929a74dafa, type: 3}
       propertyPath: m_text

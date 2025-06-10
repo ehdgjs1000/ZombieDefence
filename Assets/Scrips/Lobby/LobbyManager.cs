@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
@@ -221,7 +222,7 @@ public class LobbyManager : MonoBehaviour
             SoundManager.instance.BtnClickPlay();
             Utils.LoadScene(SceneNames.GameScnen);
 
-            BackEndGameData.Instance.UserGameData.energy -= 5;
+            //BackEndGameData.Instance.UserGameData.energy -= 5;
             UpdateGameData();
 
             BackEndGameData.Instance.UserQuestData.questCount[1]++;
@@ -244,7 +245,8 @@ public class LobbyManager : MonoBehaviour
     {
         SoundManager.instance.BtnClickPlay();
         highScoreGo.SetActive(true);
-        QuestGo.SetActive(false);
+        
+        QuestGo.transform.DOScale(new Vector3(0,0,0),0.3f);
         propsGO.SetActive(true);
     }
     public void ZombieKillCloseBtnOnClick()
@@ -265,7 +267,7 @@ public class LobbyManager : MonoBehaviour
     {
         SoundManager.instance.BtnClickPlay();
         highScoreGo.SetActive(false);
-        QuestGo.SetActive(true);
+        QuestGo.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
         propsGO.SetActive(false);
     }
     public void chapterRewardExitOnClick()
@@ -392,7 +394,8 @@ public class LobbyManager : MonoBehaviour
     }
     public void ArmyBtnOnClick()
     {
-        if(weaponLevel >0)StartCoroutine(ChooseArmy(weaponNum));
+        if (weaponLevel > 0) StartCoroutine(ChooseArmy(weaponNum));
+        else PopUpMessageBase.instance.SetMessage("총기의 레벨이 0입니다.");
     }
     public void ChooseArmyBtnOnClick(int num)
     {

@@ -1866,5 +1866,4 @@ MonoBehaviour:
   - {fileID: 558035806034126802}
   - {fileID: 1301914066791710265}
   - {fileID: 4084407127388749608}
-  speed: 5
-  isIngamePlane: 1
+  speed: 20

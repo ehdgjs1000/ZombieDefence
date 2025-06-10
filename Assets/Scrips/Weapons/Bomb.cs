@@ -8,6 +8,7 @@ public class Bomb : MonoBehaviour
     [SerializeField] private float exploseRange;
     [SerializeField] private float bombDamage;
     [SerializeField] private GameObject explosionFx;
+    public float speed;
 
     private Collider[] enemyColls;
 
@@ -21,6 +22,14 @@ public class Bomb : MonoBehaviour
             Debug.Log("Explose");
             
         }
+    }
+    private void FixedUpdate()
+    {
+        Move();
+    }
+    private void Move()
+    {
+        this.transform.position += new Vector3(0, -speed * 0.01f,0 );
     }
     private void Explosion()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StoreManager : MonoBehaviour
 {
@@ -213,7 +214,8 @@ public class StoreManager : MonoBehaviour
     public void DrawGun(int count)
     {
         //#normal 85% #Special 10% #Epic 1% #Hero 3% #Legendary 0.15% #God 0.05%
-        float ranVal = Random.Range(0.00f,100.00f);
+        float ranVal = Random.Range(0.00f, 100.00f);
+        string weaponName = "";
         int gunSpriteNum = 0;
         int gunGrade = 0;
         if(ranVal <= 84.00f) //normal
@@ -224,10 +226,12 @@ public class StoreManager : MonoBehaviour
             {
                 case 0:
                     AccountInfo.instance.pistolCount[0]++;
+                    weaponName = "리볼버";
                     gunSpriteNum = 0;
                     break;
                 case 1:
                     AccountInfo.instance.rifleCount[0]++;
+                    weaponName = "G36C";
                     gunSpriteNum = 5;
                     break;
             }
@@ -239,10 +243,12 @@ public class StoreManager : MonoBehaviour
             {
                 case 0:
                     AccountInfo.instance.smgCount[0]++;
+                    weaponName = "MP5";
                     gunSpriteNum = 3;
                     break;
                 case 1:
                     AccountInfo.instance.srCount[0]++;
+                    weaponName = "M-24";
                     gunSpriteNum = 9;
                     break;
             }
@@ -254,14 +260,17 @@ public class StoreManager : MonoBehaviour
             {
                 case 0:
                     AccountInfo.instance.pistolCount[1]++;
+                    weaponName = "D.이글";
                     gunSpriteNum = 1;
                     break;
                 case 1:
                     AccountInfo.instance.rifleCount[1]++;
+                    weaponName = "SCAR-H";
                     gunSpriteNum = 6;
                     break;
                 case 2:
                     AccountInfo.instance.dmrCount[0]++;
+                    weaponName = "Dragnov";
                     gunSpriteNum = 11;
                     break;
             }
@@ -275,18 +284,22 @@ public class StoreManager : MonoBehaviour
             {
                 case 0:
                     AccountInfo.instance.pistolCount[2]++;
+                    weaponName = "매그넘";
                     gunSpriteNum = 2;
                     break;
                 case 1:
                     AccountInfo.instance.smgCount[1]++;
+                    weaponName = "P90";
                     gunSpriteNum = 4;
                     break;
                 case 2:
                     AccountInfo.instance.rifleCount[2]++;
+                    weaponName = "AK-47";
                     gunSpriteNum = 7;
                     break;
                 case 3:
                     AccountInfo.instance.srCount[1]++;
+                    weaponName = "링스";
                     gunSpriteNum = 10;
                     break;
             }
@@ -299,10 +312,12 @@ public class StoreManager : MonoBehaviour
             {
                 case 0:
                     AccountInfo.instance.rifleCount[3]++;
+                    weaponName = "Famas";
                     gunSpriteNum = 8;
                     break;
                 case 1:
                     AccountInfo.instance.dmrCount[1]++;
+                    weaponName = "MK-14";
                     gunSpriteNum = 12;
                     break;
             }
@@ -311,12 +326,15 @@ public class StoreManager : MonoBehaviour
         {
             gunGrade = 5;
             AccountInfo.instance.specialCount[0]++;
+            weaponName = "M-249";
             gunSpriteNum = 13;
         }
 
         if (count == -1)
         {
             Image[] card1Imgs = card1.GetComponentsInChildren<Image>();
+            TextMeshProUGUI weaponNameText = card1.GetComponentInChildren<TextMeshProUGUI>();
+            weaponNameText.text = weaponName;
             card1Imgs[1].sprite = gunSprites[gunSpriteNum];
             CardBackColor(gunGrade,card1Imgs[2]);
             CardBackColor(gunGrade, card1Imgs[0]);
@@ -324,6 +342,8 @@ public class StoreManager : MonoBehaviour
         else
         {
             Image[] card10Imgs = card10[count].GetComponentsInChildren<Image>();
+            TextMeshProUGUI weaponNameText = card10[count].GetComponentInChildren<TextMeshProUGUI>();
+            weaponNameText.text = weaponName;
             card10Imgs[1].sprite = gunSprites[gunSpriteNum];
             CardBackColor(gunGrade, card10Imgs[2]);
             CardBackColor(gunGrade, card10Imgs[0]);

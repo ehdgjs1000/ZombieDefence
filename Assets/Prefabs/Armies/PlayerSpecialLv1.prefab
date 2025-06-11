@@ -1944,7 +1944,7 @@ GameObject:
   - component: {fileID: -2471741548336504568}
   m_Layer: 7
   m_Name: PlayerSpecialLv1
-  m_TagString: Untagged
+  m_TagString: Army
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7140,9 +7140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieType: 4
   isLongRange: 0
-  hp: 8000
+  hp: 10000
   exp: 300
-  moveSpeed: 6
+  moveSpeed: 3
   attackRange: 3
   damage: 30
   gold: 1

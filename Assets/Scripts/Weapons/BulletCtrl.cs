@@ -1,0 +1,88 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class BulletCtrl : MonoBehaviour
+{
+    Rigidbody rigid;
+    public float damage;
+    public float criticalChange = 20.0f; 
+    [SerializeField] private float bulletSpeed;
+    private int penetrateCount = 0;
+    private bool canPenetrate = false;
+
+    [SerializeField] private GameObject damagePopUpTr;
+    [SerializeField] private Transform bloodParticle;
+
+
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody>();
+
+    }
+    private void Start()
+    {
+        StartCoroutine(ObjectPool.instance.DeActive(2.0f, this.gameObject));
+    }
+    private void FixedUpdate()
+    {
+        this.transform.position += transform.forward * bulletSpeed;
+    }
+
+    public void SetBulletInfo(float dmg, int _penetrateCount)
+    {
+        damage = dmg;
+        penetrateCount = _penetrateCount;
+    }
+
+    private void OnCollisionEnter(Collision co)
+    {
+        try
+        {
+            if (co.gameObject.CompareTag("Enemy"))
+            {
+                //크리티컬 적용
+                float ranCriticalChance = Random.Range(0.0f,100.0f);
+                if (ranCriticalChance <= criticalChange)
+                {
+                    damage *= 1.5f;
+                    damagePopUpTr.GetComponentInChildren<TextMeshPro>().color = Color.red;
+                }
+                else
+                {
+                    damagePopUpTr.GetComponentInChildren<TextMeshPro>().color = Color.blue;
+                }
+
+                //Enemy 데미지 적용
+                if (co.gameObject.GetComponent<EnemyCtrl>() != null)
+                {
+                    co.gameObject.GetComponent<EnemyCtrl>().GetAttack(damage);
+                }
+                else //보스 좀비
+                {
+                    co.gameObject.GetComponent<BossZombie>().GetAttack(damage);
+                }
+                Instantiate(bloodParticle, this.transform.position, Quaternion.identity);
+
+                //Damage PopUp
+                DamagePopUp.Create(new Vector3(this.transform.position.x,
+                    this.transform.position.y + 0.5f, this.transform.position.z), damage);
+
+                penetrateCount--;
+                if (penetrateCount <= 0)
+                {
+                    //StartCoroutine(ObjectPool.instance.DeActive(0.0f, this.gameObject));
+                    Destroy(this.gameObject);
+                }
+
+            }
+        }
+        catch (System.ObjectDisposedException e)
+        {
+            System.Console.WriteLine("Caught: {0}", e.Message);
+        }
+    }
+
+}

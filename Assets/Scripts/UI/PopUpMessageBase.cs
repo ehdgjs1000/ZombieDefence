@@ -18,11 +18,11 @@ public class PopUpMessageBase : MonoBehaviour
     }
     protected void ResetUI()
     {
-        textGO.GetComponent<TextMeshProUGUI>().text = string.Empty;
+        textGO.GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
     }
     public void SetMessage(string message)
     {
-        textGO.GetComponent<TextMeshProUGUI>().text = message;
+        textGO.GetComponentInChildren<TextMeshProUGUI>().text = message;
         if(!isPoping) StartCoroutine(ShowMessage());
     }
     IEnumerator ShowMessage()

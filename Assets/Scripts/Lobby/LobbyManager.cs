@@ -82,6 +82,8 @@ public class LobbyManager : MonoBehaviour
         UpdateHighScore();
         UpdateGameData();
 
+
+        SynchAccountToLobby();
         //저장된 army 세팅
         if (chooseArmyCount > 0)
         {
@@ -97,15 +99,15 @@ public class LobbyManager : MonoBehaviour
     }
     private void Update()
     {
-        SynchAccountToLobby();
+        //SynchAccountToLobby();
         SteminaCharging();
 
         steminaTxt.text = $"{BackEndGameData.Instance.UserGameData.energy}";
     }
     private void UpdateHighScore()
     {
-        int highScore = PlayerPrefs.GetInt("HighScore1");
-        highScoreTxt.text = highScore.ToString();
+        int highScore = PlayerPrefs.GetInt("HighTimeLv1");
+        highScoreTxt.text = (highScore / 60) + ":" + (highScore % 60);
     }
     public void UpdateGameData()
     {

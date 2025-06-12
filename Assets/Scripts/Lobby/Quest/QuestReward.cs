@@ -19,7 +19,8 @@ public class QuestReward : MonoBehaviour
     }
     private void Start()
     {
-        if(BackEndGameData.Instance.UserQuestData.isRewardReceived[rewardOrder]) isCleard = true;
+        //if(BackEndGameData.Instance.UserQuestData.isRewardReceived[rewardOrder] == true) isCleard = true;
+        StartCoroutine(RewardRecievedUpdate());
     }
     private void CheckCanClick()
     {
@@ -28,6 +29,11 @@ public class QuestReward : MonoBehaviour
         {
             canClick = true;
         }
+    }
+    IEnumerator RewardRecievedUpdate()
+    {
+        yield return new WaitForSeconds(0.05f);
+        if (BackEndGameData.Instance.UserQuestData.isRewardReceived[rewardOrder] == true) isCleard = true;
     }
     public void ResetQuest()
     {

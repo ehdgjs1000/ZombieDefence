@@ -16,7 +16,6 @@ public class IntroScene : MonoBehaviour
     {
         SystemSetup();
     }
-
     private void SystemSetup()
     {
         //활성화 되지 않아도 실행

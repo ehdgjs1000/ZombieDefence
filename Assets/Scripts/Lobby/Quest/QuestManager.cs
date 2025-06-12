@@ -49,6 +49,7 @@ public class QuestManager : MonoBehaviour
     {
         LoadUtcDay();
         StartCoroutine(CheckQuestClearAmount());
+        //DailyQuestInfoUpdate();
     }
     private void Update()
     {
@@ -108,7 +109,7 @@ public class QuestManager : MonoBehaviour
         int beforeUtcDay = PlayerPrefs.GetInt("QUTCDay");
         int beforeUtcMonth = PlayerPrefs.GetInt("QUTCMonth");
         int beforeUtcYear = PlayerPrefs.GetInt("QUTCYear");
-        if (DateTime.UtcNow.Month != beforeUtcDay || DateTime.UtcNow.Month != beforeUtcMonth || DateTime.UtcNow.Year != beforeUtcYear)
+        if (DateTime.UtcNow.Day != beforeUtcDay || DateTime.UtcNow.Month != beforeUtcMonth || DateTime.UtcNow.Year != beforeUtcYear)
         {
             ResetQuest();
             ResetQUTC();
@@ -174,6 +175,27 @@ public class QuestManager : MonoBehaviour
             AccountInfo.instance.isClear[num] = true;
             BackEndGameData.Instance.GameDataUpdate();
         }
+    }
+    private void DailyQuestInfoUpdate()
+    {
+        int d1, d2, d3, d4, d5, d6, d7;
+        d1 = PlayerPrefs.GetInt("DailyQ1");
+        d2 = PlayerPrefs.GetInt("DailyQ2");
+        d3 = PlayerPrefs.GetInt("DailyQ3");
+        d4 = PlayerPrefs.GetInt("DailyQ4");
+        d5 = PlayerPrefs.GetInt("DailyQ5");
+        d6 = PlayerPrefs.GetInt("DailyQ6");
+        d7 = PlayerPrefs.GetInt("DailyQ7");
+
+        for (int i = 0; i < questCount.Length + 1; i++)
+        {
+            string str = "DailyQ" + i;
+            if(PlayerPrefs.GetInt(str) == 1) //이미 퀘스트 완료 클릭을 함
+            {
+                AccountInfo.instance.isClear[i] = true;
+            }
+        }
+
     }
     private void ClearBgCheck()
     {

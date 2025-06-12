@@ -87,7 +87,6 @@ public class ZombieSpawner : MonoBehaviour
     //22시 3시 마다 모드 변경
     private void ModeChange(int modeType) //#0 Normal Mode #1 Hard Mode
     {
-        Debug.Log("Mode Change");
         if (modeType == 1)
         {
             isHardMode = true;

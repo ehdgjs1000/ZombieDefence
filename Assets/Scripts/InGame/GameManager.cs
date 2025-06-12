@@ -176,8 +176,8 @@ public class GameManager : MonoBehaviour
                 break;
             case 2:
                 speedUpTxt.text = "x2";
-                Time.timeScale = 10.0f;
-                tempTimeScale = 10.0f;
+                Time.timeScale = 2.0f;
+                tempTimeScale = 2.0f;
                 break;
         }
         
@@ -193,14 +193,12 @@ public class GameManager : MonoBehaviour
         timeTxt.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
         if (min>1 && min%5 == 0  && sec == 0 && !ZombieSpawner.instance.isBossTime)
         {
-            Debug.Log("Spawn Boss Zombie");
             ZombieSpawner.instance.isBossTime = true;
         }
-            
     }
+
     private void GameHpLevelUp()
     {
-        Debug.Log("GameLevel UP");
         gameHpLevelTime = 60.0f;
         gameHpLevel *= 1.5f;
     }
@@ -286,24 +284,24 @@ public class GameManager : MonoBehaviour
             }
             else canLevelUp = false;
         }
-        //High Score
-        if (PlayerPrefs.HasKey("HighScore1"))
+
+        //End Time
+        endTimeTxt.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
+        if (PlayerPrefs.HasKey("HighTimeLv1"))
         {
-            int tempHighScore = PlayerPrefs.GetInt("HighScore1");
-            if (tempHighScore < killedZombieCount)
+            int tempHighScore = PlayerPrefs.GetInt("HighTimeLv1");
+            if (tempHighScore < min * 60 + (int)sec)
             {
                 highScoreTxt.SetActive(true);
-                PlayerPrefs.SetInt("HighScore1", killedZombieCount);
+                PlayerPrefs.SetInt("HighTimeLv1", min * 60 + (int)sec);
             }
         }
         else
         {
             highScoreTxt.SetActive(true);
-            PlayerPrefs.SetInt("HighScore1", killedZombieCount);
+            PlayerPrefs.SetInt("HighTimeLv1", min * 60 + (int)sec);
         }
-        //End Time
-        endTimeTxt.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
-
+        
 
         gameOverSet.SetActive(true);
         BackEndGameData.Instance.UserQuestData.questCount[1]++;

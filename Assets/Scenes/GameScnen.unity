@@ -8173,6 +8173,7 @@ MonoBehaviour:
   bossZombies:
   - {fileID: 7318526339764565444, guid: 747e4d955980d2946a6e3f26571fb7c9, type: 3}
   - {fileID: 7318526339764565444, guid: 1a2cae154481b91499791d56f499fc8a, type: 3}
+  - {fileID: 7318526339764565444, guid: f53cdd9fc6cf0824ea31db16fa80c248, type: 3}
   minSpawnInterval:
   - 1
   - 0.9

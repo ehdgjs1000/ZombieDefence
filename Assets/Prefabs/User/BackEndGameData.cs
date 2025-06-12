@@ -141,8 +141,6 @@ public class BackEndGameData
                 catch (System.Exception e)
                 {
                     userGameData.Reset();
-                    userQuestData.Reset();
-
                     Debug.LogError(e);
                 }
             }
@@ -197,7 +195,7 @@ public class BackEndGameData
                 catch (System.Exception e)
                 {
                     userGameData.Reset();
-                    userQuestData.Reset();
+                    //userQuestData.Reset();
 
                     Debug.LogError(e);
                 }

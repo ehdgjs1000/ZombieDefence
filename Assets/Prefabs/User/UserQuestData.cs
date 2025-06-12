@@ -12,6 +12,7 @@ public class UserQuestData
 
     public void Reset() // 매일 09:00에 초기화 하기
     {
+        Debug.Log("QuestReset");
         for(int a = 0; a < questCount.Length; a++)
         {
             questCount[a] = 0;

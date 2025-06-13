@@ -36,8 +36,6 @@ public class SrBulletCtrl : MonoBehaviour
     }
     private void OnCollisionEnter(Collision co)
     {
-        Debug.Log(co.transform.name);
-
         try
         {
             if (co.gameObject.CompareTag("Enemy"))

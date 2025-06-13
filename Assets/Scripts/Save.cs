@@ -173,6 +173,7 @@ public class Save : MonoBehaviour
     {
         string weaponFilePath = Application.persistentDataPath + "/WeaponData.json";
         Debug.Log(weaponFilePath);
+
         string weaponJsonString = File.ReadAllText(weaponFilePath);
 
         loadWeaponList = JsonConvert.DeserializeObject<List<SaveWeapon>>(weaponJsonString);
